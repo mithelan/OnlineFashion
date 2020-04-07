@@ -2,6 +2,7 @@ import React from 'react';
 
 import './App.css';
 import Home from './compound/Home'
+import Homep from "./compound/Homepage";
 
 
 
@@ -12,6 +13,7 @@ function App() {
 <div className='App'>
 
     <Home/>
+    <Homep/>
 </div>
 
 
