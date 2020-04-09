@@ -1,13 +1,15 @@
 import React from 'react';
 import '../App.css';
 import Logo from '../img/logo.PNG';
+import {connect} from 'react-redux'
+import {addCart} from "../actions/addAction";
+import Homepage from "./Homepage";
+import {getNumbers} from "../actions/getAction";
 
 
+function Home(props) {
 
-
-
-function Home() {
-
+    console.log(props);
     return (
 
         <header className="header-section">
@@ -25,6 +27,9 @@ function Home() {
                     </div>
                     <div className="ht-right">
                         <a href="#" className="login-panel"><i className="fa fa-user"></i>Login</a>
+
+                        <i className="fa fa-shopping-cart"></i>Cart<span>{props.cartProps.cartNumber}</span>
+
 
                         <div className="top-social">
                             <a href="#"><i className="fa fa-facebook"></i></a>
@@ -74,6 +79,8 @@ function Home() {
 
                                     <li><a href="./register.html">Register</a></li>
                                     <li><a href="./login.html">Login</a></li>
+
+
                                 </ul>
                             </li>
                         </ul>
@@ -89,5 +96,9 @@ function Home() {
         </header>
     );
 }
+const mapStateToProps=state =>({
+    cartProps:state.cartState
+})
 
-export default Home;
+
+export default connect(mapStateToProps,{addCart})(Home);
