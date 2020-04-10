@@ -1,10 +1,11 @@
 import React from 'react';
-import Logo from './img/logo.PNG';
-import './App.css';
+import '../App.css';
+import Logo from '../img/logo.PNG';
 
 
 
-function App() {
+
+function Home() {
 
     return (
 
@@ -14,7 +15,7 @@ function App() {
                     <div className="ht-left">
                         <div className="mail-service">
                             <i className=" fa fa-envelope"></i>
-                            fashion@gmai.com
+                            fashion@gmail.com
                         </div>
                         <div className="phone-service">
                             <i className=" fa fa-phone"></i>
@@ -85,11 +86,7 @@ function App() {
 
 
         </header>
-
-
     );
+}
 
-};
-
-
-export default App;
+export default Home;
