@@ -22,7 +22,7 @@ function Home(props) {
               </div>
               <div className="phone-service">
                 <i className=" fa fa-phone"></i>
-                avan number than enaku venum
+                avan paithyakaaran
               </div>
             </div>
             <div className="ht-right">
