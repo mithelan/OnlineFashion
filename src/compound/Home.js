@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {addCart} from "../actions/addAction";
 import Homepage from "./Homepage";
 import {getNumbers} from "../actions/getAction";
+import {Link} from 'react-router-dom';
 
 
 function Home(props) {
@@ -28,14 +29,14 @@ function Home(props) {
                     <div className="ht-right">
                         <a href="#" className="login-panel"><i className="fa fa-user"></i>Login</a>
 
-                        <i className="fa fa-shopping-cart"></i>Cart<span>{props.cartProps.cartNumber}</span>
+                        <Link to ="/Cart"><i className="fa fa-shopping-cart"></i></Link><span>{props.cartProps.cartNumber}</span>
 
 
                         <div className="top-social">
-                            <a href="#"><i className="fa fa-facebook"></i></a>
-                            <a href="#"><i className="fa fa-twitter"></i></a>
-                            <a href="#"><i className="fa fa-instagram"></i></a>
-                            <a href="#"><i className="ti-pinterest"></i></a>
+                            <Link to ="/"><i className="fa fa-facebook"></i></Link>
+                            <Link to ="#"><i className="fa fa-twitter"></i></Link>
+                            <Link to ="#"><i className="fa fa-instagram"></i></Link>
+                            <Link to ="#"><i className="ti-pinterest"></i></Link>
                         </div>
                     </div>
                 </div>
