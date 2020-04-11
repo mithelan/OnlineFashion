@@ -22,7 +22,7 @@ function Home(props) {
               </div>
               <div className="phone-service">
                 <i className=" fa fa-phone"></i>
-                +94 Number eh venam
+                avan number than enaku venum
               </div>
             </div>
             <div className="ht-right">
