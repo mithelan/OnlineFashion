@@ -22,7 +22,7 @@ function Home(props) {
               </div>
               <div className="phone-service">
                 <i className=" fa fa-phone"></i>
-                avan paithyakaaran
+                thalaivan irukirann
               </div>
             </div>
             <div className="ht-right">
