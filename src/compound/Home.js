@@ -61,7 +61,7 @@ function Home(props) {
             </div>
             <nav className="nav-menu mobile-menu">
               <ul>
-                <li className="active"><a href="./Homepage.js">Home</a></li>
+                <li className="active"><a href="">Home</a></li>
                 <li><a href="./shop.html">Shop</a></li>
                 <li><a href="#">Collection</a>
                   <ul className="dropdown">
