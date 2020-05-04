@@ -53,7 +53,7 @@ function Home(props) {
                 <span>All departments</span>
                 <ul className="depart-hover">
                   <li className="active"><a href="#">Women’s Clothing</a></li>
-                  <li><a href="#">Men’s Clothing</a></li>
+                  <li><a href="#">Men’ss Clothing</a></li>
                   <li><a href="#">Accessories/Shoes</a></li>
 
                 </ul>
