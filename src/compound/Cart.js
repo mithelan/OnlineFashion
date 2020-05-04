@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import '../App.css'
+import {productQuantity,deleteproducts} from '../actions/productQuantity'
 import tshirt1 from '../img/1.jpg';
 import tshirt2 from '../img/2.jpg';
 import tshirt3 from '../img/3.jpg';
 import tshirt4 from '../img/4.jpg';
+import {deletecart} from "../actions/deleteAction";
 
-function Cart({cartProps}) {
+function Cart({cartProps,productQuantity,deleteproducts}) {
 
     console.log(cartProps);
 
@@ -22,27 +24,42 @@ function Cart({cartProps}) {
 
     })
 
-    const productImages = [tshirt1, tshirt2, tshirt3, tshirt4]
+    //const productImages = [tshirt1, tshirt2, tshirt3, tshirt4]
+
+    const productImages=(product)=> {
+
+        if (product.referenceName === 'blackTshirt') {
+            return tshirt4;
+        } else if (product.referenceName === 'WhiteTshirt') {
+            return tshirt2;
+        } else if (product.referenceName === 'blueTshirt') {
+            return tshirt3;
+        } else if (product.referenceName === 'blacklongTshirt'){
+            return tshirt1;
+    }
+        }
+
 
     productsInCart = productsInCart.map((product, index) => {
         console.log('product name is');
         console.log(product);
         return (
+<Fragment key={index}>
 
-
-                <div className='product'><ion-icon name="close-circle"></ion-icon>
-                    <img src={productImages[index]}/>
+                <div className='product'><ion-icon onClick={() => deleteproducts(product.referenceName)} name="close-circle"/>
+                    <img src={productImages(product)}/>
                     <span className='sm-hide'>{product.name}</span>
 
                     <div className='price sm-hide'>Rs {product.price}</div>
                     <div className='quantity'>
-                        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+                        <ion-icon onClick={() => productQuantity('decrease', product.referenceName)} className='decrease'    name="arrow-back-circle-outline"/>
                         <span>{product.numbers}</span>
-                        <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+                        <ion-icon className='increase' onClick={() => productQuantity('increase', product.referenceName)} name="arrow-forward-circle-outline"/>
 
                     </div>
                     <div className='total'>Rs{product.numbers * product.price}.00</div>
                 </div>
+</Fragment>
 
         )
     });
@@ -63,7 +80,7 @@ function Cart({cartProps}) {
                 <h4 className='basketTotalTitle'>Cart Total</h4>
                 <h4 className='basketTotal'>{cartProps.cartCost}.00</h4>
             </div>
-
+            <button class='submit' >Check out</button>
 
         </div>
     );
@@ -75,4 +92,6 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps,{productQuantity,deleteproducts})(Cart);
+
+

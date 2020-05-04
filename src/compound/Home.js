@@ -22,7 +22,7 @@ function Home(props) {
               </div>
               <div className="phone-service">
                 <i className=" fa fa-phone"></i>
-                avan paithyakaaran
+                0777885111
               </div>
             </div>
             <div className="ht-right">
@@ -61,7 +61,7 @@ function Home(props) {
             </div>
             <nav className="nav-menu mobile-menu">
               <ul>
-                <li className="active"><a href="./index.html">Home</a></li>
+                <li className="active"><a href="./Homepage.js">Home</a></li>
                 <li><a href="./shop.html">Shop</a></li>
                 <li><a href="#">Collection</a>
                   <ul className="dropdown">

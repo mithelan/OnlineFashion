@@ -6,6 +6,15 @@
   height: 40vmin;
   pointer-events: none;
 }
+.login{
+  float: right;
+  font-size: 14px;
+  color: #252525;
+  line-height: 27px;
+  padding-top: 15px;
+  padding-bottom: 12px;
+  padding-left: 914px;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

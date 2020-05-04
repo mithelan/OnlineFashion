@@ -8,7 +8,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 MongoClient.connect('mongodb+srv://dbuser:user@cluster0-4bxjy.mongodb.net/test?retryWrites=true&w=majority', {
     useUnifiedTopology: true })
     .then(client => {
-        console.log('Connected to Database')
-        const db = client.db('star-wars-quotes')
-
+        console.log('Connected to Database');
     })
+
+
+
+
