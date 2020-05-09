@@ -1,16 +1,32 @@
-const express = require('express');
-const bodyParser= require('body-parser')
-const MongoClient = require('mongodb').MongoClient;
+const express = require("express");
+const cors = require("cors");
+
+const mongoose = require("mongoose");
+require("dotenv").config();
+
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+const port = process.env.PORT || 5000;
 
+app.use(cors());
+app.use(express.json());
 
-MongoClient.connect('mongodb+srv://dbuser:user@cluster0-4bxjy.mongodb.net/test?retryWrites=true&w=majority', {
-    useUnifiedTopology: true })
-    .then(client => {
-        console.log('Connected to Database');
-    })
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
 
+const connection = mongoose.connection;
+connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
+});
 
+//narthi
+const productsRouter = require("./routes/products");
+app.use("products", productsRouter);
+//end of narthi
 
-
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+});
