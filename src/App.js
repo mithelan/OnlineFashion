@@ -6,6 +6,7 @@ import Homep from "./compound/Homepage";
 import {Provider} from 'react-redux';
 import store from "./store";
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
+import Checkout from "./compound/Checkout";
 
 
 
@@ -22,11 +23,17 @@ function App() {
     <Route exact path ='/' component={Homep}/>
 
     <Route path ='/cart' component={Cart}/>
+        <Route path ='/Checkout' component={Checkout}/>
 </Switch>
 
+
+
 </BrowserRouter>
+
             </div>
+
         </Provider>
+
 
     );
 

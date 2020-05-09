@@ -32,8 +32,8 @@ function Home(props) {
 
 
               <div className="top-social">
-                <a href="#"><i className="fa fa-facebook"></i></a>
-                <a href="#"><i className="fa fa-twitter"></i></a>
+                <a href="/Checkout"><i className="fa fa-facebook"></i></a>
+                <a href=""><i className="fa fa-twitter"></i></a>
                 <a href="#"><i className="fa fa-instagram"></i></a>
                 <a href="#"><i className="ti-pinterest"></i></a>
               </div>
@@ -61,7 +61,7 @@ function Home(props) {
             </div>
             <nav className="nav-menu mobile-menu">
               <ul>
-                <li className="active"><a href="">Home</a></li>
+                <li className="active"><a href="Checkout.js">Home</a></li>
                 <li><a href="./shop.html">Shop</a></li>
                 <li><a href="#">Collection</a>
                   <ul className="dropdown">

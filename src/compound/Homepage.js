@@ -1,4 +1,3 @@
-
 import React,{useState} from 'react';
 import tshirt1 from '../img/1.jpg';
 import tshirt2 from '../img/2.jpg';

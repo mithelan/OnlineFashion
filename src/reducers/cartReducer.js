@@ -1,4 +1,4 @@
-import {ADD_PRODUCT_CART, GET_NUMBERS_CART, DECREASENUMBER, INCREASENUMBER,DELETE_PRODUCTS} from "../actions/types";
+import {ADD_PRODUCT_CART, GET_NUMBERS_CART, DECREASENUMBER, INCREASENUMBER,DELETE_PRODUCTS,GET_CART_TOTAL} from "../actions/types";
 
 const intialState = {
     cartNumber: 0,
@@ -49,7 +49,7 @@ export default (state = intialState, action) => {
             return {
                 ...state,
                 cartNumber: state.cartNumber + 1,
-
+                cartCost: state.cartCost + state.products[action.payload].price,
                 products: {
                     ...state.products,
                     [action.payload]: selecteditem
@@ -58,6 +58,11 @@ export default (state = intialState, action) => {
 
         case GET_NUMBERS_CART:
             return {
+                ...state
+            };
+
+        case GET_CART_TOTAL:
+            return{
                 ...state
             };
 
@@ -87,7 +92,7 @@ export default (state = intialState, action) => {
                 newCartCost= state.cartCost
             }else{
                 selecteditem.numbers -=1;
-                newCartCost= state.cartCost + state.products[action.payload].price
+                newCartCost= state.cartCost - state.products[action.payload].price
             }
             return {
                 ...state,
@@ -108,7 +113,7 @@ export default (state = intialState, action) => {
                 selecteditem.inCart=false
             return {
                 ...state,
-
+                cartNumber: state.cartNumber -productNumbersBackup,
                 cartCost: state.cartCost - (productNumbersBackup * selecteditem.price),
 
                 products: {

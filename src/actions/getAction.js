@@ -1,4 +1,4 @@
-import {GET_NUMBERS_CART} from "./types";
+import {GET_NUMBERS_CART,GET_CART_TOTAL} from "./types";
 
 export  const getNumbers=()=>{
     return (dispatch)=> {
@@ -8,3 +8,14 @@ export  const getNumbers=()=>{
         });
     }
 }
+
+export  const getCartTotal=()=>{
+    return (dispatch)=> {
+        console.log('Getting the CartTotal');
+        dispatch({
+            type: GET_CART_TOTAL
+        });
+    }
+}
+
+
