@@ -24,7 +24,7 @@ connection.once("open", () => {
 
 //narthi
 const productsRouter = require("./routes/products");
-app.use("products", productsRouter);
+app.use("/products", productsRouter);
 //end of narthi
 
 app.listen(port, () => {
