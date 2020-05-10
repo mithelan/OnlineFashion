@@ -41,7 +41,7 @@ router.route("/upload").post((req, res) => {
 
   const file = req.files.file;
 
-  file.mv(`${__dirname}/productPics/${file.name}`, (err) => {
+  file.mv(`../../public/images/productPhotos/${file.name}`, (err) => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);

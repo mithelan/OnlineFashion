@@ -12,7 +12,7 @@ export default class Navbar extends Component {
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
             <li className="navbar-item">
-              <Link to="/" className="nav-link">
+              <Link to="/stockmanager" className="nav-link">
                 PRODUCTS
               </Link>
             </li>
