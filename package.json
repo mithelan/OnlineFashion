@@ -1,7 +1,6 @@
 {
   "name": "untitled",
   "version": "0.1.0",
-  "type": "module",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -15,6 +14,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
     "mongoose": "^5.9.10",
