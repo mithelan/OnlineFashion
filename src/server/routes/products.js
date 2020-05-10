@@ -10,11 +10,12 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const title = req.body.title;
   const brand = req.body.brand;
-  const price = Number(req.body.price);
+  const price = req.body.price;
   const gender = req.body.gender;
   const size = req.body.size;
   const color = req.body.color;
   const description = req.body.description;
+  const filename = req.body.filename;
 
   const newProduct = new Product({
     title,
@@ -24,12 +25,30 @@ router.route("/add").post((req, res) => {
     size,
     color,
     description,
+    filename,
   });
 
   newProduct
     .save()
     .then(() => res.json("Product added!"))
     .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/upload").post((req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: "No file uploaded" });
+  }
+
+  const file = req.files.file;
+
+  file.mv(`${__dirname}/productPics/${file.name}`, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+  });
 });
 
 router.route("/:id").get((req, res) => {
