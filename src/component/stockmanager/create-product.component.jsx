@@ -13,6 +13,8 @@ export default class CreateProducts extends Component {
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeColor = this.onChangeColor.bind(this);
     this.onChangeSize = this.onChangeSize.bind(this);
+    this.onChange = this.onChange.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -22,7 +24,9 @@ export default class CreateProducts extends Component {
       color: "",
       gender: "",
       size: "",
-      users: [],
+      file: "",
+      filename: "Choose File",
+      uploaded: {},
     };
   }
 
@@ -73,16 +77,24 @@ export default class CreateProducts extends Component {
     });
   }
 
+  onChange = (e) => {
+    this.setState({
+      file: e.target.files[0],
+      filename: e.target.files[0].name,
+    });
+  };
+
   onSubmit(e) {
     e.preventDefault();
 
     const product = {
+      size: this.state.size,
       title: this.state.title,
       description: this.state.description,
       price: this.state.price,
       gender: this.state.gender,
       color: this.state.color,
-      size: this.state.size,
+      filename: this.state.filename,
     };
 
     console.log(product);
@@ -90,8 +102,32 @@ export default class CreateProducts extends Component {
     axios
       .post("http://localhost:5000/products/add", product)
       .then((res) => console.log(res.data));
-
+    // const { fileName, filePath } = res.data;
+    // this.setState({
+    //   uploaded: { fileName, filePath },
+    // });
     window.location = "/stockmanager/addStocks";
+
+    const formData = new FormData();
+    formData.append("file", this.state.file);
+
+    try {
+      const res = axios.post(
+        "http://localhost:5000/products/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const { fileName, filePath } = res.data;
+
+      this.setState({
+        uploaded: { fileName, filePath },
+      });
+    } catch (err) {}
   }
 
   render() {
@@ -193,6 +229,18 @@ export default class CreateProducts extends Component {
                   required
                   onChange={this.onChangeDescription}
                 ></textarea>
+
+                <div className="custom-file mb-4">
+                  <input
+                    type="file"
+                    className="custom-file-input"
+                    id="customFile"
+                    onChange={this.onChange}
+                  />
+                  <label className="customer-file-label" htmlFor="customFile">
+                    {this.state.filename}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
