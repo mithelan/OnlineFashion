@@ -49,6 +49,11 @@ const Homep= (prop) =>{
         <a onClick={()=>prop.addCart("blacklongTshirt")} className='addtocart cart3' href='#'>Add to cart</a>
     </div>
 
+
+
+
+
+
 </div>
 
     );

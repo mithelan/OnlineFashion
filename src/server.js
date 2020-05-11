@@ -1,31 +1,46 @@
 const express=require('express');
 const mongoose=require('mongoose');
-
+const cors =require('cors');
 const bodyParser=require('body-parser');
 
 
+
+
+
 const app=express();
+app.use(cors());
+app.use(express.json());
 
 
 //BodyParser Middelware
 
 app.use(bodyParser.json());
 
-
-
-
 mongoose.connect('mongodb+srv://dbuser:dbuser@cluster0-phmwx.mongodb.net/test?retryWrites=true&w=majority',
     {useNewUrlParser:true},(err)=>{
 
         if(!err){
-            console.log('Mongo Connected');
+            console.log('Mongo Connected dawww');
         }else {
-            console.log('Not Connected');
+            console.log('Not Connected dawq');
         }
 
     }
 
 );
+
+
+
+
+const contactRouter=require('./routes/contact');
+
+//narthi
+const productsRouter = require("../src/server/routes/products");
+app.use("/products", productsRouter);
+
+//mithi
+app.use('/contactus',contactRouter);
+
 
 
 

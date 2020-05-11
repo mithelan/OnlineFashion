@@ -6,7 +6,10 @@ import Homep from "./compound/Homepage";
 import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+//mithi
 import Checkout from "./compound/Checkout";
+import Contactus from "./compound/Contactus";
+import ProductDisplay from "./compound/ProductDisplay";
 //narthi
 import CreateProducts from "./component/stockmanager/create-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,8 +23,11 @@ function App() {
         <BrowserRouter>
           <Home />
           <Switch>
-            <Route exact path="/" component={Homep} />
+            <Route exact path="/" component={ProductDisplay} />
             <Route path="/stockmanager" component={HomeStock} />
+            <Route path="/addStock" component={CreateProducts} />
+
+            <Route path="/Contactus" component={Contactus} />
             <Route path="/addStock" component={CreateProducts} />
             <Route path="/cart" component={Cart} />
             <Route path="/Checkout" component={Checkout} />

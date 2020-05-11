@@ -6,6 +6,7 @@ import { addCart } from "../actions/addAction";
 import Homepage from "./Homepage";
 import { getNumbers } from "../actions/getAction";
 import { Link } from "react-router-dom";
+import Contactus from "./Contactus";
 
 function Home(props) {
   console.log(props);
@@ -78,7 +79,7 @@ function Home(props) {
                 <a href="">Home</a>
               </li>
               <li>
-                <a href="./shop.html">Shop</a>
+                <a href="/ProductDisplay.js">Shop</a>
               </li>
               <li>
                 <a href="#">Collection</a>
@@ -96,13 +97,13 @@ function Home(props) {
               </li>
 
               <li>
-                <a href="./contact.html">Contact</a>
+                <a href='Contactus'>Contact</a>
               </li>
               <li>
                 <a href="#">More</a>
                 <ul className="dropdown">
                   <li>
-                    <a href="./shopping-cart.html">Shopping Cart</a>
+                    <a href="./Cart.js">Shopping Cart</a>
                   </li>
                   <li>
                     <a href="./check-out.html">Checkout</a>
@@ -112,7 +113,7 @@ function Home(props) {
                     <a href="./register.html">Register</a>
                   </li>
                   <li>
-                    <a href="./login.html">Login</a>
+                    <a href="../component/user/login/Login.jsx">Login</a>
                   </li>
                 </ul>
               </li>

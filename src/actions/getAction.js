@@ -1,6 +1,16 @@
-import {GET_NUMBERS_CART,GET_CART_TOTAL} from "./types";
+import axios from 'axios';
+import {GET_NUMBERS_CART,GET_CART_TOTAL,PRODUCTS_LOADING} from "./types";
 
-export  const getNumbers=()=>{
+export  const getNumbers=()=>dispatch =>{
+    dispatch(setProductsLoading());
+    axios.get('/items ')
+    .then(res=>
+        dispatch({
+            type : GET_NUMBERS_CART,
+            payload :res.data
+        })
+
+    )
     return (dispatch)=> {
         console.log('Getting the Cart');
         dispatch({
@@ -18,4 +28,8 @@ export  const getCartTotal=()=>{
     }
 }
 
-
+export  const setProductsLoading=()=>{
+    return  {
+      type: PRODUCTS_LOADING
+    }
+}

@@ -61,7 +61,7 @@ class Navigation extends Component {
                                         </ul>
                                     </li>
 
-                                    <li><a href="./contact.html">Contact</a></li>
+                                    <li><a href="../../compound/Contactus">Contact</a></li>
                                     <li><a href="#">More</a>
                                         <ul className="dropdown">
                                             <li><a href="./shopping-cart.html">Shopping Cart</a></li>

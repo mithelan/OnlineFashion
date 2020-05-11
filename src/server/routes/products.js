@@ -1,6 +1,7 @@
 const router = require("express").Router();
 let Product = require("../models/product.model");
 
+
 router.route("/").get((req, res) => {
   Product.find()
     .then((products) => res.json(products))
@@ -50,6 +51,19 @@ router.route("/upload").post((req, res) => {
     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
   });
 });
+
+//to homepage-Mithi
+router.get('/getProducts',(req,res)=>{
+    Product.find()
+        .exec((err,products)=>{
+            if(err) return res.status(400).json({success:false,err})
+            res.status(200).json({success:true,products})
+        })
+})
+
+
+
+
 
 router.route("/:id").get((req, res) => {
   Product.findById(req.params.id)
