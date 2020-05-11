@@ -26,20 +26,20 @@ function ProductDisplay()  {
             })
     },[])
 
-const rendercard=Products.map((product,index)=>{
+const rendercard=Products.map((products,index)=>{
 
     return <Card style={{ width: '18rem', height:'20rem' }}>
-        <Card.Img variant="top" src={`/images/productPhotos/${product.filename}`}
+        <Card.Img variant="top" src={`/images/productPhotos/${products.filename}`}
                   height="180"
                   width="180"
 
         />
             <Card.Body>
 
-                <Card.Title>{product.title}</Card.Title>
-                <Card.Title>{`Rs.${product.price}`}   </Card.Title>
+                <Card.Title>{products.title}</Card.Title>
+                <Card.Title>{`Rs.${products.price}`}   </Card.Title>
 
-                <Button variant="primary" a href={'/products/${products._id}'}>Buy now</Button>
+                <Button variant="primary" a href={`/products/${products._id}`}>Buy now</Button>
             </Card.Body>
 
         </Card>

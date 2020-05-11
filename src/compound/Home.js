@@ -113,7 +113,7 @@ function Home(props) {
                     <a href="./register.html">Register</a>
                   </li>
                   <li>
-                    <a href="../component/user/login/Login.jsx">Login</a>
+                    <a href="/Login">Login</a>
                   </li>
                 </ul>
               </li>
