@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 //mithi
+import ProductDetail from "./compound/ProductDetail";
 import Checkout from "./compound/Checkout";
 import Contactus from "./compound/Contactus";
 import ProductDisplay from "./compound/ProductDisplay";
@@ -31,6 +32,8 @@ function App() {
             <Route path="/addStock" component={CreateProducts} />
             <Route path="/cart" component={Cart} />
             <Route path="/Checkout" component={Checkout} />
+
+            <Route path="/products/:productId" component={ProductDetail} />
           </Switch>
         </BrowserRouter>
       </div>
