@@ -11,6 +11,9 @@ const Product = (props) => (
     <td>{props.product.color}</td>
     <td>{props.product.gender}</td>
     <td>{props.product.size}</td>
+    <td>
+      <label className="badge badge-primary">{props.product.quantity}</label>
+    </td>
     <td>{props.product.description}</td>
     <td>
       <img
@@ -20,7 +23,7 @@ const Product = (props) => (
       />
     </td>
     <td>
-      <Link to={"/edit/" + props.product._id} className="btn btn-warning">
+      <Link to={"/editStock/" + props.product._id} className="btn btn-warning">
         edit
       </Link>{" "}
       |{" "}
@@ -93,6 +96,7 @@ export default class HomeStock extends Component {
               <th>Color</th>
               <th>Gender</th>
               <th>Size</th>
+              <th>Quantity</th>
               <th>Desctiption</th>
               <th>Photo</th>
             </tr>

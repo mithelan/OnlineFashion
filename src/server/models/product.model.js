@@ -12,6 +12,7 @@ const productSchema = new Schema(
     color: { type: String, required: false },
     description: { type: String, required: false },
     filename: { type: String, required: false },
+    quantity: { type: Number, required: false },
   },
   {
     timestamps: true,

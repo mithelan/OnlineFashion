@@ -15,8 +15,9 @@ import ProductDisplay from "./compound/ProductDisplay";
 import CreateProducts from "./component/stockmanager/create-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeStock from "./component/stockmanager/homeStock";
+import EditProduct from "./component/stockmanager/edit-product.component";
 import Login from "./component/user/login/Login";
-import Register from "./component/user/login/Register";
+//import Register from "./component/user/login/Register";
 //end of narthi
 
 function App() {
@@ -27,19 +28,16 @@ function App() {
           <Home />
           <Switch>
             <Route exact path="/" component={ProductDisplay} />
-
             //User
             <Route path="/Login" component={Login} />
-
-            <Route path="/Register" component={Register} />
+            {/* <Route path="/Register" component={Register} />  */}
             <Route path="/stockmanager" component={HomeStock} />
             <Route path="/addStock" component={CreateProducts} />
-
             <Route path="/Contactus" component={Contactus} />
             <Route path="/addStock" component={CreateProducts} />
+            <Route path="/editStock" component={EditProduct} />
             <Route path="/cart" component={Cart} />
             <Route path="/Checkout" component={Checkout} />
-
             <Route path="/products/:productsId" component={ProductDetail} />
           </Switch>
         </BrowserRouter>

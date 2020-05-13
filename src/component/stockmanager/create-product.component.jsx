@@ -13,6 +13,7 @@ export default class CreateProducts extends Component {
     this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeColor = this.onChangeColor.bind(this);
     this.onChangeSize = this.onChangeSize.bind(this);
+    this.onChangeQuantity = this.onChangeQuantity.bind(this);
     this.onChange = this.onChange.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -22,10 +23,11 @@ export default class CreateProducts extends Component {
       description: "",
       price: 0,
       color: "",
-      gender: "",
+      gender: "male",
       size: "",
       file: "",
       filename: "Choose File",
+      quantity: 0,
       uploaded: {},
     };
   }
@@ -77,6 +79,12 @@ export default class CreateProducts extends Component {
     });
   }
 
+  onChangeQuantity(e) {
+    this.setState({
+      quantity: e.target.value,
+    });
+  }
+
   onChange = (e) => {
     this.setState({
       file: e.target.files[0],
@@ -95,6 +103,7 @@ export default class CreateProducts extends Component {
       gender: this.state.gender,
       color: this.state.color,
       filename: this.state.filename,
+      quantity: this.state.quantity,
     };
 
     console.log(product);
@@ -192,9 +201,9 @@ export default class CreateProducts extends Component {
                     required
                     onChange={this.onChangeGender}
                   >
-                    <option>male</option>
-                    <option>female</option>
-                    <option>both</option>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                    <option value="both">both</option>
                   </select>
                 </div>
               </div>
@@ -207,6 +216,18 @@ export default class CreateProducts extends Component {
                     className="form-control"
                     required
                     onChange={this.onChangeColor}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Quantity </label>
+                <div className="col-sm-10">
+                  <input
+                    type="number"
+                    className="form-control"
+                    required
+                    onChange={this.onChangeQuantity}
                   />
                 </div>
               </div>
