@@ -1,27 +1,26 @@
-import React, { Component } from 'react'
-import jwt_decode from 'jwt-decode'
+import React, { Component } from "react";
+import jwt_decode from "jwt-decode";
 
 class Profile extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      first_name: '',
-      last_name: '',
-      email: '',
-      errors: {}
-    }
+      first_name: "",
+      last_name: "",
+      email: "",
+      errors: {},
+    };
   }
 
   // intha keela iruka code thaan game a kudukuthu
   componentDidMount() {
-    const token = localStorage.usertoken
-    const decoded = jwt_decode(token)
+    const token = localStorage.usertoken;
+    const decoded = jwt_decode(token);
     this.setState({
       first_name: decoded.first_name,
       last_name: decoded.last_name,
-      email: decoded.email
-
-    })
+      email: decoded.email,
+    });
 
     console.log(token);
   }
@@ -51,7 +50,7 @@ class Profile extends Component {
           </table>
         </div>
       </div>
-    )
+    );
   }
 }
 

@@ -15,16 +15,16 @@ import ProductDisplay from "./compound/ProductDisplay";
 import CreateProducts from "./component/stockmanager/create-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeStock from "./component/stockmanager/homeStock";
-<<<<<<< HEAD
+
 import EditProduct from "./component/stockmanager/edit-product.component";
-import Login from "./component/user/login/Login";
-//import Register from "./component/user/login/Register";
-=======
-import Register from "./component/Login/Register";
 import Login from "./component/Login/Login";
+import Register from "./component/Login/Register";
 import Profile from "./component/Login/Profile";
 
->>>>>>> 1025e697729ff8e59832aeaf8384b264540e2261
+//import Register from "./component/Login/Register";
+//import Login from "./component/Login/Login";
+//import Profile from "./component/Login/Profile";
+
 //end of narthi
 
 function App() {
@@ -37,13 +37,8 @@ function App() {
             <Route exact path="/" component={ProductDisplay} />
             //User
             <Route path="/Login" component={Login} />
-<<<<<<< HEAD
-            {/* <Route path="/Register" component={Register} />  */}
-=======
             <Route path="/Register" component={Register} />
             <Route path="/Profile" component={Profile} />
-
->>>>>>> 1025e697729ff8e59832aeaf8384b264540e2261
             <Route path="/stockmanager" component={HomeStock} />
             <Route path="/addStock" component={CreateProducts} />
             <Route path="/Contactus" component={Contactus} />
