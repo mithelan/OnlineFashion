@@ -17,6 +17,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HomeStock from "./component/stockmanager/homeStock";
 import Register from "./component/Login/Register";
 import Login from "./component/Login/Login";
+import Profile from "./component/Login/Profile";
 
 //end of narthi
 
@@ -32,6 +33,7 @@ function App() {
             //User
             <Route path="/Login" component={Login} />
             <Route path="/Register" component={Register} />
+            <Route path="/Profile" component={Profile} />
 
             <Route path="/stockmanager" component={HomeStock} />
             <Route path="/addStock" component={CreateProducts} />

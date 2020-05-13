@@ -7,53 +7,26 @@ import Homepage from "./Homepage";
 import { getNumbers } from "../actions/getAction";
 import { Link } from "react-router-dom";
 import Contactus from "./Contactus";
+import Profile from "../component/Login/Profile";
 
 function Home(props) {
   console.log(props);
   return (
     <header className="header-section">
-      <div className="header-top">
-        <div className="container">
-          <div className="ht-left">
-            <div className="mail-service">
-              <i className=" fa fa-envelope"></i>
-              fashion@gmail.com
-            </div>
-            <div className="phone-service">
-              <i className=" fa fa-phone"></i>
-              0777885111
-            </div>
-          </div>
-          <div className="ht-right">
-            <Link to="/stockmanager">
-              <i className="fa fa-user"></i>Login
-            </Link>
-
-            <Link to="/Cart">
-              <i className="fa fa-shopping-cart"></i>
-            </Link>
-            <span>{props.cartProps.cartNumber}</span>
-
-            <div className="top-social">
-              <a href="#">
-                <i className="fa fa-facebook"></i>
-              </a>
-              <a href="#">
-                <i className="fa fa-twitter"></i>
-              </a>
-              <a href="#">
-                <i className="fa fa-instagram"></i>
-              </a>
-              <a href="#">
-                <i className="ti-pinterest"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+<div >
 
       <img src={Logo} width="200" height="75" />
+<h3 className='text-right'>Hey ,{props.first_name}</h3>
+  <div className="text-right">
+    <Link to="/stockmanager">
+      <i className="fa fa-user"></i>Login
+    </Link>
 
+  <Link to="/Cart">
+    <i className="fa fa-shopping-cart"></i>
+  </Link>
+  <span>{props.cartProps.cartNumber}</span>  </div>
+</div>
       <div className="nav-item">
         <div className="container">
           <div className="nav-depart">

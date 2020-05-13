@@ -142,6 +142,23 @@ display: flex;
   display: flex;
   align-items: center;
 }
+.Arrange{
+  margin-right: -109%
+}
+.product-right{
+  position: absolute;
+  margin-top: 33%;
+  margin-left: 69%;
+  width: 21%;
+}
+
+.review{
+  position: absolute;
+  margin-top: 33%;
+  margin-left: 0%;
+  width: 115%;
+
+}
 .product{
   width: 68%;
   display: flex;
