@@ -15,15 +15,10 @@ import ProductDisplay from "./compound/ProductDisplay";
 import CreateProducts from "./component/stockmanager/create-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeStock from "./component/stockmanager/homeStock";
-
-import EditProduct from "./component/stockmanager/edit-product.component";
-import Login from "./component/Login/Login";
 import Register from "./component/Login/Register";
+import Login from "./component/Login/Login";
 import Profile from "./component/Login/Profile";
-
-//import Register from "./component/Login/Register";
-//import Login from "./component/Login/Login";
-//import Profile from "./component/Login/Profile";
+import EditProduct from "./component/stockmanager/edit-product.component";
 
 //end of narthi
 
@@ -42,7 +37,7 @@ function App() {
             <Route path="/stockmanager" component={HomeStock} />
             <Route path="/addStock" component={CreateProducts} />
             <Route path="/Contactus" component={Contactus} />
-            <Route path="/addStock" component={CreateProducts} />
+            >
             <Route path="/editStock" component={EditProduct} />
             <Route path="/cart" component={Cart} />
             <Route path="/Checkout" component={Checkout} />
