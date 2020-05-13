@@ -20,7 +20,7 @@ mongoose.connect('mongodb+srv://dbuser:dbuser@cluster0-phmwx.mongodb.net/test?re
     {useNewUrlParser:true},(err)=>{
 
         if(!err){
-            console.log('Mongo Connected dawww');
+            console.log('Mongo Connected dawwsw');
         }else {
             console.log('Not Connected dawq');
         }
@@ -41,6 +41,10 @@ app.use("/products", productsRouter);
 //mithi
 app.use('/contactus',contactRouter);
 
+//Anji
+const Users = require('./routes/Users')
+
+app.use('/users', Users)
 
 
 
