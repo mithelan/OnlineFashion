@@ -37,8 +37,7 @@ function App() {
             <Route path="/stockmanager" component={HomeStock} />
             <Route path="/addStock" component={CreateProducts} />
             <Route path="/Contactus" component={Contactus} />
-            >
-            <Route path="/editStock" component={EditProduct} />
+            <Route path="/editStock/:id" component={EditProduct} />
             <Route path="/cart" component={Cart} />
             <Route path="/Checkout" component={Checkout} />
             <Route path="/products/:productsId" component={ProductDetail} />

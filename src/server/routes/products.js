@@ -53,6 +53,12 @@ router.route("/upload").post((req, res) => {
   });
 });
 
+router.route("/:id").get((req, res) => {
+  Product.findById(req.params.id)
+    .then((product) => res.json(product))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 //to homepage-Mithi
 router.get("/getProducts", (req, res) => {
   Product.find().exec((err, products) => {
@@ -76,12 +82,6 @@ router.get("/products_by_id", (req, res) => {
     });
 });
 
-router.route("/:id").get((req, res) => {
-  Product.findById(req.params.id)
-    .then((product) => res.json(product))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
-
 router.route("/:id").delete((req, res) => {
   Product.findByIdAndDelete(req.params.id)
     .then(() => res.json("Product deleted."))
@@ -98,6 +98,7 @@ router.route("/update/:id").post((req, res) => {
       product.size = req.body.size;
       product.color = req.body.color;
       product.description = req.body.description;
+      product.filename = req.body.filename;
 
       product
         .save()

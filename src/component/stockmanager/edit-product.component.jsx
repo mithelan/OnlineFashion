@@ -45,6 +45,7 @@ export default class EditProduct extends Component {
           color: response.data.color,
           quantity: response.data.quantity,
           description: response.data.description,
+          filename: response.data.filename,
         });
       })
       .catch(function (error) {
@@ -201,6 +202,7 @@ export default class EditProduct extends Component {
                   <input
                     type="text"
                     required
+                    value={this.state.price}
                     onChange={this.onChangePrice}
                     className="form-control"
                   />
@@ -213,6 +215,7 @@ export default class EditProduct extends Component {
                   <input
                     type="text"
                     required
+                    value={this.state.size}
                     onChange={this.onChangeSize}
                     className="form-control"
                   />
@@ -224,9 +227,13 @@ export default class EditProduct extends Component {
                 <div className="col-sm-10">
                   <select
                     className="form-control"
+                    value={this.state.gender}
                     required
                     onChange={this.onChangeGender}
                   >
+                    <option value={this.state.gender}>
+                      {this.state.gender}
+                    </option>
                     <option value="male">male</option>
                     <option value="female">female</option>
                     <option value="both">both</option>
@@ -239,6 +246,7 @@ export default class EditProduct extends Component {
                 <div className="col-sm-10">
                   <input
                     type="text"
+                    value={this.state.color}
                     className="form-control"
                     required
                     onChange={this.onChangeColor}
@@ -252,6 +260,7 @@ export default class EditProduct extends Component {
                   <input
                     type="number"
                     className="form-control"
+                    value={this.state.quantity}
                     required
                     onChange={this.onChangeQuantity}
                   />
@@ -271,8 +280,9 @@ export default class EditProduct extends Component {
               <br />
               <div className="form-group">
                 <textarea
+                  value={this.state.description}
                   className="form-control"
-                  rows="8"
+                  rows="6"
                   required
                   onChange={this.onChangeDescription}
                 ></textarea>
@@ -284,9 +294,24 @@ export default class EditProduct extends Component {
                     id="customFile"
                     onChange={this.onChange}
                   />
-                  <label className="customer-file-label" htmlFor="customFile">
-                    {this.state.filename}
-                  </label>
+                  <div className="row">
+                    <div className="col-md-2">
+                      <label
+                        className="customer-file-label"
+                        htmlFor="customFile"
+                      >
+                        {this.state.filename}
+                      </label>
+                    </div>
+                    <div className="col-md-6">
+                      <img
+                        src={`/images/productPhotos/${this.state.filename}`}
+                        height="200"
+                        width="200"
+                      />
+                    </div>
+                    <div className="col-4"></div>
+                  </div>
                 </div>
               </div>
             </div>
