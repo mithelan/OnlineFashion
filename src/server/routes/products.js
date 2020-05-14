@@ -1,7 +1,6 @@
 const router = require("express").Router();
 let Product = require("../models/product.model");
 
-
 router.route("/").get((req, res) => {
   Product.find()
     .then((products) => res.json(products))
@@ -17,6 +16,7 @@ router.route("/add").post((req, res) => {
   const color = req.body.color;
   const description = req.body.description;
   const filename = req.body.filename;
+  const quantity = Number(req.body.quantity);
 
   const newProduct = new Product({
     title,
@@ -27,6 +27,7 @@ router.route("/add").post((req, res) => {
     color,
     description,
     filename,
+    quantity,
   });
 
   newProduct
@@ -52,42 +53,33 @@ router.route("/upload").post((req, res) => {
   });
 });
 
-//to homepage-Mithi
-router.get('/getProducts',(req,res)=>{
-    Product.find()
-        .exec((err,products)=>{
-            if(err) return res.status(400).json({success:false,err})
-            res.status(200).json({success:true,products})
-        })
-})
-
-//mithiproducts/products_by_id?=id$(productId)&type=single'
-router.get('/products_by_id',(req,res)=>{
-
-    let type=req.query.type
-    let productIds=req.query.id
-
-    if(type==='array'){
-
-    }
-    Product.find({'_id':{$in:productIds}})
-        .populate('writer')
-        .exec((err,products)=>{
-            if(err) return req.status(400).send(err)
-            return res.status(200).send(products)
-    })
-
-
-})
-
-
-
-
-
 router.route("/:id").get((req, res) => {
   Product.findById(req.params.id)
     .then((product) => res.json(product))
     .catch((err) => res.status(400).json("Error: " + err));
+});
+
+//to homepage-Mithi
+router.get("/getProducts", (req, res) => {
+  Product.find().exec((err, products) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true, products });
+  });
+});
+
+//mithiproducts/products_by_id?=id$(productId)&type=single'
+router.get("/products_by_id", (req, res) => {
+  let type = req.query.type;
+  let productIds = req.query.id;
+
+  if (type === "array") {
+  }
+  Product.find({ _id: { $in: productIds } })
+    .populate("writer")
+    .exec((err, products) => {
+      if (err) return req.status(400).send(err);
+      return res.status(200).send(products);
+    });
 });
 
 router.route("/:id").delete((req, res) => {
@@ -106,6 +98,7 @@ router.route("/update/:id").post((req, res) => {
       product.size = req.body.size;
       product.color = req.body.color;
       product.description = req.body.description;
+      product.filename = req.body.filename;
 
       product
         .save()
