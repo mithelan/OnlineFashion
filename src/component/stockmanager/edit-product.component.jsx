@@ -34,7 +34,7 @@ export default class EditProduct extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/products/" + this.props.match.params.id)
+      .get("http://localhost:5000/products/get/" + this.props.match.params.id)
       .then((response) => {
         this.setState({
           title: response.data.title,
