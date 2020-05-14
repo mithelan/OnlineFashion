@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Cart from "./compound/Cart";
 import "./App.css";
 import Home from "./compound/Home";
@@ -15,23 +15,60 @@ import ProductDisplay from "./compound/ProductDisplay";
 import CreateProducts from "./component/stockmanager/create-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeStock from "./component/stockmanager/homeStock";
-import Register from "./component/Login/Register";
-import Login from "./component/Login/Login";
+import Register from "./Justu/Register";
+import Loginn from "./Justu/Loginn";
 import Profile from "./component/Login/Profile";
+import Axios from "axios";
+import UserContext from "./Justu/UserContext";
 
 //end of narthi
 
-function App() {
+export default function App() {
+
+  const [userData, setUserData] = useState({
+    token: undefined,
+    user: undefined,
+  });
+
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+      const tokenRes = await Axios.post(
+          "http://localhost:5000/customers/tokenIsValid",
+          null,
+          { headers: { "x-auth-token": token } }
+      );
+      if (tokenRes.data) {
+        const userRes = await Axios.get("http://localhost:5000/customers/", {
+          headers: { "x-auth-token": token },
+        });
+        setUserData({
+          token,
+          user: userRes.data,
+        });
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
+
+
+
   return (
     <Provider store={store}>
       <div className="App">
         <BrowserRouter>
+          <UserContext.Provider value={{ userData, setUserData }}>
           <Home />
           <Switch>
             <Route exact path="/" component={ProductDisplay} />
 
             //User
-            <Route path="/Login" component={Login} />
+            <Route path="/Login" component={Loginn} />
             <Route path="/Register" component={Register} />
             <Route path="/Profile" component={Profile} />
 
@@ -45,10 +82,11 @@ function App() {
 
             <Route path="/products/:productsId" component={ProductDetail} />
           </Switch>
+          </UserContext.Provider>
         </BrowserRouter>
       </div>
     </Provider>
   );
 }
 
-export default App;
+

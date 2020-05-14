@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../App.css";
 import Logo from "../img/logo.PNG";
 import { connect } from "react-redux";
@@ -8,15 +8,32 @@ import { getNumbers } from "../actions/getAction";
 import { Link } from "react-router-dom";
 import Contactus from "./Contactus";
 import Profile from "../component/Login/Profile";
+import UserContext from "../Justu/UserContext";
+
 
 function Home(props) {
   console.log(props);
+
+  const { userData } = useContext(UserContext);
+
+
   return (
     <header className="header-section">
 <div >
 
       <img src={Logo} width="200" height="75" />
-<h3 className='text-right'>Hey ,{props.first_name}</h3>
+
+<h3 className='text-right'>
+
+    {userData.user ? (
+        <h1>Welcome {userData.user.displayName}</h1>
+    ) : (
+        <>
+            <h2>You are not logged in</h2>
+            <Link to="/login">Log in</Link>
+        </>
+    )}
+</h3>
   <div className="text-right">
     <Link to="/stockmanager">
       <i className="fa fa-user"></i>Login
