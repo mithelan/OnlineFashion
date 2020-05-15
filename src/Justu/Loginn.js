@@ -30,28 +30,53 @@ export default function Login() {
         }
     };
     return (
-        <div className="page">
-            <h2>Log in</h2>
-            {error && (
-                <ErrorNotice message={error} clearError={() => setError(undefined)} />
-            )}
-            <form className="form" onSubmit={submit}>
-                <label htmlFor="login-email">Email</label>
-                <input
-                    id="login-email"
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
 
-                <label htmlFor="login-password">Password</label>
-                <input
-                    id="login-password"
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+        <div className="container">
+            <div className="row">
+                <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div className="card card-signin my-5">
+                        <div className="card-body">
+                            <h5 className="card-title text-center">Sign In</h5>
+                            {error && (
+                                <ErrorNotice message={error} clearError={() => setError(undefined)} />
+                            )}
+                            <form className="form-signin" onSubmit={submit}>
+                                <div className="form-label-group">
+                                    <input
 
-                <input type="submit" value="Log in" />
-            </form>
+                                        type="email"
+                                        onChange={(e) => setEmail(e.target.value)}
+                                         id="inputEmail" className="form-control" placeholder="Email address" required autofocus />
+                                    <br/>
+                                </div>
+                                <div className="form-label-group">
+                                    <input
+                                        type="password"
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        id="inputPassword" className="form-control" placeholder="Password" required />
+                                    <br/>
+                                </div>
+
+                                <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                                <hr className="my-4" />
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
     );
 }
