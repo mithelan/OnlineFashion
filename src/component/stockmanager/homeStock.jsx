@@ -72,6 +72,7 @@ export default class HomeStock extends Component {
       quantity: 0,
       uploaded: {},
       currentId: "",
+      brand: "",
     };
   }
 

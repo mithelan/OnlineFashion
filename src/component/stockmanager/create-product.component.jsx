@@ -14,6 +14,7 @@ export default class CreateProducts extends Component {
     this.onChangeColor = this.onChangeColor.bind(this);
     this.onChangeSize = this.onChangeSize.bind(this);
     this.onChangeQuantity = this.onChangeQuantity.bind(this);
+    this.onChangeBrand = this.onChangeBrand.bind(this);
     this.onChange = this.onChange.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -29,6 +30,7 @@ export default class CreateProducts extends Component {
       filename: "Choose File",
       quantity: 0,
       uploaded: {},
+      brand: "Both",
     };
   }
 
@@ -46,6 +48,12 @@ export default class CreateProducts extends Component {
   onChangeTitle(e) {
     this.setState({
       title: e.target.value,
+    });
+  }
+
+  onChangeBrand(e) {
+    this.setState({
+      brand: e.target.value,
     });
   }
 
@@ -97,6 +105,7 @@ export default class CreateProducts extends Component {
 
     const product = {
       size: this.state.size,
+      brand: this.state.brand,
       title: this.state.title,
       description: this.state.description,
       price: this.state.price,
@@ -165,7 +174,26 @@ export default class CreateProducts extends Component {
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">BRAND</label>
                 <div className="col-sm-10">
-                  <select className="form-control border_only_field"></select>
+                  <select
+                    className="form-control border_only_field"
+                    onChange={this.onChangeBrand}
+                  >
+                    <option value="other">Other</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Inditex">Inditex </option>
+                    <option value="H and M">H and M </option>
+                    <option value="Louris Vuitton">Louris Vuitton</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Uniqlo">Uniqlo</option>
+                    <option value="Hermes">Hermes</option>
+                    <option value="Gucci">Gucci</option>
+                    <option value="Michael Kors">Michael Kors</option>
+                    <option value="Ralph Lauren">Ralph Lauren</option>
+                    <option value=" Prada"> Prada</option>
+                    <option value="Levi Strauss and Co">
+                      Levi Strauss and Co
+                    </option>
+                  </select>
                 </div>
               </div>
 
