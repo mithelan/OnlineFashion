@@ -21,6 +21,9 @@ import Loginn from "./Justu/Loginn";
 import Profile from "./component/Login/Profile";
 import Axios from "axios";
 import UserContext from "./Justu/UserContext";
+import AdminHo from "./admin/AdminHo";
+import RegisterSM from "./admin/registerStockManager";
+import LoginSM from "./admin/stockmanagerlogin";
 
 //end of narthi
 
@@ -76,6 +79,9 @@ export default function App() {
               <Route path="/cart" component={Cart} />
               <Route path="/Checkout" component={Checkout} />
               <Route path="/products/:productsId" component={ProductDetail} />
+              <Route path="/admin" component={AdminHo} />
+              <Route path="/registerstockmanager" component={RegisterSM} />
+              <Route path="/stockmanagerlogin" component={LoginSM} />
             </Switch>
           </UserContext.Provider>
         </BrowserRouter>

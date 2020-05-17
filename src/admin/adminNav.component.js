@@ -18,10 +18,12 @@ export default class AdminNavBar extends Component {
                         </li>
 
                         <li className="navbar-item">
-                            <Link to="/registerstock" className="nav-link">
+                            <Link to="/registerstockmanager" className="nav-link">
                                 Register Stock Manager
                             </Link>
                         </li>
+
+                        
 
 
                     </ul>
