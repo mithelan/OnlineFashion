@@ -7,35 +7,45 @@ export default class CreateProducts extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeDuration = this.onChangeDuration.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangePrice = this.onChangePrice.bind(this);
+    this.onChangeGender = this.onChangeGender.bind(this);
+    this.onChangeColor = this.onChangeColor.bind(this);
+    this.onChangeSize = this.onChangeSize.bind(this);
+    this.onChangeQuantity = this.onChangeQuantity.bind(this);
+    this.onChange = this.onChange.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: "",
+      title: "",
       description: "",
-      duration: 0,
-      date: new Date(),
-      users: [],
+      price: 0,
+      color: "",
+      gender: "male",
+      size: "",
+      file: "",
+      filename: "Choose File",
+      quantity: 0,
+      uploaded: {},
     };
   }
 
-  componentDidMount() {
-    axios.get("http://localhost:5000/users/").then((response) => {
-      if (response.data.length > 0) {
-        this.setState({
-          users: response.data.map((user) => user.username),
-          username: response.data[0].username,
-        });
-      }
-    });
-  }
+  // componentDidMount() {
+  //   axios.get("http://localhost:5000/users/").then((response) => {
+  //     if (response.data.length > 0) {
+  //       this.setState({
+  //         users: response.data.map((user) => user.username),
+  //         username: response.data[0].username,
+  //       });
+  //     }
+  //   });
+  // }
 
-  onChangeUsername(e) {
+  onChangeTitle(e) {
     this.setState({
-      username: e.target.value,
+      title: e.target.value,
     });
   }
 
@@ -45,143 +55,219 @@ export default class CreateProducts extends Component {
     });
   }
 
-  onChangeDuration(e) {
+  onChangeSize(e) {
     this.setState({
-      duration: e.target.value,
+      size: e.target.value,
     });
   }
 
-  onChangeDate(date) {
+  onChangePrice(e) {
     this.setState({
-      date: date,
+      price: e.target.value,
     });
   }
+
+  onChangeGender(e) {
+    this.setState({
+      gender: e.target.value,
+    });
+  }
+
+  onChangeColor(e) {
+    this.setState({
+      color: e.target.value,
+    });
+  }
+
+  onChangeQuantity(e) {
+    this.setState({
+      quantity: e.target.value,
+    });
+  }
+
+  onChange = (e) => {
+    this.setState({
+      file: e.target.files[0],
+      filename: e.target.files[0].name,
+    });
+  };
 
   onSubmit(e) {
     e.preventDefault();
 
-    const exercise = {
-      username: this.state.username,
+    const product = {
+      size: this.state.size,
+      title: this.state.title,
       description: this.state.description,
-      duration: this.state.duration,
-      date: this.state.date,
+      price: this.state.price,
+      gender: this.state.gender,
+      color: this.state.color,
+      filename: this.state.filename,
+      quantity: this.state.quantity,
     };
 
-    console.log(exercise);
+    console.log(product);
 
     axios
-      .post("http://localhost:5000/exercises/add", exercise)
+      .post("http://localhost:5000/products/add", product)
       .then((res) => console.log(res.data));
+    // const { fileName, filePath } = res.data;
+    // this.setState({
+    //   uploaded: { fileName, filePath },
+    // });
+    window.location = "/stockmanager/addStocks";
 
-    window.location = "/";
+    const formData = new FormData();
+    formData.append("file", this.state.file);
+
+    try {
+      const res = axios.post(
+        "http://localhost:5000/products/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const { fileName, filePath } = res.data;
+
+      this.setState({
+        uploaded: { fileName, filePath },
+      });
+    } catch (err) {}
   }
 
   render() {
     return (
       <div>
-        <h3>Stock Management</h3>
-        <Navbar />
-        <div class="row">
-          <div className="col-md-1"></div>
-          <div className="col-md-4">
-            <br />
-            <br />
-
-            <h4>Add new product</h4>
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <label className="h4 float-left"> Title</label>
-                <input
-                  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.description}
-                  onChange={this.onChangeDescription}
-                />
+        {/* <h3>Stock Management</h3>
+        <Navbar /> */}
+        <br />
+        <form onSubmit={this.onSubmit}>
+          <div className="row">
+            <div className="col-md-5">
+              {/* <h4>PRODUCT DETAILS</h4> */}
+              <br />
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">TITLE</label>
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    required
+                    onChange={this.onChangeTitle}
+                    className="form-control border_only_field"
+                  />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label>Brand: </label>
-                <select
-                  required
-                  className="form-control"
-                  value={this.state.username}
-                  onChange={this.onChangeUsername}
-                >
-                  {this.state.users.map(function (user) {
-                    return (
-                      <option key={user} value={user}>
-                        {user}
-                      </option>
-                    );
-                  })}
-                </select>
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">BRAND</label>
+                <div className="col-sm-10">
+                  <select className="form-control border_only_field"></select>
+                </div>
               </div>
 
-              <div className="form-group">
-                <label>Price</label>
-                <input
-                  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.description}
-                  onChange={this.onChangeDescription}
-                />
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">PRICE</label>
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    required
+                    onChange={this.onChangePrice}
+                    className="form-control border_only_field"
+                  />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label>Gender </label>
-                <select required className="form-control">
-                  <option>Male</option>
-                  <option>Female</option>
-                  <option>Both</option>
-                </select>
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">SIZE</label>
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    required
+                    onChange={this.onChangeSize}
+                    className="form-control border_only_field"
+                  />
+                </div>
               </div>
 
-              <div className="form-group">
-                <label>Color</label>
-                <input
-                  type="text"
-                  required
-                  className="form-control"
-                  value={this.state.description}
-                  onChange={this.onChangeDescription}
-                />
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">GENDER</label>
+                <div className="col-sm-10">
+                  <select
+                    className="form-control border_only_field"
+                    required
+                    onChange={this.onChangeGender}
+                  >
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                    <option value="both">both</option>
+                  </select>
+                </div>
               </div>
 
-              <div className="form-group">
-                <input
-                  type="submit"
-                  value="Create Exercise Log"
-                  className="btn btn-primary"
-                />
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">COLOR </label>
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    className="form-control border_only_field"
+                    required
+                    onChange={this.onChangeColor}
+                  />
+                </div>
               </div>
-            </form>
-          </div>
-          <div className="col-md-7">
-            <br />
-            <br />
-            <br />
-            <div id="drop">
-              Drop Here
-              <a>Browse</a>
-              <input type="file" name="upl" multiple />
+
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Quantity </label>
+                <div className="col-sm-10">
+                  <input
+                    type="number"
+                    className="form-control border_only_field"
+                    required
+                    onChange={this.onChangeQuantity}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group row">
+                <div className="col-sm-10"></div>
+              </div>
             </div>
+            <div className="col-md-7">
+              {/* <h4>PRODUCT DESCRIPTION</h4> */}
+              <br />
+              <div className="form-group">
+                <textarea
+                  className="form-control border_only_field"
+                  rows="8"
+                  required
+                  onChange={this.onChangeDescription}
+                ></textarea>
 
-            <ul></ul>
-            <div className="form-group">
-              <label>Description</label>
-              <textarea
-                type="text"
-                rows="8"
-                required
-                className="form-control"
-                value={this.state.description}
-                onChange={this.onChangeDescription}
-              />
+                <div className="custom-file mb-4">
+                  <input
+                    type="file"
+                    className="custom-file-input"
+                    id="customFile"
+                    onChange={this.onChange}
+                  />
+                  <label className="customer-file-label" htmlFor="customFile">
+                    {this.state.filename}
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+          <button
+            type="submit"
+            className="btn btn-dark btn-block rounded-0 float-right "
+          >
+            Add Product
+          </button>
+        </form>
       </div>
     );
   }

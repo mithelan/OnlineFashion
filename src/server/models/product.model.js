@@ -4,13 +4,15 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
   {
-    title: { type: String, required: true },
-    brand: { type: String, required: true },
-    price: { type: Number, required: true },
-    gender: { type: String, required: true },
-    size: { type: String, required: true },
-    color: { type: String, required: true },
-    description: { type: String, required: true },
+    title: { type: String, required: false },
+    brand: { type: String, required: false },
+    price: { type: String, required: false },
+    gender: { type: String, required: false },
+    size: { type: String, required: false },
+    color: { type: String, required: false },
+    description: { type: String, required: false },
+    filename: { type: String, required: false },
+    quantity: { type: Number, required: false },
   },
   {
     timestamps: true,

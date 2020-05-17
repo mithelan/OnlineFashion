@@ -7,9 +7,16 @@ import tshirt2 from '../img/2.jpg';
 import tshirt3 from '../img/3.jpg';
 import tshirt4 from '../img/4.jpg';
 import {deletecart} from "../actions/deleteAction";
+import Checkout from "./Checkout";
+import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
+
 
 function Cart({cartProps,productQuantity,deleteproducts}) {
 
+  /*  checkout()=>{
+        window.location='/Checkout'
+    }*/
     console.log(cartProps);
 
     let productsInCart = [];
@@ -44,7 +51,7 @@ function Cart({cartProps,productQuantity,deleteproducts}) {
         console.log('product name is');
         console.log(product);
         return (
-<Fragment key={index}>
+                <Fragment key={index}>
 
                 <div className='product'><ion-icon onClick={() => deleteproducts(product.referenceName)} name="close-circle"/>
                     <img src={productImages(product)}/>
@@ -80,9 +87,11 @@ function Cart({cartProps,productQuantity,deleteproducts}) {
                 <h4 className='basketTotalTitle'>Cart Total</h4>
                 <h4 className='basketTotal'>{cartProps.cartCost}.00</h4>
             </div>
-            <button class='submit' >Check out</button>
+            <button  class='submit' >Check out</button>
 
         </div>
+
+
     );
 }
 

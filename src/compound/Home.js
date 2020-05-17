@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../App.css";
 import Logo from "../img/logo.PNG";
 import { connect } from "react-redux";
@@ -6,60 +6,44 @@ import { addCart } from "../actions/addAction";
 import Homepage from "./Homepage";
 import { getNumbers } from "../actions/getAction";
 import { Link } from "react-router-dom";
+import Contactus from "./Contactus";
+import Profile from "../component/Login/Profile";
+import UserContext from "../Justu/UserContext";
+
 
 function Home(props) {
   console.log(props);
+
+  const { userData } = useContext(UserContext);
+
+
   return (
     <header className="header-section">
-      <div className="header-top">
-        <div className="container">
-          <div className="ht-left">
-            <div className="mail-service">
-              <i className=" fa fa-envelope"></i>
-              fashion@gmail.com
-            </div>
-            <div className="phone-service">
-              <i className=" fa fa-phone"></i>
-              0777885111
-            </div>
-          </div>
-          <div className="ht-right">
-            <Link to="/stockmanager">
-              <i className="fa fa-user"></i>Login
-            </Link>
-
-            <Link to="/admin">
-              <i className="fa fa-trash"></i> ADMIN
-            </Link>
-
-
-
-
-            <Link to="/Cart">
-              <i className="fa fa-shopping-cart"></i>
-            </Link>
-            <span>{props.cartProps.cartNumber}</span>
-
-            <div className="top-social">
-              <a href="#">
-                <i className="fa fa-facebook"></i>
-              </a>
-              <a href="#">
-                <i className="fa fa-twitter"></i>
-              </a>
-              <a href="#">
-                <i className="fa fa-instagram"></i>
-              </a>
-              <a href="#">
-                <i className="ti-pinterest"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+<div >
 
       <img src={Logo} width="200" height="75" />
 
+<h3 className='text-right'>
+
+    {userData.user ? (
+        <h1>Welcome {userData.user.displayName}</h1>
+    ) : (
+        <>
+            <h2>You are not logged in</h2>
+            <Link to="/login">Log in</Link>
+        </>
+    )}
+</h3>
+  <div className="text-right">
+    <Link to="/stockmanager">
+      <i className="fa fa-user"></i>Login
+    </Link>
+
+  <Link to="/Cart">
+    <i className="fa fa-shopping-cart"></i>
+  </Link>
+  <span>{props.cartProps.cartNumber}</span>  </div>
+</div>
       <div className="nav-item">
         <div className="container">
           <div className="nav-depart">
@@ -85,7 +69,7 @@ function Home(props) {
                 <a href="">Home</a>
               </li>
               <li>
-                <a href="./shop.html">Shop</a>
+                <a href="/ProductDisplay.js">Shop</a>
               </li>
               <li>
                 <a href="#">Collection</a>
@@ -99,28 +83,27 @@ function Home(props) {
                   <li>
                     <a href="#">Accessories/Shoes</a>
                   </li>
-
                 </ul>
               </li>
 
               <li>
-                <a href="./contact.html">Contact</a>
+                <a href='Contactus'>Contact</a>
               </li>
               <li>
                 <a href="#">More</a>
                 <ul className="dropdown">
                   <li>
-                    <a href="./shopping-cart.html">Shopping Cart</a>
+                    <a href="./Cart.js">Shopping Cart</a>
                   </li>
                   <li>
                     <a href="./check-out.html">Checkout</a>
                   </li>
 
                   <li>
-                    <a href="./register.html">Register</a>
+                    <a href="/Register">Register</a>
                   </li>
                   <li>
-                    <a href="./login.html">Login</a>
+                    <a href="/Login">Login</a>
                   </li>
                 </ul>
               </li>
