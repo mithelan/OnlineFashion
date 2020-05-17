@@ -23,7 +23,7 @@ export default class AdminNavBar extends Component {
                             </Link>
                         </li>
 
-                        
+
 
 
                     </ul>
