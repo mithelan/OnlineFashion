@@ -85,8 +85,8 @@ router.route("/adds").post((req, res) => {
     const mailOptions = {
         from: 'parkme1998@gmail.com', // sender address
         to: email, // list of receivers
-        subject: 'ulla porathuku saavi', // Subject line
-        html: 'username & password'+username,password// plain text body
+        subject: 'username'+username, // Subject line
+        html: ' password'+password// plain text body
     };
 
     transporter.sendMail(mailOptions, function (err, info) {

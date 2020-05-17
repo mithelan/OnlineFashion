@@ -39,8 +39,10 @@ function Home(props) {
       <i className="fa fa-user"></i>Login
     </Link>
 
-    <Link to="/admin">
-      <i className="fa fa-trash"></i>ADMIN
+   
+
+    <Link to="/stockmanagerlogin">
+      <i className="fa fa-save"></i>Stock Manager
     </Link>
 
   <Link to="/Cart">
