@@ -71,7 +71,7 @@ export const register = ({ name, email, password }) => dispatch => {
 
 
 
-export const login = ({email, password }) => dispatch => {
+export const login = ({ email, password }) => dispatch => {
 
     //Header
 
@@ -97,7 +97,7 @@ export const login = ({email, password }) => dispatch => {
                 type: LOGIN_FAIL
             })
         })
-    };
+};
 
 //Logout user
 

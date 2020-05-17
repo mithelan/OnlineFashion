@@ -39,7 +39,7 @@ function Home(props) {
   <Link to="/Cart">
     <i className="fa fa-shopping-cart"></i>
   </Link>
-  <span>{props.cartProps.cartNumber}</span>  </div>
+
 </div>
       <div className="nav-item">
         <div className="container">
@@ -109,6 +109,7 @@ function Home(props) {
           <div id="mobile-menu-wrap"></div>
         </div>
       </div>
+</div>
     </header>
   );
 }

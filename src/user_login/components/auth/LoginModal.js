@@ -30,12 +30,7 @@ export class LoginModal extends Component {
 
     };
 
-    static propTypes = {
-        isAuthenticated: PropTypes.bool,
-        error: PropTypes.object.isRequired,
-        login: PropTypes.func.isRequired,
-        clearErrors: PropTypes.func.isRequired
-    };
+
 
     componentDidUpdate(prevProps) {
         const { error, isAuthenticated } = this.props;
@@ -77,7 +72,7 @@ export class LoginModal extends Component {
         e.preventDefault();
 
 
-        const {email, password} = this.state;
+        const { email, password } = this.state;
 
         const user = {
             email,
@@ -85,9 +80,9 @@ export class LoginModal extends Component {
         }
 
 
-     // Attempt to login
+        // Attempt to login
 
-     this.props.login(user);
+        this.props.login(user);
 
 
 
@@ -151,7 +146,6 @@ export class LoginModal extends Component {
         );
     };
 };
-
 
 
 const mapStateToProps = state => ({
