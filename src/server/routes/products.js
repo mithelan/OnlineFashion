@@ -99,6 +99,7 @@ router.route("/update/:id").post((req, res) => {
       product.color = req.body.color;
       product.description = req.body.description;
       product.filename = req.body.filename;
+      product.quantity = req.body.quantity;
 
       product
         .save()

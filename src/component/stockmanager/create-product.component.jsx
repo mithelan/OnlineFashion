@@ -142,13 +142,13 @@ export default class CreateProducts extends Component {
   render() {
     return (
       <div>
-        <h3>Stock Management</h3>
-        <Navbar />
+        {/* <h3>Stock Management</h3>
+        <Navbar /> */}
         <br />
         <form onSubmit={this.onSubmit}>
           <div className="row">
             <div className="col-md-5">
-              <h4>PRODUCT DETAILS</h4>
+              {/* <h4>PRODUCT DETAILS</h4> */}
               <br />
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">TITLE</label>
@@ -157,7 +157,7 @@ export default class CreateProducts extends Component {
                     type="text"
                     required
                     onChange={this.onChangeTitle}
-                    className="form-control"
+                    className="form-control border_only_field"
                   />
                 </div>
               </div>
@@ -165,7 +165,7 @@ export default class CreateProducts extends Component {
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">BRAND</label>
                 <div className="col-sm-10">
-                  <select className="form-control"></select>
+                  <select className="form-control border_only_field"></select>
                 </div>
               </div>
 
@@ -176,7 +176,7 @@ export default class CreateProducts extends Component {
                     type="text"
                     required
                     onChange={this.onChangePrice}
-                    className="form-control"
+                    className="form-control border_only_field"
                   />
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default class CreateProducts extends Component {
                     type="text"
                     required
                     onChange={this.onChangeSize}
-                    className="form-control"
+                    className="form-control border_only_field"
                   />
                 </div>
               </div>
@@ -197,7 +197,7 @@ export default class CreateProducts extends Component {
                 <label className="col-sm-2 col-form-label">GENDER</label>
                 <div className="col-sm-10">
                   <select
-                    className="form-control"
+                    className="form-control border_only_field"
                     required
                     onChange={this.onChangeGender}
                   >
@@ -213,7 +213,7 @@ export default class CreateProducts extends Component {
                 <div className="col-sm-10">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control border_only_field"
                     required
                     onChange={this.onChangeColor}
                   />
@@ -225,7 +225,7 @@ export default class CreateProducts extends Component {
                 <div className="col-sm-10">
                   <input
                     type="number"
-                    className="form-control"
+                    className="form-control border_only_field"
                     required
                     onChange={this.onChangeQuantity}
                   />
@@ -233,19 +233,15 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <div className="col-sm-10">
-                  <button type="submit" className="btn btn-dark  float-right ">
-                    Add Product
-                  </button>
-                </div>
+                <div className="col-sm-10"></div>
               </div>
             </div>
             <div className="col-md-7">
-              <h4>PRODUCT DESCRIPTION</h4>
+              {/* <h4>PRODUCT DESCRIPTION</h4> */}
               <br />
               <div className="form-group">
                 <textarea
-                  className="form-control"
+                  className="form-control border_only_field"
                   rows="8"
                   required
                   onChange={this.onChangeDescription}
@@ -265,6 +261,12 @@ export default class CreateProducts extends Component {
               </div>
             </div>
           </div>
+          <button
+            type="submit"
+            className="btn btn-dark btn-block rounded-0 float-right "
+          >
+            Add Product
+          </button>
         </form>
       </div>
     );
