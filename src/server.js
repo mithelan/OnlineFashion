@@ -42,12 +42,13 @@ app.use("/products", productsRouter);
 app.use('/contactus',contactRouter);
 
 //Anjik
-const Users = require('./routes/Users')
 
-app.use('/users', Users)
+// Use Routes
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
 
-const CustomerRouter = require("../src/Justu/customer.router");
-app.use("/customers", CustomerRouter);
+
+
 
 
 

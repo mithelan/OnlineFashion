@@ -7,14 +7,12 @@ import Homepage from "./Homepage";
 import { getNumbers } from "../actions/getAction";
 import { Link } from "react-router-dom";
 import Contactus from "./Contactus";
-import Profile from "../component/Login/Profile";
-import UserContext from "../Justu/UserContext";
 
 
 function Home(props) {
   console.log(props);
 
-  const { userData } = useContext(UserContext);
+
 
 
   return (
@@ -25,14 +23,7 @@ function Home(props) {
 
 <h3 className='text-right'>
 
-    {userData.user ? (
-        <h1>Welcome {userData.user.displayName}</h1>
-    ) : (
-        <>
-            <h2>You are not logged in</h2>
-            <Link to="/login">Log in</Link>
-        </>
-    )}
+
 </h3>
   <div className="text-right">
     <Link to="/stockmanager">
@@ -106,10 +97,10 @@ function Home(props) {
                   </li>
 
                   <li>
-                    <a href="/Register">Register</a>
+                    <a href="/register">Register</a>
                   </li>
                   <li>
-                    <a href="/Login">Login</a>
+                    <a href="/login">Login</a>
                   </li>
                 </ul>
               </li>

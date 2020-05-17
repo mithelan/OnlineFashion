@@ -16,61 +16,35 @@ import CreateProducts from "./component/stockmanager/create-product.component";
 import EditProduct from "./component/stockmanager/edit-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeStock from "./component/stockmanager/homeStock";
-import Register from "./Justu/Register";
-import Loginn from "./Justu/Loginn";
-import Profile from "./component/Login/Profile";
+
 import Axios from "axios";
-import UserContext from "./Justu/UserContext";
 import AdminHo from "./admin/AdminHo";
 import RegisterSM from "./admin/registerStockManager";
 import LoginSM from "./admin/stockmanagerlogin";
+import LoginModal  from "./user_login/components/auth/LoginModal";
+import RegisterModal from "./user_login/components/auth/RegisterModal";
 
 //end of narthi
 
 export default function App() {
-  const [userData, setUserData] = useState({
-    token: undefined,
-    user: undefined,
-  });
 
-  useEffect(() => {
-    const checkLoggedIn = async () => {
-      let token = localStorage.getItem("auth-token");
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-      }
-      const tokenRes = await Axios.post(
-        "http://localhost:5000/customers/tokenIsValid",
-        null,
-        { headers: { "x-auth-token": token } }
-      );
-      if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/customers/", {
-          headers: { "x-auth-token": token },
-        });
-        setUserData({
-          token,
-          user: userRes.data,
-        });
-      }
-    };
-
-    checkLoggedIn();
-  }, []);
 
   return (
     <Provider store={store}>
       <div className="App">
         <BrowserRouter>
-          <UserContext.Provider value={{ userData, setUserData }}>
+
             <Home />
             <Switch>
               <Route exact path="/" component={ProductDisplay} />
+
+
               //User
-              <Route path="/Login" component={Loginn} />
-              <Route path="/Register" component={Register} />
-              <Route path="/Profile" component={Profile} />
+
+              <Route exact path="/login" component={LoginModal} />
+              <Route exact path="/register" component={RegisterModal} />
+
+
               <Route path="/stockmanager" component={HomeStock} />
               <Route path="/addStock" component={CreateProducts} />
               <Route path="/editStock/:id" component={EditProduct} />
@@ -83,7 +57,7 @@ export default function App() {
               <Route path="/registerstockmanager" component={RegisterSM} />
               <Route path="/stockmanagerlogin" component={LoginSM} />
             </Switch>
-          </UserContext.Provider>
+
         </BrowserRouter>
       </div>
     </Provider>
