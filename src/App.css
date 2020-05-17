@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -53,7 +55,7 @@
   padding-bottom: 100px;
 }
 .image{
-margin-right: 200px;
+  margin-right: 200px;
   margin-left: 20px;
   position: relative;
   overflow: hidden;
@@ -108,12 +110,12 @@ margin-right: 200px;
   color: blue;
   margin-left: 10px;
   margin-right: 10px;
-cursor: pointer;
+  cursor: pointer;
 }
 .product-header{
   width: 100%;
-max-width: 650px;
-display: flex;
+  max-width: 650px;
+  display: flex;
   justify-content: flex-start;
   border-bottom: 4px solid gray;
   margin: 0 auto;
@@ -124,8 +126,8 @@ display: flex;
 
 .price{
   width: 15%;
-border-bottom: 1px solid lightgray;
-display: flex;
+  border-bottom: 1px solid lightgray;
+  display: flex;
   align-items: center;
 }
 .quantity{
@@ -193,11 +195,28 @@ display: flex;
   width: 10%;
 
 }
+.lay{
+
+  position: relative;
+  margin-top: -23%;
+  margin-left: 43%;
+}
+
+.shop{
 
 
+}
 
 
+.container-fluid{
+  margin-left: 1%;
+  background: linear-gradient(to right, #42275a, #734b6d);
 
+}
+.navbar {
+  background: rgb(14,23,23);
+  background: linear-gradient(0deg, rgba(14,23,23,1) 0%, rgba(180,145,71,1) 100%);
+}
 
 
 
