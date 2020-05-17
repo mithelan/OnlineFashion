@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {Component, Fragment, useContext} from "react";
 import "../App.css";
 import Logo from "../img/logo.PNG";
 import { connect } from "react-redux";
@@ -7,114 +7,167 @@ import Homepage from "./Homepage";
 import { getNumbers } from "../actions/getAction";
 import { Link } from "react-router-dom";
 import Contactus from "./Contactus";
-
-
-function Home(props) {
-  console.log(props);
+import  Logout from '../user_login/components/auth/Logout'
 
 
 
 
-  return (
-    <header className="header-section">
-<div >
+import Login from '../user_login/components/auth/LoginModal'
+import Register from '../user_login/components/auth/RegisterModal'
+import {Navbar} from "react-bootstrap";
+import PropTypes from 'prop-types'
+import {Nav} from "reactstrap";
 
-      <img src={Logo} width="200" height="75" />
+class Home extends Component{
 
-<h3 className='text-right'>
+  state={
+    isOpen:false
+  };
+  static propTypes={
+    auth: PropTypes.object.isRequired
+  }
+
+  toggle=()=>{
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  };
+
+  render() {
+
+    const { isAuthenticated,user  }=this.props.auth;
+
+    const authLinks=(
+
+        <Fragment>
+          <Navbar>
+            <span className="navbar-text mr-3">
+            <p>k</p>
+              <strong>{user? `Welcome ${user.name}` : ``}</strong>
+            </span>
+            <Logout/>
+          </Navbar>
+
+        </Fragment>
+    )
+
+    const guestLinks=(
+        <Fragment>
+          <Navbar>
+            <Login/>
+            <Register/>
 
 
-</h3>
-  <div className="text-right">
-    <Link to="/stockmanager">
-      <i className="fa fa-user"></i>Login
-    </Link>
+          </Navbar>
+        </Fragment>
+    )
 
-   
+    return (
+        <header className="header-section">
+          <div className='navbar'>
 
-    <Link to="/stockmanagerlogin">
-      <i className="fa fa-save"></i>Stock Manager
-    </Link>
+            <img src={Logo} width="200" height="75"/>
 
-  <Link to="/Cart">
-    <i className="fa fa-shopping-cart"></i>
-  </Link>
+            <h3 className='text-right'>
 
-</div>
-      <div className="nav-item">
-        <div className="container">
-          <div className="nav-depart">
-            <div className="depart-btn">
-              <i className="ti-menu"></i>
-              <span>All departments</span>
-              <ul className="depart-hover">
-                <li className="active">
-                  <a href="#">Women’s Clothing</a>
-                </li>
-                <li>
-                  <a href="#">Men’ss Clothing</a>
-                </li>
-                <li>
-                  <a href="#">Accessories/Shoes</a>
-                </li>
-              </ul>
+            </h3>
+            <div>
+
+
+              <Nav className='ml-auto' navbar>
+                {isAuthenticated? authLinks:guestLinks}
+              </Nav>
+              <Link to="/stockmanager">
+                <i className="fa fa-user"></i>Login
+              </Link>
+
+              <Link to="/Cart">
+                <i className="fa fa-shopping-cart"></i>
+              </Link>
+              <span></span></div>
+          </div>
+
+
+
+
+
+
+          <div className="nav-item">
+            <div className="container">
+              <div className="nav-depart">
+                <div className="depart-btn">
+                  <i className="ti-menu"></i>
+                  <span>All departments</span>
+                  <ul className="depart-hover">
+                    <li className="active">
+                      <a href="#">Women’s Clothing</a>
+                    </li>
+                    <li>
+                      <a href="#">Men’ss Clothing</a>
+                    </li>
+                    <li>
+                      <a href="#">Accessories/Shoes</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <nav className="nav-menu mobile-menu">
+                <ul>
+                  <li className="active">
+                    <a href="/">Home</a>
+                  </li>
+                  <li>
+                    <a href="/ProductDisplay.js">Shop</a>
+                  </li>
+                  <li>
+                    <a href="#">Collection</a>
+                    <ul className="dropdown">
+                      <li>
+                        <a href="/MaleProductDisplay">Men's</a>
+                      </li>
+                      <li>
+                        <a href="#">Women's</a>
+                      </li>
+                      <li>
+                        <a href="#">Accessories/Shoes</a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li>
+                    <a href='Contactus'>Contact</a>
+                  </li>
+                  <li>
+                    <a href="#">More</a>
+                    <ul className="dropdown">
+                      <li>
+                        <a href="/Cart.js">Shopping Cart</a>
+                      </li>
+                      <li>
+                        <a href="/J">Checkout</a>
+                      </li>
+
+                      <li>
+                        <a href="/Register">Register</a>
+                      </li>
+                      <li>
+                        <a href="/Login">Login</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+              <div id="mobile-menu-wrap"></div>
             </div>
           </div>
-          <nav className="nav-menu mobile-menu">
-            <ul>
-              <li className="active">
-                <a href="">Home</a>
-              </li>
-              <li>
-                <a href="/ProductDisplay.js">Shop</a>
-              </li>
-              <li>
-                <a href="#">Collection</a>
-                <ul className="dropdown">
-                  <li>
-                    <a href="#">Men's</a>
-                  </li>
-                  <li>
-                    <a href="#">Women's</a>
-                  </li>
-                  <li>
-                    <a href="#">Accessories/Shoes</a>
-                  </li>
-                </ul>
-              </li>
 
-              <li>
-                <a href='Contactus'>Contact</a>
-              </li>
-              <li>
-                <a href="#">More</a>
-                <ul className="dropdown">
-                  <li>
-                    <a href="./Cart.js">Shopping Cart</a>
-                  </li>
-                  <li>
-                    <a href="./check-out.html">Checkout</a>
-                  </li>
-
-                  <li>
-                    <a href="/register">Register</a>
-                  </li>
-                  <li>
-                    <a href="/login">Login</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-          <div id="mobile-menu-wrap"></div>
-        </div>
-      </div>
-</div>
-    </header>
-  );
+        </header>
+    );
+  }
 }
-const mapStateToProps = (state) => ({
-  cartProps: state.cartState,
+const mapStateToProps = state=> ({
+
+  auth:state.auth
 });
 
-export default connect(mapStateToProps, { addCart })(Home);
+export default connect(mapStateToProps,null)(Home);
