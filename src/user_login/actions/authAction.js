@@ -11,11 +11,49 @@ import {
     REGISTER_FAIL,
 } from "./types"
 
+export const tokenConfig = getState => {
+
+    // get token from local storage
+
+    const token = getState().auth.token;
+
+    //Headers
+
+    const config = {
+        headers: {
+            "Content-type": "application/json"
+        }
+    }
+
+    // If token , add to headers
+
+    if (token) {
+        config.headers['x-auth-token'] = token;
+    }
+
+    return config;
+
+}
+
+
 // Check token & load user
 export const loadUser = () => (dispatch, getState) => {
     // User loading
     dispatch({ type: USER_LOADING });
 
+    const token=getState().auth.token;
+
+    const config={
+        headers:{
+            "Content-type":"application/json"
+        }
+    }
+
+
+    //IF Token add to headers
+    if(token){
+        config.headers['x-auth-token']=token;
+    }
     axios
         .get('http://localhost:5000/api/auth/user', tokenConfig(getState))
         .then(res =>
@@ -113,28 +151,5 @@ export const logout = () => {
 
 //setup config/header and token
 
-export const tokenConfig = getState => {
-
-    // get token from local storage
-
-    const token = getState().auth.token;
-
-    //Headers
-
-    const config = {
-        headers: {
-            "Content-type": "application/json"
-        }
-    }
-
-    // If token , add to headers
-
-    if (token) {
-        config.headers['x-auth-token'] = token;
-    }
-
-    return config;
-
-}
 
 

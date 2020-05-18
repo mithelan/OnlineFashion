@@ -1,15 +1,16 @@
 import React, {Component, useEffect, useState} from 'react';
 import Axios from 'axios';
-import {addToCart} from '../actions/addAction';
-import {useDispatch} from "react-redux";
+import {addCart, addToCart} from '../actions/addAction';
+import {connect, useDispatch} from "react-redux";
 import {Card, Row, Col, Button} from "react-bootstrap";
+import {detailsProduct} from "../user_login/actions/actions";
 
 
 function ProductDetail(props) {
 
     const dispatch = useDispatch();
 
-
+    const [qty, setQty] = useState(1);
     const productsId = props.match.params.productsId
     const [Product, setProduct] = useState([])
 
@@ -24,8 +25,9 @@ function ProductDetail(props) {
     }, [])
 
 
-    const addToCardFunction = (productsId) => {
-        dispatch(addToCart(productsId))
+
+    const addToCardFunction = () => {
+       props.history.push("/cartpage/"+productsId+"?qty="+qty)
     }
 
     return (
@@ -49,20 +51,32 @@ function ProductDetail(props) {
 
                                         </h3>
                                         <p className="box-text"></p>
-                                        <p className="stock">Availability: <span>In Stock</span> {Product.quantity}</p>
+
                                         <div className="quantity-box">
-                                 </div>
+                                        </div>
                                     </div>
 
 
 
                                 </div>
-         <div className="product-right">
+                                <div className="product-right">
                                     <h4>Description</h4>
                                     <h6>{Product.description}</h6>
-                                    <a href="#" className="btn btn-danger" onClick={addToCardFunction} >
+
+
+                                    Qty: <select value={qty} onChange={(e) => { setQty(e.target.value) }}>
+                                    {[...Array(Product.quantity).keys()].map(x =>
+                                        <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                    )}
+                                </select>
+
+
+
+
+
+                                    {Product.quantity >0 && <a href="#" className="btn btn-danger" onClick={addToCardFunction}>
                                         Add to cart
-                                    </a>
+                                    </a>}
                                     <div className='review'>
                                         <h4>Add a review</h4>
                                         <div className="tab-caption">
@@ -136,4 +150,4 @@ function ProductDetail(props) {
 
 }
 
-export default ProductDetail;
+export default connect(null,{addCart})(ProductDetail);

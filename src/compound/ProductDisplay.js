@@ -4,6 +4,8 @@ import { Card, Row, Col, Button } from "react-bootstrap";
 import { CardBody } from "react-bootstrap/Card";
 import Slider from "@ant-design/react-slick";
 import PhotoSlide from "./PhotoSlide";
+import {useDispatch, useSelector} from "react-redux";
+import {listProducts} from "../user_login/actions/actions";
 
 function ProductDisplay() {
 
@@ -23,6 +25,9 @@ function ProductDisplay() {
 
   const [Products, setProducts] = useState([]);
 
+
+
+
   useEffect(() => {
     Axios.get("http://localhost:5000/products/getProducts").then((response) => {
       if (response.data.success) {
@@ -38,24 +43,26 @@ function ProductDisplay() {
 
   const rendercard = Products.map((products, index) => {
     return (
-        <Card
-            style={{ width: "18rem", height: "20rem", backgroundColor: "#dddbc2" }}
-        >
-          <Card.Img
-              variant="top"
-              src={`/images/productPhotos/${products.filename}`}
-              height="234"
-              width="180"
-          />
-          <Card.Body>
-            <Card.Title>{products.title}</Card.Title>
-            <Card.Title>{`Rs.${products.price}`} </Card.Title>
+        <li key={products._id}>
+          <Card
+              style={{ width: "18rem", height: "20rem", backgroundColor: "#dddbc2" }}
+          >
+            <Card.Img
+                variant="top"
+                src={`/images/productPhotos/${products.filename}`}
+                height="234"
+                width="180"
+            />
+            <Card.Body>
+              <Card.Title>{products.title}</Card.Title>
+              <Card.Title>{`Rs.${products.price}`} </Card.Title>
 
-            <Button variant="primary" a href={`/products/${products._id}`}>
-              Buy now
-            </Button>
-          </Card.Body>
-        </Card>
+              <Button variant="primary" a href={`/products/${products._id}`}>
+                Buy now
+              </Button>
+            </Card.Body>
+          </Card>
+        </li>
     );
   });
 
@@ -68,7 +75,7 @@ function ProductDisplay() {
 
 
 
-        <div  style={{ width: "75%", margin: "3rem auto" }}>
+        <div style={{ width: "75%", margin: "3rem auto" }}>
           <div style={{ textAlign: "center" }}>
             <h2> Shop Now </h2>
           </div>

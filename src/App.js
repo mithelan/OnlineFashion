@@ -23,11 +23,21 @@ import RegisterSM from "./admin/registerStockManager";
 import LoginSM from "./admin/stockmanagerlogin";
 import LoginModal  from "./user_login/components/auth/LoginModal";
 import RegisterModal from "./user_login/components/auth/RegisterModal";
+import {loadUser} from "./user_login/actions/authAction";
+import setAuthToken from "./middleware/setAuthToken";
+
+
+import Cartpage from "./compound/Cartpage";
 
 //end of narthi
-
+if(localStorage.token){
+    setAuthToken(localStorage.token);
+}
 export default function App() {
 
+useEffect(()=>{
+    store.dispatch(loadUser());
+})
 
   return (
     <Provider store={store}>
@@ -44,6 +54,9 @@ export default function App() {
               <Route exact path="/login" component={LoginModal} />
               <Route exact path="/register" component={RegisterModal} />
 
+
+              //Cart
+                <Route path="/Cartpage/:id?" component={Cartpage} />
 
               <Route path="/stockmanager" component={HomeStock} />
               <Route path="/addStock" component={CreateProducts} />

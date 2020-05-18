@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../App.css'
@@ -51,7 +51,15 @@ class PhotoSlide extends Component {
 
 
                 <div className="container">
+                    <Slider {...settings}>
+                        {photos.map((photos)=>{
+                            return <div>
+                                <img width='40%'  src={photos.url}/>
 
+                            </div>
+                        })}
+
+                    </Slider>
 
 
                 </div>
