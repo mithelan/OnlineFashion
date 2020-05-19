@@ -4,15 +4,6 @@ import Logo from "../css/img/logo.PNG";
 import { connect } from "react-redux";
 import { addCart } from "../actions/addAction";
 import Homepage from "./Homepage";
-
-import { Link } from "react-router-dom";
-import Contactus from "./Contactus";
-//import  Logout from '../user_login/components/auth/Logout'
-
-
-
-
-
 import Register from '../user_login/RegisterModal'
 import {Navbar} from "react-bootstrap";
 import PropTypes from 'prop-types'
@@ -32,9 +23,10 @@ class Home extends Component{
     if(localStorage.length !== 0){
       return(
           <div>
-          <h2>
+
+            <h4>Welcome  <h2 color='white'>
             {payload.name}
-          </h2>
+          </h2></h4>
           </div>
       )
     }
@@ -122,7 +114,7 @@ class Home extends Component{
               </Nav>
 
 
-              {this.namemethod()}
+             {this.namemethod()}
               {this.isAuth()}
               <span></span></div>
           </div>

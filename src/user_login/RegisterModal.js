@@ -46,7 +46,7 @@ export class RegisterModal extends Component {
        
 
         })
-        // window.location='/login'
+        window.location='/login'
       }render() {
         return (
 

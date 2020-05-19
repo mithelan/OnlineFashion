@@ -22,7 +22,14 @@ function Cartpage(props) {
 
 
     const checkOutFunction = () => {
-       props.history.push('/login?redirect=payment')
+        let payload=localStorage.getItem("token")
+        if(localStorage.length !== 0){
+
+        props.history.push('/login?redirect=payment')
+    }else{
+            props.history.push('/checkout')
+
+        }
     }
 
     useEffect(()=>{

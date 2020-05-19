@@ -42,20 +42,6 @@ export async function doLogin(email, password) {
 
                     alert("ur logged in")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 }
 
 
