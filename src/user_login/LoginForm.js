@@ -50,73 +50,34 @@ class LoginForm extends Component{
 
     render(){
         return(
-            <div className="formBodyld">
 
-                <div className="lddop">
-
-                    <Card style={{width:'84.4rem',height:'50rem'}}>
-                        <br/>
-
-                        <CardBody>
-                            <Card.Text>
-                                <div className="csignuppage">
-                                    <div className="csignupformdetails">
-
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                        <div className="card card-signin my-5">
+                            <div className="card-body">
+                                <h5 className="card-title text-center">Sign In</h5>
+                                <form className="form-signin">
+                                    <div className="form-label-group">
+                                        <input type="email"  name="login" onChange={this.changeUserName.bind(this)} onKeyPress={this.pressEnter.bind(this)} className="form-control" placeholder="Email address" required autofocus />
+                                        <label htmlFor="inputEmail">Email address</label>
+                                    </div>
+                                    <div className="form-label-group">
+                                        <input type="password"  name="pass" onChange={this.changePass.bind(this)} onKeyPress={this.pressEnter.bind(this)}className="form-control" placeholder="Password" required />
+                                        <label htmlFor="inputPassword">Password</label>
                                     </div>
 
-                                    <div className="csignupform">
-                                        <div className="textblock">
-                                            <h5><br/>WELCOME BACK,</h5>
-                                        </div>
+                                    <button className="btn btn-lg btn-primary btn-block text-uppercase" type="button" onClick={this.doLogin.bind(this)} >Sign in</button>
+                                    <hr className="my-4" />
 
-
-                                        <br/><Form horizontal>
-
-                                        <Form.Group as={Row} controlId="formPlaintextEmail">
-                                            <Form.Label column sm="2">
-                                                Username&nbsp;&nbsp; &nbsp; &nbsp;
-
-                                            </Form.Label>
-                                            <Col sm="10">
-                                                <Form.Control type="email" placeholder="Login" name="login" onChange={this.changeUserName.bind(this)} onKeyPress={this.pressEnter.bind(this)} />
-                                            </Col>
-                                        </Form.Group>
-
-                                        <Form.Group as={Row} controlId="formPlaintextPassword">
-                                            <Form.Label column sm="2">
-                                                Password
-                                            </Form.Label>
-                                            <Col sm="10">
-                                                <Form.Control type="password" placeholder="password" name="pass" onChange={this.changePass.bind(this)} onKeyPress={this.pressEnter.bind(this)} />
-                                            </Col>
-                                        </Form.Group>
-
-                                        <Form.Group controlId="formBasicCheckbox">
-                                            <Form.Check type="checkbox" label="Check me out" /><br/>
-                                            <a href="/">Forget Password?</a> <br/> <br/>
-
-                                            <div className="csignup">
-                                                <button type="button" className="block" onClick={this.doLogin.bind(this)}>SIGN IN</button>
-                                            </div>
-                                            <a href="/DriveRegister">I'm new here as a Driver!</a> <br/> <br/>
-                                            <a href="/Register">I'm new here as a Customer!</a> <br/> <br/>
-
-                                        </Form.Group>
-
-                                    </Form>
-                                    </div>
-
-
-                                </div>
-
-
-
-                            </Card.Text>
-                        </CardBody>
-                    </Card>
-
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
         );
     }
 
@@ -125,3 +86,4 @@ class LoginForm extends Component{
 
 
 export default LoginForm;
+

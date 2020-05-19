@@ -40,7 +40,7 @@ export async function doLogin(email, password) {
 
 
 
-                    alert("ur logged in")
+                    alert("Login sucess ")
 
                 }
 
