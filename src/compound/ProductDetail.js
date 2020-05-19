@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { addToCart} from '../actions/addAction';
 import {connect, useDispatch} from "react-redux";
 import {Card, Row, Col, Button} from "react-bootstrap";
+import StarRating  from "./StarRating";
 
 
 
@@ -50,6 +51,7 @@ function ProductDetail(props) {
                                             Rs .{Product.price}
 
                                         </h3>
+                                        <StarRating/>
                                         <p className="box-text"></p>
 
                                         <div className="quantity-box">
@@ -77,6 +79,8 @@ function ProductDetail(props) {
                                     {Product.quantity >0 && <a href="#" className="btn btn-danger" onClick={addToCardFunction}>
                                         Add to cart
                                     </a>}
+
+
                                     <div className='review'>
                                         <h4>Add a review</h4>
                                         <div className="tab-caption">
@@ -105,6 +109,10 @@ function ProductDetail(props) {
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
                                         <div className="tab-caption">
                                             <div className="add-review">
                                                 <div className="tab-title">
