@@ -23,7 +23,7 @@ import RegisterSM from "./admin/registerStockManager";
 import LoginSM from "./admin/stockmanagerlogin";
 import Login from "./user_login/LoginForm";
 
-import RegisterModal from "./user_login/components/auth/RegisterModal";
+import RegisterModal from "./user_login/RegisterModal";
 
 
 import setAuthToken from "./middleware/setAuthToken";

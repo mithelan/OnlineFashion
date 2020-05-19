@@ -18,9 +18,6 @@ import {
 
 
 
-
-
-
 export class RegisterModal extends Component {
 
     state = {

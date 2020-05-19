@@ -1,6 +1,6 @@
 import React, {Component, Fragment, useContext} from "react";
 import "../App.css";
-import Logo from "../img/logo.PNG";
+import Logo from "../css/img/logo.PNG";
 import { connect } from "react-redux";
 import { addCart } from "../actions/addAction";
 import Homepage from "./Homepage";
@@ -12,8 +12,8 @@ import Contactus from "./Contactus";
 
 
 
-import Login from '../user_login/components/auth/LoginModal'
-import Register from '../user_login/components/auth/RegisterModal'
+
+import Register from '../user_login/RegisterModal'
 import {Navbar} from "react-bootstrap";
 import PropTypes from 'prop-types'
 import {Nav} from "reactstrap";
@@ -95,7 +95,7 @@ class Home extends Component{
     const guestLinks=(
         <Fragment>
           <Navbar>
-            <Login/>
+
             <Register/>
 
 
