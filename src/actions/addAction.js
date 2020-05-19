@@ -1,20 +1,12 @@
-import {ADD_PRODUCT_CART, ADD_TO_CART,ADD_TO_NEW_CART} from "./types";
+import {ADD_PRODUCT_CART, ADD_TO_CART,ADD_TO_NEW_CART,REMOVE_FROM_CART} from "./types";
 import axios from 'axios'
-import {USER_INFO} from "../compound/Config";
-//Earlier add to cart with REDUX ONLY
-export const addCart= (productsId)=>{
-    return (dispatch)=>{
-        console.log('Adding to Cart');
-        console.log('Product',productsId);
-        dispatch({
-            type:ADD_PRODUCT_CART,
-            payload:productsId
-        });
-    }
-}
+import Cookie from 'js-cookie'
 
 
-const addtocartnew=(productId,qty)=> async (dispatch)=>{
+
+
+
+const addtocartnew=(productId,qty)=> async (dispatch,getState)=>{
     try{
         const {data}= await axios.get(`http://localhost:5000/products/get/`+productId)
         console.log('Adding to Cart');
@@ -30,9 +22,25 @@ const addtocartnew=(productId,qty)=> async (dispatch)=>{
 
             }});
 
+        const {cart:{cartItems}}=getState();
+        Cookie.set("cartItems",JSON.stringify(cartItems))
+
     }catch(error){
 
-    }
+    } 
+}
+const removeFromCart=(productId)=> async (dispatch,getState)=>{
+
+        console.log('Remove an item');
+        dispatch({
+            type: REMOVE_FROM_CART,
+            payload: productId
+        })
+
+    const {cart:{cartItems}}=getState();
+    Cookie.set("cartItems",JSON.stringify(cartItems))
 }
 
-export {addtocartnew}
+
+
+export {addtocartnew,removeFromCart}

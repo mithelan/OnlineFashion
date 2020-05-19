@@ -1,9 +1,9 @@
 import React, {Component, useEffect, useState} from 'react';
 import Axios from 'axios';
-import {addCart, addToCart} from '../actions/addAction';
+import { addToCart} from '../actions/addAction';
 import {connect, useDispatch} from "react-redux";
 import {Card, Row, Col, Button} from "react-bootstrap";
-import {detailsProduct} from "../user_login/actions/actions";
+
 
 
 function ProductDetail(props) {
@@ -150,4 +150,4 @@ function ProductDetail(props) {
 
 }
 
-export default connect(null,{addCart})(ProductDetail);
+export default connect(null,)(ProductDetail);

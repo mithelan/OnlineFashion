@@ -8,6 +8,8 @@
 
  const User = require('../../model/User');
 
+
+
  router.post('/',(req,res)=>{
     const {name,email,password}= req.body;
 
@@ -38,7 +40,7 @@
                     .then(user =>{
 
                         jwt.sign(
-                            { id:user.id},
+                            { name:user.name},
                             process.env.JWT_SECRET,
                             {expiresIn:3600},
                             (err,token)=>{

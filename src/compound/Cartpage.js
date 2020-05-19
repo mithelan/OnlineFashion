@@ -1,6 +1,7 @@
 import React, {Component, useEffect} from 'react';
-import {addtocartnew} from "../actions/addAction";
+import {addtocartnew,removeFromCart} from "../actions/addAction";
 import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 
 function Cartpage(props) {
 
@@ -14,12 +15,24 @@ function Cartpage(props) {
     const qty=props.location.search.search? Number(props.location.search.split('=')[1]):1;
 
     const dispatch=useDispatch();
+
+    const removeCartItem = (productId) => {
+        dispatch(removeFromCart(productId));
+    }
+
+
+    const checkOutFunction = () => {
+       props.history.push('/login?redirect=payment')
+    }
+
     useEffect(()=>{
 
         if(productId){
             dispatch(addtocartnew(productId,qty));
         }
     },[])
+
+
 
 
 
@@ -48,17 +61,33 @@ function Cartpage(props) {
                                                 <img src={`/images/productPhotos/${item.filename}`}alt="product" />
                                             </div>
                                             <div className="cart-name">
-                                                <div>
+
+                                                    <Link to={"/products/" + item.product}>
+                                                        {item.title}
+                                                    </Link>
+
+                                            </div>
+
+                                            <div >
+                                                Selected Number of products :
+                                                <select className='dropdown' value={item.qty} onChange={(e) => dispatch(addtocartnew(item.product, e.target.value))}>
+                                                    {[...Array(item.quantity).keys()].map(x =>
+                                                        <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                    )}
+                                                </select>
 
 
-                                                </div>
 
+
+                                                <button type="button" className="btn btn-danger"  onClick={() => removeCartItem(item.product)} >
+                                                    Delete
+                                                </button>
                                             </div>
                                             <div className="cart-price">
-                                                Rs.{item.price * item.qty}
+                                                Rs.{item.price}
                                             </div>
 
-                                            {item.qty}
+
                                         </li>
                                     )
                             }
@@ -66,14 +95,23 @@ function Cartpage(props) {
 
                     </div>
 
+                </div>
+
+                <div className="cart-action">
+                    <h3>
+                       Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} item/s)
+                        :
+                        Rs.{cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                    </h3>
+                    <button onClick={checkOutFunction} className="btn btn-warning">
+                        Proceed to Checkout
+                    </button>
 
                 </div>
 
-
-
-
-
             </div>
+
+
         );
 
 }

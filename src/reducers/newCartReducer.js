@@ -1,4 +1,4 @@
-import {ADD_TO_NEW_CART} from "../actions/types";
+import {ADD_TO_NEW_CART,REMOVE_FROM_CART} from "../actions/types";
 
 
 function newCartReducer(state={cartItems:[]},action) {
@@ -13,9 +13,18 @@ function newCartReducer(state={cartItems:[]},action) {
                 };
             }
             return {cartItems: [...state.cartItems, item]};
+
+        case REMOVE_FROM_CART:
+            return {cartItems: state.cartItems.filter(element=>element.product!=action.payload)}
+
+
         default:
             return state
     }
 }
+
+
+
+
 
 export {newCartReducer}

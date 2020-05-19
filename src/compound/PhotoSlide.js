@@ -54,6 +54,7 @@ class PhotoSlide extends Component {
                     <Slider {...settings}>
                         {photos.map((photos)=>{
                             return <div>
+                                <h3 className='right-align'> New Arivals </h3>
                                 <img width='40%'  src={photos.url}/>
 
                             </div>

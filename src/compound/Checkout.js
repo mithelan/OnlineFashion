@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Cart from "./Cart";
+
 
 import {productQuantity} from "../actions/productQuantity";
 

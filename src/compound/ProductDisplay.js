@@ -5,7 +5,7 @@ import { CardBody } from "react-bootstrap/Card";
 import Slider from "@ant-design/react-slick";
 import PhotoSlide from "./PhotoSlide";
 import {useDispatch, useSelector} from "react-redux";
-import {listProducts} from "../user_login/actions/actions";
+
 
 function ProductDisplay() {
 

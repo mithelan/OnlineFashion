@@ -7,7 +7,7 @@ import Homepage from "./Homepage";
 import { getNumbers } from "../actions/getAction";
 import { Link } from "react-router-dom";
 import Contactus from "./Contactus";
-import  Logout from '../user_login/components/auth/Logout'
+//import  Logout from '../user_login/components/auth/Logout'
 
 
 
@@ -20,35 +20,76 @@ import {Nav} from "reactstrap";
 
 class Home extends Component{
 
-  state={
-    isOpen:false
-  };
-  static propTypes={
-    auth: PropTypes.object.isRequired
+  dologout(){
+    localStorage.clear()
+
+    window.location='/'
+
+
+  }
+  namemethod(){
+    let payload = this.parseJwt(localStorage.getItem("token"))
+    if(localStorage.length !== 0){
+      return(
+          <div>
+          <h2>
+            {payload.name}
+          </h2>
+          </div>
+      )
+    }
+    else{
+
+    }
+  }
+  isAuth(){
+    let payload = this.parseJwt(localStorage.getItem("token"))
+    if(localStorage.length !== 0){
+      return (
+      <Navbar>
+
+        <a  className="d-inline p-2 text-dark" onClick={this.dologout}>LOGOUT</a>
+
+        </Navbar>
+      )
+
+    }else{
+      return (
+          <Navbar>
+            <a  className="d-inline p-2 text-dark" href='/Login'>Login</a>
+          <a  className="d-inline p-2 text-dark" href='/Register'>Register</a>
+
+          </Navbar>
+      ) }
+    }
+
+
+
+  parseJwt(token) {
+    if (!token) {
+      return;
+    }
+    const base64Url = token.split(".")[1];
+    // const base64 = base64Url.replace().replace();
+    return JSON.parse(window.atob(base64Url));
   }
 
-  toggle=()=>{
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  };
-
   render() {
+    let payload = this.parseJwt(localStorage.getItem("token"))
 
-    const { isAuthenticated,user  }=this.props.auth;
 
     const authLinks=(
 
         <Fragment>
           <Navbar>
             <span className="navbar-text mr-3">
-            <p>k</p>
-              <strong>{user? `Welcome ${user.name}` : ``}</strong>
-            </span>
-            <Logout/>
-          </Navbar>
+            <p></p>
 
+            </span>
+
+          </Navbar>
         </Fragment>
+
     )
 
     const guestLinks=(
@@ -56,6 +97,7 @@ class Home extends Component{
           <Navbar>
             <Login/>
             <Register/>
+
 
 
           </Navbar>
@@ -70,20 +112,18 @@ class Home extends Component{
 
             <h3 className='text-right'>
 
+
             </h3>
             <div>
 
 
               <Nav className='ml-auto' navbar>
-                {isAuthenticated? authLinks:guestLinks}
-              </Nav>
-              <Link to="/stockmanager">
-                <i className="fa fa-user"></i>Login
-              </Link>
 
-              <Link to="/Cart">
-                <i className="fa fa-shopping-cart"></i>
-              </Link>
+              </Nav>
+
+
+              {this.namemethod()}
+              {this.isAuth()}
               <span></span></div>
           </div>
 
@@ -140,19 +180,11 @@ class Home extends Component{
                   <li>
                     <a href="#">More</a>
                     <ul className="dropdown">
-                      <li>
-                        <a href="/Cart.js">Shopping Cart</a>
-                      </li>
-                      <li>
-                        <a href="/J">Checkout</a>
-                      </li>
 
                       <li>
-                        <a href="/Register">Register</a>
+                        <a href="/stockmanager"> Staff Login</a>
                       </li>
-                      <li>
-                        <a href="/Login">Login</a>
-                      </li>
+
                     </ul>
                   </li>
                 </ul>
