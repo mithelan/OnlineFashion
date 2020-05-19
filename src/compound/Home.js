@@ -4,7 +4,7 @@ import Logo from "../img/logo.PNG";
 import { connect } from "react-redux";
 import { addCart } from "../actions/addAction";
 import Homepage from "./Homepage";
-import { getNumbers } from "../actions/getAction";
+
 import { Link } from "react-router-dom";
 import Contactus from "./Contactus";
 //import  Logout from '../user_login/components/auth/Logout'

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 
-import {productQuantity} from "../actions/productQuantity";
+
 
 function Checkout(cartprops) {
 
