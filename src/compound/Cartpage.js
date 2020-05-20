@@ -2,6 +2,7 @@ import React, {Component, useEffect} from 'react';
 import {addtocartnew,removeFromCart} from "../actions/addAction";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import Paypal  from './Paypal'
 
 function Cartpage(props) {
 
@@ -39,11 +40,24 @@ function Cartpage(props) {
         }
     },[])
 
+    const transactionError = () => {
+        console.log('Paypal error')
+    }
+
+    const transactionCanceled = () => {
+        console.log('Transaction canceled')
+    }
+
+    const transactionSuccess =()=>{
+
+    }
 
 
 
 
-        return (
+
+
+    return (
             <div>
                 <div className="cart">
                     <div className="cart-list">
@@ -110,9 +124,16 @@ function Cartpage(props) {
                         :
                         Rs.{cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
                     </h3>
-                    <button onClick={checkOutFunction} className="btn btn-warning">
-                        Proceed to Checkout
-                    </button>
+                    {/*<button onClick={checkOutFunction} className="btn btn-warning">*/}
+                    {/*    Proceed to Checkout*/}
+                    {/*</button>*/}
+
+                    <Paypal
+                        toPay={cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                        onSuccess={transactionSuccess}
+                        transactionError={transactionError}
+                        transactionCanceled={transactionCanceled}
+                    />
 
                 </div>
 
