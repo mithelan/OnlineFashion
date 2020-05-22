@@ -9,6 +9,7 @@ import Comment from "./Comment";
 import {addcart} from "../actions/addAction";
 import axios from 'axios'
 import {TokenStorage as localstorage} from "@uppy/companion-client";
+import StarRating from "./StarRating";
 
 
 function ProductDetail(props) {
@@ -125,8 +126,9 @@ function ProductDetail(props) {
                     <img  className="product-view" src={`/images/productPhotos/${Product.filename}`}
                           data-zoom-image={`/images/productPhotos/${Product.filename}`}/>
 
-
+                    <StarRating/>
                 </div>
+
 
                 <div className="details-info">
 
