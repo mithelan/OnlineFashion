@@ -1,6 +1,6 @@
 const router = require("express").Router();
 let Product = require("../models/product.model");
-
+const auth=require('../../middleware/auth')
 router.route("/").get((req, res) => {
   Product.find()
     .then((products) => res.json(products))
@@ -69,17 +69,17 @@ router.get("/getProducts", (req, res) => {
 
 //mithiproducts/products_by_id?=id$(productId)&type=single'
 router.get("/products_by_id", (req, res) => {
-  let type = req.query.type;
-  let productIds = req.query.id;
+    let type = req.query.type;
+    let productIds = req.query.id;
 
-  if (type === "array") {
-  }
-  Product.find({ _id: { $in: productIds } })
-    .populate("writer")
-    .exec((err, products) => {
-      if (err) return req.status(400).send(err);
-      return res.status(200).send(products);
-    });
+    if (type === "array") {
+    }
+    Product.find({ _id: { $in: productIds } })
+        .populate("writer")
+        .exec((err, products) => {
+            if (err) return req.status(400).send(err);
+            return res.status(200).send(products);
+        });
 });
 
 router.route("/:id").delete((req, res) => {
@@ -108,5 +108,30 @@ router.route("/update/:id").post((req, res) => {
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
+
+//COMMENT
+
+router.route("/comments/:id").post(auth,(req, res) => {
+
+        Product.findById(req.params.id)
+            .then(post => {
+                const newComment = {
+                    user: req.user.id,
+                    comments: req.body.comments,
+
+
+
+                };
+
+                // Add to comments array
+                post.Review.unshift(newComment);
+
+                // Save
+                post.save().then(post => res.json(post));
+            })
+            .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+    }
+);
+
 
 module.exports = router;

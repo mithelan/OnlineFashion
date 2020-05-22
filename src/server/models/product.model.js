@@ -13,6 +13,26 @@ const productSchema = new Schema(
     description: { type: String, required: false },
     filename: { type: String, required: false },
     quantity: { type: Number, required: false },
+        Review: [
+          {
+
+              user: {
+                  type: mongoose.Schema.Types.ObjectId,
+                  ref: 'users',
+                  required: true
+              },
+              comments: {
+                  type: String,
+                  required: true
+              },
+
+
+              date: {
+                  type: Date,
+                  default: Date.now
+              }
+          }
+      ],
   },
   {
     timestamps: true,

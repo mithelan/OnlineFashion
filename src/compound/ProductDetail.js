@@ -2,18 +2,25 @@ import React, {Component, useEffect, useState} from 'react';
 import Axios from 'axios';
 import { addToCart} from '../actions/addAction';
 import {connect, useDispatch} from "react-redux";
-import {Card, Row, Col, Button} from "react-bootstrap";
-import StarRating  from "./StarRating";
-
+import {Card, Row, Col, Button, Navbar} from "react-bootstrap";
+import '../App.css'
+import {FormGroup, Input, Label} from "reactstrap";
+import Comment from "./Comment";
+import {addcart} from "../actions/addAction";
+import axios from 'axios'
+import {TokenStorage as localstorage} from "@uppy/companion-client";
 
 
 function ProductDetail(props) {
-
+    const [comments, SetComments]=useState();
+    // const [commentname, SetCommentname]=useState();
+    const [user]=useState();
     const dispatch = useDispatch();
 
     const [qty, setQty] = useState(1);
     const productsId = props.match.params.productsId
     const [Product, setProduct] = useState([])
+    const [Items, setItems] = useState([])
 
     useEffect(() => {
         Axios.get(`http://localhost:5000/products/products_by_id?id=${productsId}&type=single`)
@@ -27,134 +34,209 @@ function ProductDetail(props) {
 
 
 
+
+
+
     const addToCardFunction = () => {
-       props.history.push("/cartpage/"+productsId+"?qty="+qty)
+        props.history.push("/cartpage/"+productsId+"?qty="+qty)
     }
 
-    return (
+    /*          const addToCardNEW=(productsId)=>{
+    dispatch(addcart(productsId));
+  }*/
 
+
+
+    const submit =(e) => {
+        e.preventDefault();
+
+        const comment = {comments };
+
+        const token=localStorage.getItem('token')
+        Axios.post(
+            "http://localhost:5000/products/comments/" + productsId,
+            comment,{
+
+                headers:{
+                    "x-auth-token":localStorage.getItem("token"),
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                }
+
+            }
+        ).then(response=>{
+            console.log(response.data)
+        })
+        console.log('success');
+
+    };
+
+
+
+
+    function namemethod(){
+
+        if(localStorage.length !== 0){
+            return(
+                <div className="form-group row">
+
+
+
+
+                    <label className="col-sm-2 col-form-label">Comment</label>
+                    <div className="col-sm-10">
+
+                            <textarea
+                                type="text"
+
+                                className="form-control"
+                                rows="3"
+                                onChange={(e) => SetComments(e.target.value)}
+
+
+
+
+                            />
+
+
+                        <div className='buttonalign'>
+                            <button  type="submit" className="btn btn-warning" >
+                                Send
+                            </button></div>
+                    </div>
+                </div>
+            )
+        }
+        else{
+            return(
+                <a  className="text-primary" href='/Login'>Login to Comment</a>
+            )
+
+        }
+
+    }
+
+
+    return (
         <div>
 
-            <section className="products-detail-section pt_large pb_large">
-                <div className="container">
+            <div className="details">
+                <div className="details-image">
+                    <img  className="product-view" src={`/images/productPhotos/${Product.filename}`}
+                          data-zoom-image={`/images/productPhotos/${Product.filename}`}/>
+
+
+                </div>
+
+                <div className="details-info">
+
+                    <h2 className="box-title"> {Product.title}</h2>
+
+                    <p className="box-title"> {Product.description}</p>
+                    <h3 className="box-price">
+                        Rs .{Product.price}
+
+                    </h3>
+                </div>
+
+                <div className="details-action">
+                    <ul>
+
+
+                        <ol>{Product.description}</ol>
+
+                        <br></br>
+                        <ol>
+
+                            Availablity : {Product.quantity>0 ?<div className='text-success'>In Stock </div>: <div className='text-danger'>Sorry this stock is currently unavailable</div>}
+                        </ol>      <br></br>
+
+                        Quantity: <select
+                        value={qty} onChange={(e) => { setQty(e.target.value) }}>
+                        {[...Array(Product.quantity).keys()].map(x =>
+                            <option key={x + 1} value={x + 1}>{x + 1}</option>
+                        )}
+                    </select>
+
+                        <ol>
+                            <h3>Price:
+                                {Product.price*qty}
+                            </h3>
+                        </ol>
+
+
+                        <ol>
+                            <br></br>
+                            {Product.quantity >0 && <a href="#" className="btn btn-danger" onClick={addToCardFunction}>
+                                Add to cart
+                            </a>}
+
+
+                            <button type="button" className="btn btn-light" onClick={`/products/AddToWish/${productsId}`}>Add to WishList</button>
+                        </ol>
+
+                    </ul>
+
+                </div>
+            </div>
+
+
+            <br></br>
+
+            <div className="container">
+                <div className="row d-flex mb-5 contact-info">
+                    <div className="w-100"></div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+            <div className="table-wrapper-scroll-y my-custom-scrollbar">
+
+                <table className="table table-bordered table-striped mb-0">
+                    <thead>
+                    <tr>
+
+                        <th scope="col">Comments</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <form onSubmit={submit}>
+                <div className='Arrange'>
                     <div className="row">
-                        <div className="col-xl-9 col-lg-9 col-md-12 mb-4 mb-sm-5 mb-lg-0">
-                            <div className="row">
-                                <div className="col-md-5">
-                                    <div className="product-image">
-                                        <img className="product_img" src={`/images/productPhotos/${Product.filename}`}
-                                             data-zoom-image={`/images/productPhotos/${Product.filename}`}/>
-                                    </div>
-                                    <div className="quickview-product-detail">
-                                        <h2 className="box-title"> {Product.title}</h2>
-                                        <h3 className="box-price">
-                                            Rs .{Product.price}
+                        <div className="col-md-5">
+                            <br/>
+                            {namemethod()}
 
-                                        </h3>
-                                        <StarRating/>
-                                        <p className="box-text"></p>
-
-                                        <div className="quantity-box">
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-                                <div className="product-right">
-                                    <h4>Description</h4>
-                                    <h6>{Product.description}</h6>
-
-
-                                    Qty: <select value={qty} onChange={(e) => { setQty(e.target.value) }}>
-                                    {[...Array(Product.quantity).keys()].map(x =>
-                                        <option key={x + 1} value={x + 1}>{x + 1}</option>
-                                    )}
-                                </select>
-
-
-
-
-
-                                    {Product.quantity >0 && <a href="#" className="btn btn-danger" onClick={addToCardFunction}>
-                                        Add to cart
-                                    </a>}
-
-
-                                    <div className='review'>
-                                        <h4>Add a review</h4>
-                                        <div className="tab-caption">
-                                            <div className="costomer-reviews">
-                                                <div className="costomer-reviews-box">
-                                                    <div className="reviews-img">
-                                                        <img src="image/costomer-img.jpg" alt="costomer-img"/>
-                                                    </div>
-                                                    <div className="reviews-text">
-                                                        <p className="reviewer-name">admin</p>
-                                                        <span className="reviews-date">September 13, 2017</span>
-                                                        <p className="reviewer-text">24/7 helpdesk is also available. I
-                                                            Love it!</p>
-                                                    </div>
-                                                </div>
-                                                <div className="costomer-reviews-box">
-                                                    <div className="reviews-img">
-                                                        <img src="image/costomer-img.jpg" alt="costomer-img"/>
-                                                    </div>
-                                                    <div className="reviews-text">
-                                                        <p className="reviewer-name">admin</p>
-                                                        <span className="reviews-date">September 13, 2017</span>
-                                                        <p className="reviewer-text">24/7 helpdesk is also available. I
-                                                            Love it!</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-
-                                        <div className="tab-caption">
-                                            <div className="add-review">
-                                                <div className="tab-title">
-                                                    <h6>Add a review</h6>
-                                                </div>
-                                                <form className="add-review-form">
-                                                    <div className="input-1">
-                                                        <input required className="form-control"
-                                                               placeholder="Enter Your Name" value="" type="text"/>
-                                                    </div>
-                                                    <div className="input-2">
-                                                        <input required className="form-control"
-                                                               placeholder="Enter Your Email" value="" type="email"/>
-                                                    </div>
-                                                    <div className="input-3">
-                                                        <textarea required rows="6" className="form-control"
-                                                                  placeholder="Enter Your Review"></textarea>
-                                                    </div>
-                                                    <div className="input-btn">
-                                                        <button type="submit" className="btn btn-secondary">Submit
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
+                            <div className="form-group row">
 
                             </div>
                         </div>
+
                     </div>
                 </div>
-            </section>
-
-
+            </form>
         </div>
 
+
     );
+
+
+
+
+
+
+
 
 }
 

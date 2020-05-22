@@ -33,7 +33,7 @@ export class RegisterModal extends Component {
         axios.post('http://localhost:5000/api/users',this.state.newUserData).then((response)=>{
           let { users } = this.state;
           users.push(response.data);
-          alert("User registered sucesfully")
+          alert("User registered succesfully")
           this.setState({users , newUserModel: false, newUserData:{
 
 

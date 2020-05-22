@@ -2,7 +2,9 @@
   text-align: center;
 }
 
+.new{
 
+}
 
 .App-logo {
   height: 40vmin;
@@ -36,7 +38,7 @@
 }
 
 .App-link {
-  color: #61  dafb;
+  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -144,9 +146,12 @@
   display: flex;
   align-items: center;
 }
-.Arrange{
-  margin-right: -109%
+.buttonalign{
+  position: absolute;
+  margin-left: 44%;
+  margin-top: 3%;
 }
+
 .product-right{
   position: absolute;
   margin-top: 33%;
@@ -342,3 +347,71 @@ tbody>tr:nth-child(odd){
   color: #f08000;
 }
 
+.details{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+.details-image {
+  flex: 1 66rem;
+}
+.details-image img{
+  max-width: 60rem;
+  width: 60%;
+}
+.details-info {
+  flex: 1 1 30rem;
+}
+.details-action {
+  flex: 1 1 30rem;
+}
+
+.details-info ul, .details-action ul{
+  list-style-type: none;
+  padding: 0;
+}
+.details-info li, .details-action li{
+  margin-bottom: 1rem;
+}
+.back-to-result {
+  padding: 1rem;
+}
+.details-action{
+  border: .1rem #808080 solid;
+  border-radius: 0.5rem;
+  background-color: #f8f8f8;
+  padding: 1rem;
+}
+.details-action ul li:last-child{
+  display: flex;
+  flex-direction: column;
+}
+.button{
+  padding: 1rem;
+  border: .1rem #808080 solid;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.button:hover{
+
+  border: .1rem #404040 solid;
+}
+.button.primary{
+  background-color: #f0c040;
+}
+.button.secondary{
+  background-color: #f0f0f0;
+}
+.text-center{
+  text-align: center;
+}
+.my-custom-scrollbar {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
+}

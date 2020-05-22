@@ -21,11 +21,11 @@ import Axios from "axios";
 import AdminHo from "./admin/AdminHo";
 import RegisterSM from "./admin/registerStockManager";
 import LoginSM from "./admin/stockmanagerlogin";
-import Login from "./user_login/LoginForm";
+import Login from "./user_login/components/auth/LoginModal";
 
-import RegisterModal from "./user_login/RegisterModal";
-
-
+import RegisterModal from "./user_login/components/auth/RegisterModal";
+import Comment from "./compound/Comment";
+import Profile from "./compound/Profile";
 import setAuthToken from "./middleware/setAuthToken";
 
 
@@ -95,8 +95,10 @@ render(){
                         //User
 
                         <Route exact path="/login" component={Login} />
-
+                        <Route exact path="/Profile" component={Profile} />
                         <Route exact path="/Register" component={RegisterModal} />
+                        <Route exact path="/Comment" component={Component} />
+
 
                         //Cart
                         <Route path="/Cartpage/:id?" component={Cartpage} />

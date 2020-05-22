@@ -12,8 +12,6 @@ const initialState = {cart:{cartItems},userSignIn:{userInfo}};
 
 const middleWare = [thunk];
 
-
-
 //const composeEnhancers = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
 const store = createStore(
     rootReducer,

@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import Axios from "axios";
-import { Card, Row, Col, Button } from "react-bootstrap";
+import {Card, Row, Col, Button, Navbar} from "react-bootstrap";
 import { CardBody } from "react-bootstrap/Card";
 import Slider from "@ant-design/react-slick";
 import PhotoSlide from "./PhotoSlide";
@@ -14,13 +14,7 @@ function ProductDisplay() {
       name:'Photo1',
       url: 'https://images.unsplash.com/photo-1566491888763-e71518bbe846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80'
     },
-
-
-
-
   ]
-
-
 
 
   const [Products, setProducts] = useState([]);
@@ -60,6 +54,10 @@ function ProductDisplay() {
               <Button variant="primary" a href={`/products/${products._id}`}>
                 Buy now
               </Button>
+              <Button variant="primary" a href={`/addToWishList/${products._id}`}>
+               Wish
+              </Button>
+
             </Card.Body>
           </Card>
         </li>
