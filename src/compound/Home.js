@@ -25,7 +25,7 @@ class Home extends Component{
           <div>
 
             <h4>Welcome  <h2 color='white'>
-            {payload.name}
+            {/*{payload.name}*/}
           </h2></h4>
           </div>
       )

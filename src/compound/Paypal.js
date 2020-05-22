@@ -8,6 +8,8 @@ export default class Paypal extends React.Component {
             console.log("The payment was succeeded!", payment);
 
             this.props.onSuccess(payment);
+
+
         
         }
 
