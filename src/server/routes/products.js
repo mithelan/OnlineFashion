@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Product = require("../models/product.model");
+let Category = require("../../admin/model/category.model");
 
 router.route("/").get((req, res) => {
   Product.find()
@@ -7,11 +8,17 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/category").get((req, res) => {
+  Category.find()
+    .then((categories) => res.json(categories))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route("/add").post((req, res) => {
   const title = req.body.title;
   const brand = req.body.brand;
   const price = req.body.price;
-  const gender = req.body.gender;
+  // const gender = req.body.gender;
   const size = req.body.size;
   const color = req.body.color;
   const description = req.body.description;
@@ -22,7 +29,7 @@ router.route("/add").post((req, res) => {
     title,
     brand,
     price,
-    gender,
+    // gender,
     size,
     color,
     description,

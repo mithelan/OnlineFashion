@@ -10,7 +10,7 @@ export default class CreateProducts extends Component {
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
-    this.onChangeGender = this.onChangeGender.bind(this);
+    // this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeColor = this.onChangeColor.bind(this);
     this.onChangeSize = this.onChangeSize.bind(this);
     this.onChangeQuantity = this.onChangeQuantity.bind(this);
@@ -24,26 +24,28 @@ export default class CreateProducts extends Component {
       description: "",
       price: 0,
       color: "",
-      gender: "male",
+      // gender: "male",
       size: "",
       file: "",
       filename: "Choose File",
       quantity: 0,
       uploaded: {},
       brand: "Both",
+      categories: [],
+      category: "",
     };
   }
 
-  // componentDidMount() {
-  //   axios.get("http://localhost:5000/users/").then((response) => {
-  //     if (response.data.length > 0) {
-  //       this.setState({
-  //         users: response.data.map((user) => user.username),
-  //         username: response.data[0].username,
-  //       });
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    axios.get("http://localhost:5000/products/category").then((response) => {
+      if (response.data.length > 0) {
+        this.setState({
+          categories: response.data.map((category) => category.category),
+          category: response.data[0].category,
+        });
+      }
+    });
+  }
 
   onChangeTitle(e) {
     this.setState({
@@ -75,11 +77,11 @@ export default class CreateProducts extends Component {
     });
   }
 
-  onChangeGender(e) {
-    this.setState({
-      gender: e.target.value,
-    });
-  }
+  // onChangeGender(e) {
+  //   this.setState({
+  //     gender: e.target.value,
+  //   });
+  // }
 
   onChangeColor(e) {
     this.setState({
@@ -109,7 +111,7 @@ export default class CreateProducts extends Component {
       title: this.state.title,
       description: this.state.description,
       price: this.state.price,
-      gender: this.state.gender,
+      // gender: this.state.gender,
       color: this.state.color,
       filename: this.state.filename,
       quantity: this.state.quantity,
@@ -162,12 +164,26 @@ export default class CreateProducts extends Component {
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">TITLE</label>
                 <div className="col-sm-10">
-                  <input
+                  {/* <input
                     type="text"
                     required
                     onChange={this.onChangeTitle}
                     className="form-control border_only_field"
-                  />
+                  /> */}
+
+                  <select
+                    required
+                    onChange={this.onChangeTitle}
+                    className="form-control border_only_field"
+                  >
+                    {this.state.categories.map(function (category) {
+                      return (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
               </div>
 
@@ -221,7 +237,7 @@ export default class CreateProducts extends Component {
                 </div>
               </div>
 
-              <div className="form-group row">
+              {/* <div className="form-group row">
                 <label className="col-sm-2 col-form-label">GENDER</label>
                 <div className="col-sm-10">
                   <select
@@ -234,7 +250,7 @@ export default class CreateProducts extends Component {
                     <option value="both">both</option>
                   </select>
                 </div>
-              </div>
+              </div> */}
 
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">COLOR </label>

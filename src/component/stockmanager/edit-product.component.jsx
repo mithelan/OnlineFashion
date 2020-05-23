@@ -1,6 +1,17 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class EditProduct extends Component {
+  componentDidMount() {
+    axios.get("http://localhost:5000/products/category").then((response) => {
+      if (response.data.length > 0) {
+        this.setState({
+          categories: response.data.map((category) => category.category),
+          category: response.data[0].category,
+        });
+      }
+    });
+  }
   render() {
     return (
       <div>
@@ -10,22 +21,46 @@ export default class EditProduct extends Component {
             <div className="col-md-5">
               <br />
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">TITLE</label>
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    required
-                    value={this.props.title}
-                    onChange={this.props.onChangeTitle}
-                    className="form-control"
-                  />
-                </div>
+                <select
+                  required
+                  onChange={this.props.onChangeTitle}
+                  value={this.props.title}
+                  className="form-control border_only_field"
+                >
+                  {this.props.categories.map(function (category) {
+                    return (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
 
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">BRAND</label>
                 <div className="col-sm-10">
-                  <select className="form-control"></select>
+                  <select
+                    className="form-control"
+                    value={this.props.brand}
+                    onChange={this.props.onChangeBrand}
+                  >
+                    <option value="other">Other</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Inditex">Inditex </option>
+                    <option value="H and M">H and M </option>
+                    <option value="Louris Vuitton">Louris Vuitton</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Uniqlo">Uniqlo</option>
+                    <option value="Hermes">Hermes</option>
+                    <option value="Gucci">Gucci</option>
+                    <option value="Michael Kors">Michael Kors</option>
+                    <option value="Ralph Lauren">Ralph Lauren</option>
+                    <option value=" Prada"> Prada</option>
+                    <option value="Levi Strauss and Co">
+                      Levi Strauss and Co
+                    </option>
+                  </select>
                 </div>
               </div>
 
@@ -55,7 +90,7 @@ export default class EditProduct extends Component {
                 </div>
               </div>
 
-              <div className="form-group row">
+              {/* <div className="form-group row">
                 <label className="col-sm-2 col-form-label">GENDER</label>
                 <div className="col-sm-10">
                   <select
@@ -72,7 +107,7 @@ export default class EditProduct extends Component {
                     <option value="both">both</option>
                   </select>
                 </div>
-              </div>
+              </div> */}
 
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">COLOR </label>

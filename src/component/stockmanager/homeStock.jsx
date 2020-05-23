@@ -11,7 +11,7 @@ const Product = (props) => (
     <td>{props.product.brand}</td>
     <td>{props.product.price}</td>
     <td>{props.product.color}</td>
-    <td>{props.product.gender}</td>
+    {/* <td>{props.product.gender}</td> */}
     <td>{props.product.size}</td>
 
     <td>
@@ -65,7 +65,7 @@ export default class HomeStock extends Component {
       description: "",
       price: 0,
       color: "",
-      gender: "male",
+      // gender: "male",
       size: "",
       file: "",
       filename: "Choose File",
@@ -121,7 +121,7 @@ export default class HomeStock extends Component {
           brand: response.data.brand,
           price: response.data.price,
           size: response.data.size,
-          gender: response.data.gender,
+          // gender: response.data.gender,
           color: response.data.color,
           quantity: response.data.quantity,
           description: response.data.description,
@@ -137,6 +137,12 @@ export default class HomeStock extends Component {
   onChangeTitle(key, event) {
     this.setState({
       title: event.target.value,
+    });
+  }
+
+  onChangeBrand(key, event) {
+    this.setState({
+      brand: event.target.value,
     });
   }
 
@@ -158,11 +164,11 @@ export default class HomeStock extends Component {
     });
   }
 
-  onChangeGender(key, event) {
-    this.setState({
-      gender: event.target.value,
-    });
-  }
+  // onChangeGender(key, event) {
+  //   this.setState({
+  //     gender: event.target.value,
+  //   });
+  // }
 
   onChangeColor(key, event) {
     this.setState({
@@ -194,7 +200,8 @@ export default class HomeStock extends Component {
       title: this.state.title,
       description: this.state.description,
       price: this.state.price,
-      gender: this.state.gender,
+      // gender: this.state.gender,
+      brand: this.state.brand,
       color: this.state.color,
     };
 
@@ -259,7 +266,7 @@ export default class HomeStock extends Component {
               <th>Brand</th>
               <th>Price</th>
               <th>Color</th>
-              <th>Gender</th>
+              {/* <th>Gender</th> */}
               <th>Size</th>
               <th>Quantity</th>
               <th>Desctiption</th>
@@ -342,16 +349,18 @@ export default class HomeStock extends Component {
                   description={this.state.description}
                   quantity={this.state.quantity}
                   color={this.state.color}
-                  gender={this.state.gender}
+                  brand={this.state.brand}
+                  // gender={this.state.gender}
                   size={this.state.size}
                   filename={this.state.filename}
                   onChangeTitle={this.onChangeTitle.bind(this, "title")}
+                  onChangeBrand={this.onChangeBrand.bind(this, "brand")}
                   onChangePrice={this.onChangePrice.bind(this, "price")}
                   onChangeDescription={this.onChangeDescription.bind(
                     this,
                     "description"
                   )}
-                  onChangeGender={this.onChangeGender.bind(this, "gender")}
+                  // onChangeGender={this.onChangeGender.bind(this, "gender")}
                   onChangeQuantity={this.onChangeQuantity.bind(
                     this,
                     "quantity"
