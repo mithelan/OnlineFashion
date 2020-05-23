@@ -67,12 +67,25 @@ router.get("/getProducts", (req, res) => {
   });
 });
 
+//to homepage-Mithi
+router.get("/getProducts/:id", (req, res) => {
+    Product.findById(req.params.id)
+        .then((products) => res.json(products))
+        .catch((err) => res.status(400).json("Error: " + err));
+});
+
 //mithiproducts/products_by_id?=id$(productId)&type=single'
 router.get("/products_by_id", (req, res) => {
     let type = req.query.type;
     let productIds = req.query.id;
 
     if (type === "array") {
+        let ids=req.query.id.split(',');
+        productIds=[]=ids.map(Cart=>{
+            return Cart
+        })
+
+
     }
     Product.find({ _id: { $in: productIds } })
         .populate("writer")
@@ -81,6 +94,25 @@ router.get("/products_by_id", (req, res) => {
             return res.status(200).send(products);
         });
 });
+
+router.get("/products_by_comment", (req, res) => {
+    let type = req.query.type;
+    let productIds = req.query.id;
+
+    if (type === "array") {
+
+    }
+    Product.find({ _id: { $in: productIds } })
+        .populate("writer")
+        .exec((err, Review) => {
+            if (err) return req.status(400).send(err);
+            return res.status(200).send(Review);
+        });
+});
+
+
+
+
 
 router.route("/:id").delete((req, res) => {
   Product.findByIdAndDelete(req.params.id)
@@ -129,7 +161,32 @@ router.route("/comments/:id").post(auth,(req, res) => {
                 // Save
                 post.save().then(post => res.json(post));
             })
-            .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+            .catch(err => res.status(404).json({ postnotfound: 'No comments found' }));
+    }
+);
+
+
+
+//RATEEEE
+router.route("/rate/:id").post(auth,(req, res) => {
+
+        Product.findById(req.params.id)
+            .then(post => {
+                const newRate = {
+                    user: req.user.id,
+                    rating: req.body.rating,
+
+
+
+                };
+
+                // Add to comments array
+                post.Rate.unshift(newRate);
+
+                // Save
+                post.save().then(post => res.json(post));
+            })
+            .catch(err => res.status(404).json({ postnotfound: 'No ratting found' }));
     }
 );
 

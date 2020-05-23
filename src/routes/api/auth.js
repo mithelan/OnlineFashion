@@ -72,15 +72,12 @@ router.post('/', (req, res) => {
 //post
 
 
-router.get('/addToCart', auth, (req, res) => {
+router.get('/addToCart/:id', auth, (req, res) => {
 
-    User.findOne({ _id: req.user._id }, (err, userInfo) => {
+    User.findOne({ _id: req.user.id }, (err, userInfo) => {
         let duplicate = false;
-
-        console.log(userInfo)
-
-        userInfo.cart.forEach((cartInfo) => {
-            if (cartInfo.id == req.query.productId) {
+        userInfo.Cart.forEach((Cart) => {
+            if (Cart.id === req.params.id) {
                 duplicate = true;
             }
         })
@@ -88,21 +85,21 @@ router.get('/addToCart', auth, (req, res) => {
 
         if (duplicate) {
             User.findOneAndUpdate(
-                { _id: req.user._id, "cart.id": req.query.productId },
-                { $inc: { "cart.$.quantity": 1 } },
+                { _id: req.user.id, "Cart.id": req.params.id },
+                { $inc: { "Cart.$.quantity": 1 } },
                 { new: true },
                 (err, userInfo) => {
                     if (err) return res.json({ success: false, err });
-                    res.status(200).json(userInfo.cart)
+                    res.status(200).json(userInfo.Cart)
                 }
             )
         } else {
             User.findOneAndUpdate(
-                { _id: req.user._id },
+                { _id: req.user.id },
                 {
                     $push: {
-                        cart: {
-                            id: req.query.productId,
+                        Cart: {
+                            id: req.params.id,
                             quantity: 1,
                             date: Date.now()
                         }
@@ -111,13 +108,12 @@ router.get('/addToCart', auth, (req, res) => {
                 { new: true },
                 (err, userInfo) => {
                     if (err) return res.json({ success: false, err });
-                    res.status(200).json(userInfo.cart)
+                    res.status(200).json(userInfo.Cart)
                 }
             )
         }
     })
 });
-
 
 // route  GET api/auth/user
 //private
@@ -126,6 +122,34 @@ router.get('/user', auth, (req, res) => {
     User.findById(req.user.id)
         .select('-password')
         .then(user => res.json(user));
+});
+
+router.get("/getUsers", (req, res) => {
+    User.find().exec((err, users) => {
+        if (err) return res.status(400).json({ success: false, err });
+        res.status(200).json({ success: true, users });
+    });
+});
+
+//DELETE THE USER
+router.route('/delete',auth).delete((req,res)=>{
+
+    User.findByIdAndDelete(req.param.id)
+        .then(()=>res.json('USER DELETED'))
+        .catch(err=>res.status(400).json('Error:'+err));
+})
+
+
+router.route("/updateuser/:id").put((req, res) => {
+    User.findById(req.params.id)
+        .then((users) => {
+            users.email = req.body.email;
+            users
+                .save()
+                .then(() => res.json("User Details updated!"))
+                .catch((err) => res.status(400).json("Error: " + err));
+        })
+        .catch((err) => res.status(400).json("Error: " + err));
 });
 
 

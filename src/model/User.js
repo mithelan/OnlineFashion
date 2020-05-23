@@ -17,7 +17,7 @@ const UserSchema = new Schema({
         type:String,
         required:true
     },
-    cart: {
+    Cart: {
         type: Array,
         default: []
     },

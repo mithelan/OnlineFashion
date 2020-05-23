@@ -43,14 +43,20 @@ const removeFromCart=(productId)=> async (dispatch,getState)=>{
 
 
 
-const addcart=(id)=> {
+const addcart=(_id)=> {
 
+   const request=axios.post(`http://localhost:5000/api/auth/addToCart/`+_id
 
+       ,"",{
 
-   const request=axios.get(`http://localhost:5000/api/auth/addToCart?productId=${id}`)
+       headers:{
+               "x-auth-token":localStorage.getItem("token"),
+               'Accept':'application/json',
+               'Content-Type':'application/json'
+           }
 
-       .then(response=> response.data);
-console.log('dd')
+       }
+       )
    return{
        type:ADD_ME_CART,
        payload:request
@@ -59,6 +65,34 @@ console.log('dd')
 
 
 }
+
+const getCart=(cartItems,userCart)=>{
+
+    const request=axios.get(`http://localhost:5000/product/products_by_id?id=${cartItems}&type=array`
+
+        ,"",{
+
+            headers:{
+                "x-auth-token":localStorage.getItem("token"),
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            }
+
+        }
+
+
+    )
+
+    return{
+        type:ADD_ME_CART,
+        payload:request
+    }
+
+
+
+}
+
+
 
 export const tokenConfig = getState => {
 
@@ -87,4 +121,4 @@ export const tokenConfig = getState => {
 
 
 
-export {addtocartnew,removeFromCart,addcart}
+export {addtocartnew,removeFromCart,addcart,getCart}

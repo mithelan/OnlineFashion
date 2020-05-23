@@ -11,6 +11,7 @@ import ProductDetail from "./compound/ProductDetail";
 import Checkout from "./compound/Checkout";
 import Contactus from "./compound/Contactus";
 import ProductDisplay from "./compound/ProductDisplay";
+import NewCartPage from "./compound/NewCartPage";
 //narthi
 import CreateProducts from "./component/stockmanager/create-product.component";
 import EditProduct from "./component/stockmanager/edit-product.component";
@@ -99,6 +100,7 @@ render(){
                         <Route exact path="/Register" component={RegisterModal} />
                         <Route exact path="/Comment" component={Component} />
 
+                        <Route exact path="/user/cart" component={NewCartPage} />
 
                         //Cart
                         <Route path="/Cartpage/:id?" component={Cartpage} />

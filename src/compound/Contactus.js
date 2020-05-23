@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import "../App.css";
-
+import {Alert} from 'reactstrap'
 
 
 class Contactus extends Component {
@@ -75,9 +75,14 @@ class Contactus extends Component {
         console.log(contact);
 
         axios.post('http://localhost:5000/contactus/add',contact)
-            .then(res=>console.log(res.data));
+            .then(res=>
+           alert('Thank you! We will contact you soon with your email address')
+            )
+        .catch((err) => {
 
-       // window.location = '/';
+            alert("Pleas Add again")
+
+        })
     }
 
     render() {
@@ -134,7 +139,7 @@ class Contactus extends Component {
 
 
                             <div className="form-group row">
-                                <label className="col-sm-2 col-form-label">Phone</label>
+                                <label className="col-sm-2 col-form-label">Subject</label>
                                 <div className="col-sm-10">
                                     <input
                                         type="text"
@@ -150,7 +155,7 @@ class Contactus extends Component {
                                 <label className="col-sm-2 col-form-label">Email</label>
                                 <div className="col-sm-10">
                                     <input
-                                        type="text"
+                                        type="email"
                                         required
                                         onChange={this.onChangeEmail}
                                         value={this.state.email}
@@ -164,7 +169,7 @@ class Contactus extends Component {
                                 <label className="col-sm-2 col-form-label">Comments </label>
                                 <div className="col-sm-10">
 
-                                    <input
+                                    <textarea
                                         type="text"
                                         className="form-control"
                                         required
@@ -175,10 +180,10 @@ class Contactus extends Component {
                                 </div>
                             </div>
 
-                            <div className="form-group row">
-                                <div className="col-sm-10">
-                                    <button  type="submit" className="btn btn-dark  float-right ">
-                                        Send
+                            <div className="form-group row-size">
+                                <div className="col-sm-16">
+                                    <button  type="submit" className="btn btn-dark float-md">
+                                         Send
                                     </button>
                                 </div>
                             </div>

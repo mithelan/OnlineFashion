@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import { addCart } from "../actions/addAction";
 import Homepage from "./Homepage";
 import Register from '../user_login/RegisterModal'
-import {Navbar} from "react-bootstrap";
+import {Badge, Navbar} from "react-bootstrap";
 import PropTypes from 'prop-types'
 import {Nav} from "reactstrap";
+
 
 class Home extends Component{
 
@@ -40,6 +41,13 @@ class Home extends Component{
       return (
       <Navbar>
 
+
+<Badge count={1}>
+<a href='/user/cart'>
+  <ion-icon name="cart-outline"></ion-icon>
+</a>
+</Badge>
+        <a  className="d-inline p-2 text-dark" href='/Profile'>Profile</a>
         <a  className="d-inline p-2 text-dark" onClick={this.dologout}>LOGOUT</a>
 
         </Navbar>
