@@ -4,36 +4,33 @@ const Schema = mongoose.Schema;
 
 const productSchema = new Schema(
   {
-    title: { type: String, required: false },
+    category: { type: String, required: false },
     brand: { type: String, required: false },
     price: { type: String, required: false },
-    gender: { type: String, required: false },
+    // gender: { type: String, required: false },
     size: { type: String, required: false },
     color: { type: String, required: false },
     description: { type: String, required: false },
     filename: { type: String, required: false },
     quantity: { type: Number, required: false },
-        Review: [
-          {
+    Review: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "users",
+          required: true,
+        },
+        comments: {
+          type: String,
+          required: true,
+        },
 
-              user: {
-                  type: mongoose.Schema.Types.ObjectId,
-                  ref: 'users',
-                  required: true
-              },
-              comments: {
-                  type: String,
-                  required: true
-              },
-
-
-              date: {
-                  type: Date,
-                  default: Date.now
-              }
-          }
-      ],
-
+        date: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
       Rate:[
           {
               user: {

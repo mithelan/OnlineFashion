@@ -7,10 +7,10 @@ export default class CreateProducts extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangePrice = this.onChangePrice.bind(this);
-    this.onChangeGender = this.onChangeGender.bind(this);
+    // this.onChangeGender = this.onChangeGender.bind(this);
     this.onChangeColor = this.onChangeColor.bind(this);
     this.onChangeSize = this.onChangeSize.bind(this);
     this.onChangeQuantity = this.onChangeQuantity.bind(this);
@@ -20,34 +20,36 @@ export default class CreateProducts extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      title: "",
+      categroy: "",
       description: "",
       price: 0,
       color: "",
-      gender: "male",
+      // gender: "male",
       size: "",
       file: "",
       filename: "Choose File",
       quantity: 0,
       uploaded: {},
       brand: "Both",
+      categories: [],
+      category: "",
     };
   }
 
-  // componentDidMount() {
-  //   axios.get("http://localhost:5000/users/").then((response) => {
-  //     if (response.data.length > 0) {
-  //       this.setState({
-  //         users: response.data.map((user) => user.username),
-  //         username: response.data[0].username,
-  //       });
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    axios.get("http://localhost:5000/products/category").then((response) => {
+      if (response.data.length > 0) {
+        this.setState({
+          categories: response.data.map((category) => category.category),
+          category: response.data[0].category,
+        });
+      }
+    });
+  }
 
-  onChangeTitle(e) {
+  onChangeCategory(e) {
     this.setState({
-      title: e.target.value,
+      category: e.target.value,
     });
   }
 
@@ -72,12 +74,6 @@ export default class CreateProducts extends Component {
   onChangePrice(e) {
     this.setState({
       price: e.target.value,
-    });
-  }
-
-  onChangeGender(e) {
-    this.setState({
-      gender: e.target.value,
     });
   }
 
@@ -106,10 +102,9 @@ export default class CreateProducts extends Component {
     const product = {
       size: this.state.size,
       brand: this.state.brand,
-      title: this.state.title,
+      category: this.state.category,
       description: this.state.description,
       price: this.state.price,
-      gender: this.state.gender,
       color: this.state.color,
       filename: this.state.filename,
       quantity: this.state.quantity,
@@ -120,10 +115,7 @@ export default class CreateProducts extends Component {
     axios
       .post("http://localhost:5000/products/add", product)
       .then((res) => console.log(res.data));
-    // const { fileName, filePath } = res.data;
-    // this.setState({
-    //   uploaded: { fileName, filePath },
-    // });
+
     window.location = "/stockmanager/addStocks";
 
     const formData = new FormData();
@@ -151,8 +143,7 @@ export default class CreateProducts extends Component {
   render() {
     return (
       <div>
-        {/* <h3>Stock Management</h3>
-        <Navbar /> */}
+        {/* <Navbar /> */}
         <br />
         <form onSubmit={this.onSubmit}>
           <div className="row">
@@ -160,14 +151,21 @@ export default class CreateProducts extends Component {
               {/* <h4>PRODUCT DETAILS</h4> */}
               <br />
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">TITLE</label>
+                <label className="col-sm-2 col-form-label">CATEGORY</label>
                 <div className="col-sm-10">
-                  <input
-                    type="text"
-                    required
-                    onChange={this.onChangeTitle}
+                  <select
+                    onChange={this.onChangeCategory}
                     className="form-control border_only_field"
-                  />
+                  >
+                    <option value="others">Select one</option>
+                    {this.state.categories.map(function (category) {
+                      return (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
               </div>
 
@@ -178,7 +176,7 @@ export default class CreateProducts extends Component {
                     className="form-control border_only_field"
                     onChange={this.onChangeBrand}
                   >
-                    <option value="other">Other</option>
+                    <option value="Others">Select one</option>
                     <option value="Nike">Nike</option>
                     <option value="Inditex">Inditex </option>
                     <option value="H and M">H and M </option>
@@ -212,26 +210,22 @@ export default class CreateProducts extends Component {
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">SIZE</label>
                 <div className="col-sm-10">
-                  <input
+                  {/* <input
                     type="text"
                     required
                     onChange={this.onChangeSize}
                     className="form-control border_only_field"
-                  />
-                </div>
-              </div>
-
-              <div className="form-group row">
-                <label className="col-sm-2 col-form-label">GENDER</label>
-                <div className="col-sm-10">
+                  /> */}
                   <select
-                    className="form-control border_only_field"
-                    required
-                    onChange={this.onChangeGender}
+                    className="form-control "
+                    onChange={this.onChangeSize}
                   >
-                    <option value="male">male</option>
-                    <option value="female">female</option>
-                    <option value="both">both</option>
+                    <option value="extra small">extra small</option>
+                    <option value="small">small</option>
+                    <option value="medium">medium</option>
+                    <option value="large">large</option>
+                    <option value="extra large">extra large</option>
+                    <option>double extra large</option>
                   </select>
                 </div>
               </div>
@@ -271,7 +265,6 @@ export default class CreateProducts extends Component {
                 <textarea
                   className="form-control border_only_field"
                   rows="8"
-                  required
                   onChange={this.onChangeDescription}
                 ></textarea>
 

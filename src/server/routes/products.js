@@ -1,17 +1,27 @@
 const router = require("express").Router();
 let Product = require("../models/product.model");
-const auth=require('../../middleware/auth')
+
+let Category = require("../../admin/model/category.model");
+
+const auth = require("../../middleware/auth");
+
 router.route("/").get((req, res) => {
   Product.find()
     .then((products) => res.json(products))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/category").get((req, res) => {
+  Category.find()
+    .then((categories) => res.json(categories))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route("/add").post((req, res) => {
-  const title = req.body.title;
+  const category = req.body.category;
   const brand = req.body.brand;
   const price = req.body.price;
-  const gender = req.body.gender;
+  // const gender = req.body.gender;
   const size = req.body.size;
   const color = req.body.color;
   const description = req.body.description;
@@ -19,10 +29,10 @@ router.route("/add").post((req, res) => {
   const quantity = Number(req.body.quantity);
 
   const newProduct = new Product({
-    title,
+    category,
     brand,
     price,
-    gender,
+
     size,
     color,
     description,
@@ -76,15 +86,17 @@ router.get("/getProducts/:id", (req, res) => {
 
 //mithiproducts/products_by_id?=id$(productId)&type=single'
 router.get("/products_by_id", (req, res) => {
-    let type = req.query.type;
-    let productIds = req.query.id;
+  let type = req.query.type;
+  let productIds = req.query.id;
 
-    if (type === "array") {
-        let ids=req.query.id.split(',');
-        productIds=[]=ids.map(Cart=>{
-            return Cart
-        })
-
+  if (type === "array") {
+  }
+  Product.find({ _id: { $in: productIds } })
+    .populate("writer")
+    .exec((err, products) => {
+      if (err) return req.status(400).send(err);
+      return res.status(200).send(products);
+    });
 
     }
     Product.find({ _id: { $in: productIds } })
@@ -92,7 +104,7 @@ router.get("/products_by_id", (req, res) => {
         .exec((err, products) => {
             if (err) return req.status(400).send(err);
             return res.status(200).send(products);
-        });
+
 });
 
 router.get("/products_by_comment", (req, res) => {
@@ -123,10 +135,10 @@ router.route("/:id").delete((req, res) => {
 router.route("/update/:id").post((req, res) => {
   Product.findById(req.params.id)
     .then((product) => {
-      product.title = req.body.title;
+      product.category = req.body.category;
       product.brand = req.body.brand;
       product.price = Number(req.body.price);
-      product.gender = req.body.gender;
+      // product.gender = req.body.gender;
       product.size = req.body.size;
       product.color = req.body.color;
       product.description = req.body.description;
@@ -164,7 +176,6 @@ router.route("/comments/:id").post(auth,(req, res) => {
             .catch(err => res.status(404).json({ postnotfound: 'No comments found' }));
     }
 );
-
 
 
 //RATEEEE
