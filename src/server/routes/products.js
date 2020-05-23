@@ -86,17 +86,15 @@ router.get("/getProducts/:id", (req, res) => {
 
 //mithiproducts/products_by_id?=id$(productId)&type=single'
 router.get("/products_by_id", (req, res) => {
-  let type = req.query.type;
-  let productIds = req.query.id;
+    let type = req.query.type;
+    let productIds = req.query.id;
 
-  if (type === "array") {
-  }
-  Product.find({ _id: { $in: productIds } })
-    .populate("writer")
-    .exec((err, products) => {
-      if (err) return req.status(400).send(err);
-      return res.status(200).send(products);
-    });
+    if (type === "array") {
+        let ids=req.query.id.split(',');
+        productIds=[]=ids.map(Cart=>{
+            return Cart
+        })
+
 
     }
     Product.find({ _id: { $in: productIds } })
@@ -104,7 +102,7 @@ router.get("/products_by_id", (req, res) => {
         .exec((err, products) => {
             if (err) return req.status(400).send(err);
             return res.status(200).send(products);
-
+        });
 });
 
 router.get("/products_by_comment", (req, res) => {
@@ -121,9 +119,6 @@ router.get("/products_by_comment", (req, res) => {
             return res.status(200).send(Review);
         });
 });
-
-
-
 
 
 router.route("/:id").delete((req, res) => {
@@ -162,9 +157,6 @@ router.route("/comments/:id").post(auth,(req, res) => {
                 const newComment = {
                     user: req.user.id,
                     comments: req.body.comments,
-
-
-
                 };
 
                 // Add to comments array
@@ -186,9 +178,6 @@ router.route("/rate/:id").post(auth,(req, res) => {
                 const newRate = {
                     user: req.user.id,
                     rating: req.body.rating,
-
-
-
                 };
 
                 // Add to comments array
