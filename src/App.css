@@ -35,6 +35,11 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.Arrange1{
+  position: relative;
+  margin-top: -15%;
+
+}
 
 .App-link {
   color: #61dafb;

@@ -26,7 +26,7 @@ import Login from "./user_login/components/auth/LoginModal";
 
 import RegisterModal from "./user_login/components/auth/RegisterModal";
 import Comment from "./compound/Comment";
-
+import Profile from "./compound/Profile";
 import setAuthToken from "./middleware/setAuthToken";
 
 import Cartpage from "./compound/Cartpage";
@@ -88,6 +88,8 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/Register" component={RegisterModal} />
               <Route exact path="/Comment" component={Component} />
+              <Route exact path="/Profile" component={Profile} />
+
               //Cart
               <Route path="/Cartpage/:id?" component={Cartpage} />
               <Route path="/stockmanager" component={HomeStock} />

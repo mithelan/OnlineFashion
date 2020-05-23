@@ -160,7 +160,7 @@ function ProductDetail(props) {
 
 
 
-                    <label className="col-sm-2 col-form-label">Comment</label>
+                    <label className="col-sm-2 col-form-label"></label>
                     <div className="col-sm-10">
 
                             <textarea
@@ -255,7 +255,9 @@ function ProductDetail(props) {
 
             <div className="details">
                 <div className="details-image">
-                    <img  className="product-view" src={`/images/productPhotos/${Product.filename}`}
+                    <h4>Selected Product</h4>
+                    <img  className="product-view" height="500"
+                          width="180" src={`/images/productPhotos/${Product.filename}`}
                           data-zoom-image={`/images/productPhotos/${Product.filename}`}/>
 
 
@@ -341,10 +343,11 @@ function ProductDetail(props) {
             </div>
 
             <form onSubmit={submit}>
-                <div className='Arrange'>
+                <div className='Arrange1'>
                     <div className="row">
                         <div className="col-md-5">
                             <br/>
+                            <h4>Add a comment Here</h4>
                             {namemethod()}
 
                             <div className="form-group row">
