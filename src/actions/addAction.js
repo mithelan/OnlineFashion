@@ -1,4 +1,4 @@
-import {ADD_PRODUCT_CART, ADD_TO_CART,ADD_TO_NEW_CART,REMOVE_FROM_CART} from "./types";
+import {ADD_ME_CART, ADD_TO_CART,ADD_TO_NEW_CART,REMOVE_FROM_CART} from "./types";
 import axios from 'axios'
 import Cookie from 'js-cookie'
 
@@ -43,4 +43,48 @@ const removeFromCart=(productId)=> async (dispatch,getState)=>{
 
 
 
-export {addtocartnew,removeFromCart}
+const addcart=(id)=> {
+
+
+
+   const request=axios.get(`http://localhost:5000/api/auth/addToCart?productId=${id}`)
+
+       .then(response=> response.data);
+console.log('dd')
+   return{
+       type:ADD_ME_CART,
+       payload:request
+   }
+
+
+
+}
+
+export const tokenConfig = getState => {
+
+    // get token from local storage
+
+    const token = getState().auth.token;
+
+    //Headers
+
+    const config = {
+        headers: {
+            "x-auth-token":localStorage.getItem("token"),
+            "Content-type": "application/json"
+        }
+    }
+
+    // If token , add to headers
+
+    if (token) {
+        config.headers['x-auth-token'] = token;
+    }
+
+    return config;
+
+}
+
+
+
+export {addtocartnew,removeFromCart,addcart}

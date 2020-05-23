@@ -1,6 +1,9 @@
 const router = require("express").Router();
 let Product = require("../models/product.model");
+
 let Category = require("../../admin/model/category.model");
+
+const auth = require("../../middleware/auth");
 
 router.route("/").get((req, res) => {
   Product.find()
@@ -15,7 +18,7 @@ router.route("/category").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
-  const title = req.body.title;
+  const category = req.body.category;
   const brand = req.body.brand;
   const price = req.body.price;
   // const gender = req.body.gender;
@@ -26,10 +29,10 @@ router.route("/add").post((req, res) => {
   const quantity = Number(req.body.quantity);
 
   const newProduct = new Product({
-    title,
+    category,
     brand,
     price,
-    // gender,
+
     size,
     color,
     description,
@@ -98,10 +101,10 @@ router.route("/:id").delete((req, res) => {
 router.route("/update/:id").post((req, res) => {
   Product.findById(req.params.id)
     .then((product) => {
-      product.title = req.body.title;
+      product.category = req.body.category;
       product.brand = req.body.brand;
       product.price = Number(req.body.price);
-      product.gender = req.body.gender;
+      // product.gender = req.body.gender;
       product.size = req.body.size;
       product.color = req.body.color;
       product.description = req.body.description;
@@ -114,6 +117,25 @@ router.route("/update/:id").post((req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(400).json("Error: " + err));
+});
+
+//COMMENT
+
+router.route("/comments/:id").post(auth, (req, res) => {
+  Product.findById(req.params.id)
+    .then((post) => {
+      const newComment = {
+        user: req.user.id,
+        comments: req.body.comments,
+      };
+
+      // Add to comments array
+      post.Review.unshift(newComment);
+
+      // Save
+      post.save().then((post) => res.json(post));
+    })
+    .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
 });
 
 module.exports = router;

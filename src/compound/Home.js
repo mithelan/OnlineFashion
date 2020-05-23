@@ -20,7 +20,9 @@ class Home extends Component {
     if (localStorage.length !== 0) {
       return (
         <div>
-          <h4>{/* Welcome <h2 color="white">{payload.name}</h2> */}</h4>
+          <h4>
+            Welcome <h2 color="white">{/*{payload.name}*/}</h2>
+          </h4>
         </div>
       );
     } else {

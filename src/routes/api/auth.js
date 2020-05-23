@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
-const auth = require('../../middleware/auth');
+const auth=require('../../middleware/auth')
 
 // User Model
 
@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
                     if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
                     jwt.sign(
-                        { name: user.name },
+                        { id: user.id  },
                         process.env.JWT_SECRET,
                         { expiresIn: 3600 },
                         (err, token) => {
@@ -62,6 +62,62 @@ router.post('/', (req, res) => {
 
 
 });
+
+
+//WISHTOLIST
+
+
+
+
+//post
+
+
+router.get('/addToCart', auth, (req, res) => {
+
+    User.findOne({ _id: req.user._id }, (err, userInfo) => {
+        let duplicate = false;
+
+        console.log(userInfo)
+
+        userInfo.cart.forEach((cartInfo) => {
+            if (cartInfo.id == req.query.productId) {
+                duplicate = true;
+            }
+        })
+
+
+        if (duplicate) {
+            User.findOneAndUpdate(
+                { _id: req.user._id, "cart.id": req.query.productId },
+                { $inc: { "cart.$.quantity": 1 } },
+                { new: true },
+                (err, userInfo) => {
+                    if (err) return res.json({ success: false, err });
+                    res.status(200).json(userInfo.cart)
+                }
+            )
+        } else {
+            User.findOneAndUpdate(
+                { _id: req.user._id },
+                {
+                    $push: {
+                        cart: {
+                            id: req.query.productId,
+                            quantity: 1,
+                            date: Date.now()
+                        }
+                    }
+                },
+                { new: true },
+                (err, userInfo) => {
+                    if (err) return res.json({ success: false, err });
+                    res.status(200).json(userInfo.cart)
+                }
+            )
+        }
+    })
+});
+
 
 // route  GET api/auth/user
 //private

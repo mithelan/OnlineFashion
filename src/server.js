@@ -34,12 +34,17 @@ app.use(bodyParser.json());
 
 const contactRouter=require('./routes/contact');
 
-//narthi
+
+//natti
 const productsRouter = require("../src/server/routes/products");
 app.use("/products", productsRouter);
 
-//mithi
+//dimi
 app.use('/contactus',contactRouter);
+
+const checkoutRouter = require('./routes/checkout')
+
+app.use('/checkout',checkoutRouter);
 
 //Anjik
 

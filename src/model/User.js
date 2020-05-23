@@ -25,7 +25,11 @@ const UserSchema = new Schema({
     register_date:{
         type:Date,
         default:Date.now
-    }
+    },
+    WishList : {
+        type : Array,
+        default: []
+    },
 });
 
 module.exports = User = mongoose.model('users',UserSchema); 

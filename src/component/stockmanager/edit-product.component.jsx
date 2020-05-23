@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export default class EditProduct extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      categories: [],
+      category: "",
+    };
+  }
   componentDidMount() {
     axios.get("http://localhost:5000/products/category").then((response) => {
       if (response.data.length > 0) {
@@ -12,6 +20,7 @@ export default class EditProduct extends Component {
       }
     });
   }
+
   render() {
     return (
       <div>
@@ -21,20 +30,24 @@ export default class EditProduct extends Component {
             <div className="col-md-5">
               <br />
               <div className="form-group row">
-                <select
-                  required
-                  onChange={this.props.onChangeTitle}
-                  value={this.props.title}
-                  className="form-control border_only_field"
-                >
-                  {this.props.categories.map(function (category) {
-                    return (
-                      <option key={category} value={category}>
-                        {category}
-                      </option>
-                    );
-                  })}
-                </select>
+                <label className="col-sm-2 col-form-label">CATEGORY</label>
+                <div className="col-sm-10">
+                  <select
+                    value={this.props.category}
+                    required
+                    onChange={this.props.onChangeCategory}
+                    className="form-control border_only_field"
+                  >
+                    <option>Others</option>
+                    {this.state.categories.map(function (category) {
+                      return (
+                        <option key={category} value={category}>
+                          {category}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
               </div>
 
               <div className="form-group row">
@@ -45,7 +58,7 @@ export default class EditProduct extends Component {
                     value={this.props.brand}
                     onChange={this.props.onChangeBrand}
                   >
-                    <option value="other">Other</option>
+                    <option value="Others">Other</option>
                     <option value="Nike">Nike</option>
                     <option value="Inditex">Inditex </option>
                     <option value="H and M">H and M </option>
@@ -80,13 +93,26 @@ export default class EditProduct extends Component {
               <div className="form-group row">
                 <label className="col-sm-2 col-form-label">SIZE</label>
                 <div className="col-sm-10">
-                  <input
+                  {/* <input
                     type="text"
                     required
                     value={this.props.size}
                     onChange={this.props.onChangeSize}
                     className="form-control"
-                  />
+                  /> */}
+
+                  <select
+                    className="form-control "
+                    onChange={this.props.onChangeSize}
+                    value={this.props.size}
+                  >
+                    <option value="extra small">extra small</option>
+                    <option value="small">small</option>
+                    <option value="medium">medium</option>
+                    <option value="large">large</option>
+                    <option value="extra large">extra large</option>
+                    <option>double extra large</option>
+                  </select>
                 </div>
               </div>
 

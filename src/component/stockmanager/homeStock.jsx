@@ -7,7 +7,7 @@ import EditProduct from "./edit-product.component";
 
 const Product = (props) => (
   <tr>
-    <td>{props.product.title}</td>
+    <td>{props.product.category}</td>
     <td>{props.product.brand}</td>
     <td>{props.product.price}</td>
     <td>{props.product.color}</td>
@@ -26,11 +26,8 @@ const Product = (props) => (
       />
     </td>
     <td>
-      {/* <Link to={"/editStock/" + props.product._id} className="btn btn-warning">
-        edit
-      </Link>{" "} */}
-      <button
-        className="btn btn-warning"
+      {/* <button
+        className="btn btn-warning btn-function2 mt-2 btn-lg rounded-0"
         data-toggle="modal"
         data-target="#exampleModalCenter2"
         onClick={() => {
@@ -38,11 +35,13 @@ const Product = (props) => (
         }}
       >
         EDIT
-      </button>
-      |{" "}
+      </button> */}
+      <i className="fa fa-trash fa-5x"></i>
+      <br />
+      <br />
       <a
         href="#"
-        className="btn btn-danger"
+        className="btn btn-danger btn-function2 btn-lg rounded-0"
         onClick={() => {
           props.deleteProduct(props.product._id);
         }}
@@ -61,7 +60,7 @@ export default class HomeStock extends Component {
 
     this.state = {
       products: [],
-      title: "",
+      category: "",
       description: "",
       price: 0,
       color: "",
@@ -117,7 +116,7 @@ export default class HomeStock extends Component {
       .get("http://localhost:5000/products/get/" + id)
       .then((response) => {
         this.setState({
-          title: response.data.title,
+          category: response.data.category,
           brand: response.data.brand,
           price: response.data.price,
           size: response.data.size,
@@ -134,9 +133,9 @@ export default class HomeStock extends Component {
       });
   }
 
-  onChangeTitle(key, event) {
+  onChangeCategory(key, event) {
     this.setState({
-      title: event.target.value,
+      category: event.target.value,
     });
   }
 
@@ -163,12 +162,6 @@ export default class HomeStock extends Component {
       price: event.target.value,
     });
   }
-
-  // onChangeGender(key, event) {
-  //   this.setState({
-  //     gender: event.target.value,
-  //   });
-  // }
 
   onChangeColor(key, event) {
     this.setState({
@@ -197,10 +190,10 @@ export default class HomeStock extends Component {
       filename: this.state.filename,
       quantity: this.state.quantity,
       size: this.state.size,
-      title: this.state.title,
+      category: this.state.category,
       description: this.state.description,
       price: this.state.price,
-      // gender: this.state.gender,
+      category: this.state.category,
       brand: this.state.brand,
       color: this.state.color,
     };
@@ -241,20 +234,21 @@ export default class HomeStock extends Component {
   render() {
     return (
       <div>
-        <h3>Stock Management</h3>
+        <h3 className="theading mt-2">Stock Management</h3>
         <br />
         <br />
-        {/* <Navbar /> */}
+
+        <Navbar />
+
         <div className="row">
           <div className="col-md-9"></div>
           <div className="col-md-3">
             <button
-              style={{ letterSpacing: "1px" }}
-              className="btn btn-dark rounded-0 btn-block btn-lg"
+              className="btn btn-dark rounded-0 btn-block btn-lg btn-function"
               data-toggle="modal"
               data-target="#exampleModalCenter"
             >
-              Add New Product
+              + ADD NEW PRODUCT
             </button>
           </div>
         </div>
@@ -262,15 +256,14 @@ export default class HomeStock extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Title</th>
-              <th>Brand</th>
-              <th>Price</th>
-              <th>Color</th>
-              {/* <th>Gender</th> */}
-              <th>Size</th>
-              <th>Quantity</th>
-              <th>Desctiption</th>
-              <th>Photo</th>
+              <th className="theading">CATEGORY</th>
+              <th className="theading">Brand</th>
+              <th className="theading">Price</th>
+              <th className="theading">Color</th>
+              <th className="theading">Size</th>
+              <th className="theading">Quantity</th>
+              <th className="theading">Description</th>
+              <th className="theading">Photo</th>
             </tr>
           </thead>
           <tbody>{this.productList()}</tbody>
@@ -344,16 +337,16 @@ export default class HomeStock extends Component {
               {/* modal for edit */}
               <div className="modal-body">
                 <EditProduct
-                  title={this.state.title}
+                  category={this.state.category}
                   price={this.state.price}
                   description={this.state.description}
                   quantity={this.state.quantity}
                   color={this.state.color}
                   brand={this.state.brand}
                   // gender={this.state.gender}
+                  // cate
                   size={this.state.size}
                   filename={this.state.filename}
-                  onChangeTitle={this.onChangeTitle.bind(this, "title")}
                   onChangeBrand={this.onChangeBrand.bind(this, "brand")}
                   onChangePrice={this.onChangePrice.bind(this, "price")}
                   onChangeDescription={this.onChangeDescription.bind(
@@ -368,6 +361,10 @@ export default class HomeStock extends Component {
                   onChangeColor={this.onChangeColor.bind(this, "color")}
                   onChangeSize={this.onChangeSize.bind(this, "size")}
                   onChangePhoto={this.onChangePhoto.bind(this, "file")}
+                  onChangeCategory={this.onChangeCategory.bind(
+                    this,
+                    "category"
+                  )}
                   onSubmit={this.onSubmit.bind(this)}
                 />
               </div>

@@ -40,7 +40,6 @@ class PhotoSlide extends Component {
             arrows:true,
             slidesToScroll:1,
             className:'slider',
-
             autoplay: true,
             autoplaySpeed:2000,
         }
@@ -55,9 +54,12 @@ class PhotoSlide extends Component {
                         {photos.map((photos)=>{
                             return <div>
                                 <h3 className='right-align'> New Arivals </h3>
-                                <img width='40%'  src={photos.url}/>
+                                <img width='50%'  src={photos.url}/>
+
 
                             </div>
+
+
                         })}
 
                     </Slider>
