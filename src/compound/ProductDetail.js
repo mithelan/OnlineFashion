@@ -1,6 +1,6 @@
 import React, {Component, Fragment, useEffect, useState} from 'react';
 import Axios from 'axios';
-import {addToCart, addtocartnew} from '../actions/addAction';
+import { addToCart} from '../actions/addAction';
 import {connect, useDispatch} from "react-redux";
 import {Card, Row, Col, Button, Navbar} from "react-bootstrap";
 import '../App.css'
@@ -11,6 +11,7 @@ import axios from 'axios'
 import {TokenStorage as localstorage} from "@uppy/companion-client";
 
 import {FaStar} from 'react-icons/fa'
+import Page from "react-page-loading";
 
 
 function ProductDetail(props) {
@@ -160,9 +161,9 @@ function ProductDetail(props) {
 
 
 
-                    <label className="col-sm-2 col-form-label">Comment</label>
+                    <label className="col-sm-2 col-form-label"></label>
                     <div className="col-sm-10">
-
+                        <h5>Comment here</h5>
                             <textarea
                                 type="text"
 
@@ -197,6 +198,7 @@ function ProductDetail(props) {
         if (localStorage.length !== 0) {
             return (
                 <div>
+                    <h6>Rate Products</h6>
                     {/*short hand for array with five untitled items in it.*/}
                     {[...Array(5)].map((star, i) => {
                         const ratValue = i + 1;
@@ -223,7 +225,7 @@ function ProductDetail(props) {
                                     </label>
                                 </div>
                                 <button  type="submit" className="btn btn-warning" >
-                                    Rating
+                                    Select
                                 </button>
                             </div>
 
@@ -252,11 +254,12 @@ function ProductDetail(props) {
 
     return (
         <div>
-
+            <Page loader={"bar"} color={"#A9A9A9"} size={6}   >
             <div className="details">
                 <div className="details-image">
                     <img  className="product-view" src={`/images/productPhotos/${Product.filename}`}
-                          data-zoom-image={`/images/productPhotos/${Product.filename}`}/>
+                          height="500"
+                          width="180"      data-zoom-image={`/images/productPhotos/${Product.filename}`}/>
 
 
 
@@ -272,9 +275,9 @@ function ProductDetail(props) {
                 <div className="details-info">
 
 
-                    <h2 className="box-title"> {Product.category}</h2>
+                    <h2 className="box-title"> {Product.title}</h2>
 
-                    <h3 className="box-title"> {Product.description}</h3>
+                    <p className="box-title"> {Product.description}</p>
                     <h3 className="box-price">
                         Rs .{Product.price}
 
@@ -287,7 +290,7 @@ function ProductDetail(props) {
 
 
 
-
+                        <ol>{Product.description}</ol>
 
                         <br></br>
                         <ol>
@@ -320,6 +323,8 @@ function ProductDetail(props) {
                             <button type="button" className="btn btn-light" onClick={`/products/AddToWish/${productId}`}>Add to WishList</button>
                         </ol>
 
+
+
                     </ul>
 
                 </div>
@@ -327,6 +332,12 @@ function ProductDetail(props) {
 
 
             <br></br>
+
+
+
+                <form onSubmit={submitRate}>
+                    <div className="ratee">{isLoginnedForRating()}   </div>
+                </form>
 
 
 
@@ -353,10 +364,8 @@ function ProductDetail(props) {
                     </div>
                 </div>
             </form>
+            </Page>
 
-            <form onSubmit={submitRate}>
-                {isLoginnedForRating()}
-            </form>
         </div>
 
 

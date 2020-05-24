@@ -24,9 +24,20 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.ratee{
+  position: relative;
+  margin-left: 22%;
+  margin-top: 0%;
+}
 .selected{
   position: relative;
   margin-top: 1%;
+
+}
+.Arrange{
+  position: relative;
+  margin-left: 4%;
+  margin-top: -29% ;
 
 }
 .take{

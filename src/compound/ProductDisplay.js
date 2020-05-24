@@ -11,6 +11,8 @@ import {
 
 
 } from 'reactstrap';
+import Page from 'react-page-loading'
+
 
 
 function ProductDisplay() {
@@ -123,6 +125,8 @@ function ProductDisplay() {
   return (
 
       <div className='shop'>
+        <Page loader={"bar"} color={"#A9A9A9"} size={6}   >
+
 
         <PhotoSlide/>
 
@@ -265,6 +269,7 @@ function ProductDisplay() {
             </div>
           </div>
         </footer>
+        </Page>
       </div>
   );
 }
