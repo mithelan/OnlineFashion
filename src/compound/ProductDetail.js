@@ -1,6 +1,6 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component, Fragment, useEffect, useState} from 'react';
 import Axios from 'axios';
-import { addToCart} from '../actions/addAction';
+import {addToCart, addtocartnew} from '../actions/addAction';
 import {connect, useDispatch} from "react-redux";
 import {Card, Row, Col, Button, Navbar} from "react-bootstrap";
 import '../App.css'
@@ -9,25 +9,38 @@ import Comment from "./Comment";
 import {addcart} from "../actions/addAction";
 import axios from 'axios'
 import {TokenStorage as localstorage} from "@uppy/companion-client";
-import StarRating from "./StarRating";
+
+import {FaStar} from 'react-icons/fa'
 
 
 function ProductDetail(props) {
     const [comments, SetComments]=useState();
-    // const [commentname, SetCommentname]=useState();
+
     const [user]=useState();
     const dispatch = useDispatch();
 
     const [qty, setQty] = useState(1);
-    const productsId = props.match.params.productsId
+    const productId = props.match.params.productsId
     const [Product, setProduct] = useState([])
+    const [Products, setProducts] = useState([]);
+
+    //FOR RATING
+    const [rating, SetRate]=useState();
+
+    const [ratings,setRating] = useState(null);
+    const [hover,setHover]= useState(null);
+
+
+
     const [Items, setItems] = useState([])
+    // const [state, setState] = useState(initialState);
 
     useEffect(() => {
-        Axios.get(`http://localhost:5000/products/products_by_id?id=${productsId}&type=single`)
+        Axios.get(`http://localhost:5000/products/products_by_id?id=${productId}&type=single`)
             .then(response => {
 
                 setProduct(response.data[0])
+
 
                 console.log(response.data[0])
             })
@@ -35,28 +48,92 @@ function ProductDetail(props) {
 
 
 
-
-
-
     const addToCardFunction = () => {
-        props.history.push("/cartpage/"+productsId+"?qty="+qty)
+        props.history.push("/cartpage/"+productId+"?qty="+qty)
+        console.log("pri",productId)
     }
 
-    /*          const addToCardNEW=(productsId)=>{
-    dispatch(addcart(productsId));
-  }*/
+    useEffect(() => {
+        Axios.get("http://localhost:5000/products/getProducts/"+productId).then((response) => {
+
+            //products same name as routes
+            setProducts(response.data.products);
+
+
+        });
+    }, []);
+
+
+
+
+    /* const addToCardNEW=(e)=>{
+         //dispatch(addcart(productId));
+
+         e.preventDefault();
+
+         //  const comment = {comments};
+
+         const token=localStorage.getItem('token')
+         Axios.post(
+             "http://localhost:5000/api/auth/addToCart/" + productId,
+             "",{
+
+                 headers:{
+                     "x-auth-token":localStorage.getItem("token"),
+                     'Accept':'application/json',
+                     'Content-Type':'application/json'
+                 }
+
+             }
+         ).then(response=>{
+             console.log(response.data)
+         })
+         console.log('success');
+
+     };
+
+ */
+
+
+
 
 
 
     const submit =(e) => {
-        e.preventDefault();
 
-        const comment = {comments };
+
+        const comment = {comments};
 
         const token=localStorage.getItem('token')
         Axios.post(
-            "http://localhost:5000/products/comments/" + productsId,
+            "http://localhost:5000/products/comments/" + productId,
             comment,{
+
+                headers:{
+                    "x-auth-token":localStorage.getItem("token"),
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                }
+
+            }
+        ).then(response=>{
+            console.log(response.data)
+
+        })
+        console.log('success');
+
+    };
+
+
+    const submitRate =(e) => {
+
+
+        const rates = {rating};
+
+        const token=localStorage.getItem('token')
+        Axios.post(
+            "http://localhost:5000/products/rate/" + productId,
+            rates,{
 
                 headers:{
                     "x-auth-token":localStorage.getItem("token"),
@@ -71,7 +148,6 @@ function ProductDetail(props) {
         console.log('success');
 
     };
-
 
 
 
@@ -93,10 +169,6 @@ function ProductDetail(props) {
                                 className="form-control"
                                 rows="3"
                                 onChange={(e) => SetComments(e.target.value)}
-
-
-
-
                             />
 
 
@@ -118,6 +190,66 @@ function ProductDetail(props) {
     }
 
 
+
+
+    //CHECK LOGIN FOR START RATING
+    function isLoginnedForRating() {
+        if (localStorage.length !== 0) {
+            return (
+                <div>
+                    {/*short hand for array with five untitled items in it.*/}
+                    {[...Array(5)].map((star, i) => {
+                        const ratValue = i + 1;
+                        return (
+                            <div>
+                                <div>
+                                    <label>
+                                        <input style={{display: "none"}}
+                                               type="radio"
+                                               name='ratings'
+                                               value={ratValue}
+                                               onClick={() => setRating(ratValue)}
+                                               onChange={(e) => SetRate(e.target.value)}
+
+                                        />
+
+                                        <FaStar style={{cursor: "pointer"}}
+                                                color={ratValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+                                                onMouseEnter={() => setHover(ratValue)}
+                                                onMouseLeave={() => setHover(null)}
+
+                                        />
+
+                                    </label>
+                                </div>
+                                <button  type="submit" className="btn btn-warning" >
+                                    Rating
+                                </button>
+                            </div>
+
+
+                        )
+                    })}
+
+                </div>
+
+            )
+        }
+    }
+
+    /*    const rendercard = Products.map((products, productId) => {
+
+            return<div>
+                {products.Review.map((item,productId)=>{
+                    return(
+                        <div>
+                            {item.comments}
+                        </div>
+                    )
+                })}
+            </div>
+        })*/
+
     return (
         <div>
 
@@ -126,15 +258,23 @@ function ProductDetail(props) {
                     <img  className="product-view" src={`/images/productPhotos/${Product.filename}`}
                           data-zoom-image={`/images/productPhotos/${Product.filename}`}/>
 
-                    <StarRating/>
+
+
+
                 </div>
+
+
+
+
+
 
 
                 <div className="details-info">
 
-                    <h2 className="box-title"> {Product.title}</h2>
 
-                    <p className="box-title"> {Product.description}</p>
+                    <h2 className="box-title"> {Product.category}</h2>
+
+                    <h3 className="box-title"> {Product.description}</h3>
                     <h3 className="box-price">
                         Rs .{Product.price}
 
@@ -145,13 +285,17 @@ function ProductDetail(props) {
                     <ul>
 
 
-                        <ol>{Product.description}</ol>
+
+
+
 
                         <br></br>
                         <ol>
 
                             Availablity : {Product.quantity>0 ?<div className='text-success'>In Stock </div>: <div className='text-danger'>Sorry this stock is currently unavailable</div>}
                         </ol>      <br></br>
+
+
 
                         Quantity: <select
                         value={qty} onChange={(e) => { setQty(e.target.value) }}>
@@ -165,16 +309,15 @@ function ProductDetail(props) {
                                 {Product.price*qty}
                             </h3>
                         </ol>
-
+                        <div className="col">
+                        </div>
 
                         <ol>
                             <br></br>
                             {Product.quantity >0 && <a href="#" className="btn btn-danger" onClick={addToCardFunction}>
                                 Add to cart
                             </a>}
-
-
-                            <button type="button" className="btn btn-light" onClick={`/products/AddToWish/${productsId}`}>Add to WishList</button>
+                            <button type="button" className="btn btn-light" onClick={`/products/AddToWish/${productId}`}>Add to WishList</button>
                         </ol>
 
                     </ul>
@@ -185,32 +328,14 @@ function ProductDetail(props) {
 
             <br></br>
 
+
+
             <div className="container">
                 <div className="row d-flex mb-5 contact-info">
                     <div className="w-100"></div>
 
 
                 </div>
-            </div>
-
-
-
-
-
-            <div className="table-wrapper-scroll-y my-custom-scrollbar">
-
-                <table className="table table-bordered table-striped mb-0">
-                    <thead>
-                    <tr>
-
-                        <th scope="col">Comments</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-
             </div>
 
             <form onSubmit={submit}>
@@ -227,6 +352,10 @@ function ProductDetail(props) {
 
                     </div>
                 </div>
+            </form>
+
+            <form onSubmit={submitRate}>
+                {isLoginnedForRating()}
             </form>
         </div>
 

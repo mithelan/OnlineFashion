@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+
 import Navbar from "./stocknav.component";
 import axios from "axios";
-import CreateProducts from "./create-product.component";
+
 import EditProduct from "./edit-product.component";
 
 const Product = (props) => (
@@ -10,6 +11,7 @@ const Product = (props) => (
     <td>{props.product.brand}</td>
     <td>{props.product.price}</td>
     <td>{props.product.color}</td>
+    {/* <td>{props.product.gender}</td> */}
     <td>{props.product.size}</td>
 
     <td>
@@ -232,22 +234,7 @@ export default class HomeStock extends Component {
     return (
       <div>
         <br />
-        <Navbar />
 
-        <div className="row">
-          <div className="col-md-9"></div>
-          <div className="col-md-3">
-            {/* add new product button  */}
-            <button
-              className="btn btn-dark rounded-0 btn-block btn-lg btn-function"
-              data-toggle="modal"
-              data-target="#exampleModalCenter"
-            >
-              + ADD NEW PRODUCT
-            </button>
-            {/* end of add new product button  */}
-          </div>
-        </div>
         <br />
         <table className="table">
           <thead className="thead-light">
@@ -264,43 +251,6 @@ export default class HomeStock extends Component {
           </thead>
           <tbody>{this.productList()}</tbody>
         </table>
-
-        {/* modal for creating new product */}
-        <div
-          className="modal fade"
-          id="exampleModalCenter"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalCenterTitle"
-          aria-hidden="true"
-        >
-          <div
-            className="modal-dialog modal-dialog-centered modal-xl"
-            role="document"
-          >
-            <div className="modal-content">
-              <div className="modal-header">
-                <h2 style={{ letterSpacing: "5px" }} className="text-center">
-                  ADD PRODUCT
-                </h2>
-
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-
-              <div className="modal-body">
-                <CreateProducts />
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* end of modal for creating product  */}
 
         {/* modal for editing prduct */}
         <div

@@ -31,6 +31,27 @@ const productSchema = new Schema(
         },
       },
     ],
+      Rate:[
+          {
+              user: {
+                  type: mongoose.Schema.Types.ObjectId,
+                  ref: 'users',
+                  required: true
+              },
+              rating: {
+                  type: String,
+                  required: true
+              },
+
+              date: {
+                  type: Date,
+                  default: Date.now
+              }
+
+          }
+      ],
+
+
   },
   {
     timestamps: true,

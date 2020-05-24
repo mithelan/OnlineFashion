@@ -24,6 +24,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.selected {
+  position: relative;
+  margin-top: 1%;
+}
 
 .App-header {
   background-color: #ffffff;
@@ -34,6 +38,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.Arrange1 {
+  position: relative;
+  margin-top: -15%;
 }
 
 .App-link {
@@ -425,4 +433,12 @@ tbody > tr:nth-child(odd) {
 
 .myicon {
   size: 100px;
+}
+
+.row {
+  padding-left: 50px;
+}
+
+.brandbox {
+  border: 3px solid black;
 }

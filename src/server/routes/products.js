@@ -53,14 +53,17 @@ router.route("/upload").post((req, res) => {
 
   const file = req.files.file;
 
-  file.mv(`../../public/images/productPhotos/${file.name}`, (err) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send(err);
-    }
+  file.mv(
+    `../OnlineFashion/public/images/productPhotos/${file.name}`,
+    (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+      }
 
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
-  });
+      res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    }
+  );
 });
 
 router.route("/get/:id").get((req, res) => {
@@ -84,8 +87,33 @@ router.get("/getProducts", (req, res) => {
   });
 });
 
+//to homepage-Mithi
+router.get("/getProducts/:id", (req, res) => {
+  Product.findById(req.params.id)
+    .then((products) => res.json(products))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 //mithiproducts/products_by_id?=id$(productId)&type=single'
 router.get("/products_by_id", (req, res) => {
+  let type = req.query.type;
+  let productIds = req.query.id;
+
+  if (type === "array") {
+    let ids = req.query.id.split(",");
+    productIds = [] = ids.map((Cart) => {
+      return Cart;
+    });
+  }
+  Product.find({ _id: { $in: productIds } })
+    .populate("writer")
+    .exec((err, products) => {
+      if (err) return req.status(400).send(err);
+      return res.status(200).send(products);
+    });
+});
+
+router.get("/products_by_comment", (req, res) => {
   let type = req.query.type;
   let productIds = req.query.id;
 
@@ -93,9 +121,9 @@ router.get("/products_by_id", (req, res) => {
   }
   Product.find({ _id: { $in: productIds } })
     .populate("writer")
-    .exec((err, products) => {
+    .exec((err, Review) => {
       if (err) return req.status(400).send(err);
-      return res.status(200).send(products);
+      return res.status(200).send(Review);
     });
 });
 
@@ -142,7 +170,27 @@ router.route("/comments/:id").post(auth, (req, res) => {
       // Save
       post.save().then((post) => res.json(post));
     })
-    .catch((err) => res.status(404).json({ postnotfound: "No post found" }));
+    .catch((err) =>
+      res.status(404).json({ postnotfound: "No comments found" })
+    );
+});
+
+//RATEEEE
+router.route("/rate/:id").post(auth, (req, res) => {
+  Product.findById(req.params.id)
+    .then((post) => {
+      const newRate = {
+        user: req.user.id,
+        rating: req.body.rating,
+      };
+
+      // Add to comments array
+      post.Rate.unshift(newRate);
+
+      // Save
+      post.save().then((post) => res.json(post));
+    })
+    .catch((err) => res.status(404).json({ postnotfound: "No ratting found" }));
 });
 
 module.exports = router;

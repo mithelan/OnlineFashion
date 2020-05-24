@@ -75,7 +75,7 @@ function Cartpage(props) {
 
                                         </div>
 
-                                        <div >
+                                        <div className='selected' >
                                             Selected Number of products :
                                             <select className='dropdown' value={item.qty} onChange={(e) => dispatch(addtocartnew(item.product, e.target.value))}>
                                                 {[...Array(item.quantity).keys()].map(x =>
@@ -106,8 +106,8 @@ function Cartpage(props) {
 
             <div className="cart-action">
                 <h3>
-                    Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} item/s)
-                    :
+
+                    Total  :
                     Rs.{cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
                 </h3>
                 <button onClick={checkOutFunction} className="btn btn-warning">

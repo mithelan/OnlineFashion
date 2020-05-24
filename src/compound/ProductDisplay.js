@@ -5,6 +5,12 @@ import { CardBody } from "react-bootstrap/Card";
 import Slider from "@ant-design/react-slick";
 import PhotoSlide from "./PhotoSlide";
 import {useDispatch, useSelector} from "react-redux";
+import {
+
+  Modal, ModalBody, ModalHeader
+
+
+} from 'reactstrap';
 
 
 function ProductDisplay() {
@@ -35,11 +41,13 @@ function ProductDisplay() {
     });
   }, []);
 
+
+
   const rendercard = Products.map((products, index) => {
     return (
         <li key={products._id}>
           <Card
-              style={{ width: "18rem", height: "20rem", backgroundColor: "#dddbc2" }}
+              style={{ width: "18rem", height: "23rem", backgroundColor: "#dddbc2" }}
           >
             <Card.Img
                 variant="top"
@@ -48,16 +56,64 @@ function ProductDisplay() {
                 width="180"
             />
             <Card.Body>
-              <Card.Title>{products.title}</Card.Title>
+              <Card.Title>{products.category}</Card.Title>
               <Card.Title>{`Rs.${products.price}`} </Card.Title>
+
+
+              <button type="button" className="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">
+                Check the reviews
+              </button>
+              <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog"
+                   aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+
+                      <h5 className="modal-title" id="exampleModalLongTitle">Reviews</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      {products.Review.map((item,index)=>{
+                        return(
+
+                            <div className="table-wrapper-scroll-y my-custom-scrollbar">
+
+                              <table className="table table-bordered table-striped mb-0">
+                                <thead>
+                                <tr>
+
+
+                                  <th scope="col">Comments </th>
+                                  <th scope="col">Date </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <td>{item.comments}</td>
+                                <td>{item.date}</td>
+                                </tbody>
+                              </table>
+
+                            </div>
+
+
+
+
+                        )
+                      })}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
 
               <Button variant="primary" a href={`/products/${products._id}`}>
                 Buy now
               </Button>
-              <Button variant="primary" a href={`/addToWishList/${products._id}`}>
-               Wish
-              </Button>
-
             </Card.Body>
           </Card>
         </li>
@@ -82,6 +138,15 @@ function ProductDisplay() {
             <Row gutter={[16, 16]}>{rendercard}</Row>
           </div>
         </div>
+
+
+
+
+
+
+
+
+
 
         <footer className="ftco-footer bg-dark ftco-section">
           <div className="container">

@@ -1,57 +1,75 @@
 import React, { Component } from "react";
 import HomeStock from "./homeStock";
-import CategoryProduct from "./category-product.component";
+import CreateProducts from "./create-product.component";
+import Navbar from "./stocknav.component";
 
 export default class StockMain extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    document.getElementById("table").style.display = "none";
-    document.getElementById("category").style.display = "block";
-  }
-
-  // display only table view on button click
-  showTable() {
-    document.getElementById("table").style.display = "block";
-    document.getElementById("category").style.display = "none";
-  }
-  // end of display only table view on button click
-
-  // display only category view on button click
-  showCategory() {
-    document.getElementById("table").style.display = "none";
-    document.getElementById("category").style.display = "block";
-  }
-  // end of display only category view on button click
-
   render() {
     return (
       <div>
         <h1>Stock Management</h1>
+        <Navbar />
 
-        {/* button to select the view type  */}
         <div className="row">
           <div className="col-md-8"></div>
           <div className="col-md-4">
-            <button onClick={this.showTable}>Table View</button>
-            <button onClick={this.showCategory}>Category View</button>
+            {" "}
+            <button
+              className="btn btn-dark rounded-0 btn-block btn-lg btn-function"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+            >
+              + ADD NEW PRODUCT
+            </button>
           </div>
         </div>
-        {/* end of button to select the view type  */}
+
+        {/* modal for creating new product */}
+        <div
+          className="modal fade"
+          id="exampleModalCenter"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered modal-xl"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-header">
+                <h2 style={{ letterSpacing: "5px" }} className="text-center">
+                  ADD PRODUCT
+                </h2>
+
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div className="modal-body">
+                <CreateProducts />
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* end of modal for creating product  */}
 
         {/* hidden element to show table view  */}
-        <div id="table">
+        <div>
           <HomeStock />
         </div>
         {/* // end of hiddem element to show table view  */}
-
-        {/* // hidden element show category view  */}
-        <div id="category">
-          <CategoryProduct />
-        </div>
-        {/* // end of hidden element to show category view  */}
       </div>
     );
   }
