@@ -13,7 +13,9 @@ export default class StockMain extends Component {
       <div>
         <h1>STOCK MANAGEMENT</h1>
         <br />
-        <Navbar />
+        <div className="row">
+          <Navbar />
+        </div>
 
         <div className="row">
           <div className="col-md-8"></div>

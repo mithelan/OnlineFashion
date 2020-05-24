@@ -28,57 +28,46 @@ app.use(bodyParser.json());
 
 );*/
 
-
-
-
-const contactRouter=require('./routes/contact');
-
+const contactRouter = require("./routes/contact");
 
 //natti
 const productsRouter = require("../src/server/routes/products");
+const brandsRouter = require("../src/server/routes/brands");
 app.use("/products", productsRouter);
+app.use("/brands", productsRouter);
 
 //dimi
-app.use('/contactus',contactRouter);
+app.use("/contactus", contactRouter);
 
-const checkoutRouter = require('./routes/checkout')
+const checkoutRouter = require("./routes/checkout");
 
-app.use('/checkout',checkoutRouter);
+app.use("/checkout", checkoutRouter);
 
 //Anjik
 
 // Use Routes
-app.use('/api/users', require('./routes/api/users'));
-app.use('/api/auth', require('./routes/api/auth'));
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 //VITHU
 const stockManagerRouter = require("./admin/routes/stockmanager");
-const categoryRouter =require ("./admin/routes/category");
+const categoryRouter = require("./admin/routes/category");
+const AdminRouter = require("./admin/routes/admin");
+app.use("/adminaction", AdminRouter);
+app.use("/stockmanager", stockManagerRouter);
+app.use("/category", categoryRouter);
 
-app.use("/stockmanager",stockManagerRouter);
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log("Server started " + port));
 
-app.use("/category",categoryRouter);
-
-
-
-
-
-
-const port =process.env.PORT || 5000;
-app.listen(port,()=> console.log('Server started '+port));
-
-mongoose.connect(process.env.MONGO_DB_CONNECTION,{
-
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-    },(err)=>{
-    if(err) throw err;
-    console.log("MONGO VAREN DAW")
-});
-
-
-
-
-
-
-
+mongoose.connect(
+  process.env.MONGO_DB_CONNECTION,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err) => {
+    if (err) throw err;
+    console.log("MONGO VAREN DAW");
+  }
+);

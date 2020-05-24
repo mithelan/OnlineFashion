@@ -1,142 +1,119 @@
-import React, {Component} from 'react';
-import axios from 'axios';
-
-
-
+import React, { Component } from "react";
+import axios from "axios";
 
 class Checkout extends Component {
+  constructor(props) {
+    super();
 
-    constructor(props) {
-        super();
+    this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.onChangePhone = this.onChangePhone.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
-        this.onChangeAddress = this.onChangeAddress.bind(this);
-        this.onChangePhone = this.onChangePhone.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      address: "",
+      phone: "",
+    };
+  }
 
-        this.state = {
-            address: '',
-            phone: '',
-        }
-    }
-
-
-    componentDidMount() {
-        axios.get('http://localhost:5000/checkout/add')
-            .then(response =>{
-                if(response.data.length>0){
-                    this.setState({
-
-                        address:'null'
-
-                    })
-                }
-
-            })
-    }
-
-    onChangeAddress(e) {
+  componentDidMount() {
+    axios.get("http://localhost:5000/checkout/add").then((response) => {
+      if (response.data.length > 0) {
         this.setState({
-            address: e.target.value
+          address: "null",
         });
-    }
+      }
+    });
+  }
 
-    onChangePhone(e) {
-        this.setState({
-            phone: e.target.value
-        });
-    }
+  onChangeAddress(e) {
+    this.setState({
+      address: e.target.value,
+    });
+  }
 
+  onChangePhone(e) {
+    this.setState({
+      phone: e.target.value,
+    });
+  }
 
-    onSubmit(e) {
-        e.preventDefault();
+  onSubmit(e) {
+    e.preventDefault();
 
-        const checkout = {
-            address: this.state.address,
-            phone: this.state.phone,
+    const checkout = {
+      address: this.state.address,
+      phone: this.state.phone,
+    };
+    console.log(checkout);
 
+    axios
+      .post("http://localhost:5000/checkout/add", checkout)
+      .then((res) => console.log(res.data));
 
-        };
-        console.log(checkout);
+    alert("Your order is on the way");
+    window.location = "/";
+  }
 
-        axios.post('http://localhost:5000/checkout/add',checkout)
-            .then(res=>console.log(res.data));
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <br />
+          <h1>Delivery Details</h1>
 
-        // window.location = '/';
-    }
+          <br />
+          <div>
+            <br />
+            <div className="row">
+              <div className="col-md-2"></div>
+              <div className="col-md-8">
+                <div className="form-group row">
+                  <label className="col-sm-2 col-form-label">Address</label>
+                  <div className="col-sm-10">
+                    <input
+                      type="text"
+                      required
+                      onChange={this.onChangeAddress}
+                      value={this.state.address}
+                      className="form-control"
+                    />
+                  </div>
+                </div>
 
-    render() {
+                <div className="form-group row">
+                  <label className="col-sm-2 col-form-label">
+                    Contact Number
+                  </label>
+                  <div className="col-sm-10">
+                    <input
+                      type="text"
+                      required
+                      onChange={this.onChangePhone}
+                      value={this.state.phone}
+                      className="form-control"
+                    />
+                  </div>
+                </div>
 
-
-        return(
-            <div>
-
-                <form onSubmit={this.onSubmit}>
-                    <div className='Arrange'>
-                        <div className="row">
-                            <div className="col-md-5">
-
-                                <br/>
-
-                                <div className="form-group row">
-                                    <label className="col-sm-2 col-form-label">Address</label>
-                                    <div className="col-sm-10">
-                                        <input
-
-                                            type="text"
-                                            required
-                                            onChange={this.onChangeAddress}
-                                            value={this.state.address}
-                                            className="form-control"
-                                        />
-                                    </div>
-                                </div>
-
-
-                                <div className="form-group row">
-                                    <label className="col-sm-2 col-form-label">Contact Number</label>
-                                    <div className="col-sm-10">
-                                        <input
-                                            type="text"
-                                            required
-                                            onChange={this.onChangePhone}
-                                            value={this.state.phone}
-                                            className="form-control"
-                                        />
-                                    </div>
-                                </div>
-
-
-
-                                <div className="form-group row">
-                                    <div className="col-sm-10">
-                                        <button  type="submit" className="btn btn-dark  float-center ">
-                                            Buy
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </form>
-
-
-
-
-
-
-
+                <div className="form-group row">
+                  <div className="col-sm-10">
+                    <button
+                      type="submit"
+                      className="btn btn-dark btn-lg  float-center rounded-0"
+                      style={{ width: "30%" }}
+                    >
+                      Buy
+                    </button>
+                  </div>
+                  <div className="col-md-2"></div>
+                </div>
+              </div>
             </div>
-
-
-
-
-
-        )
-    }
-
-
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
-
 
 export default Checkout;

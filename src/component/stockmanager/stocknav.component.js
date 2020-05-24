@@ -23,14 +23,6 @@ export default class Navbar extends Component {
   render() {
     return (
       <div className="float-left">
-        {/* <button
-          className="btn btn-dark md-2 "
-          style={{ letterSpacing: "1px" }}
-          id="button"
-          onClick={this.changeColor}
-        >
-          ALL PRODUCTS
-        </button> */}
         <Link
           to={"/stockmanager/"}
           style={{ letterSpacing: "1px" }}
@@ -45,17 +37,11 @@ export default class Navbar extends Component {
           className="btn btn-dark"
           id="button2"
           onClick={this.changeColor2}
+          style={{ display: "none" }}
         >
           OUT OF STOCK
         </button>
         &nbsp;
-        {/* <button
-          className="btn btn-dark"
-          id="button3"
-          onClick={this.changeColor3}
-        >
-          MANAGE BRANDS
-        </button> */}
         <Link
           onClick={this.changeColor3}
           style={{ letterSpacing: "1px" }}

@@ -5,7 +5,6 @@ import { Card, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { login } from "./Actions";
 
-
 export default class LoginSM extends Component {
   constructor() {
     super();
