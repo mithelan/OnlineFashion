@@ -11,6 +11,8 @@ import {
 
 
 } from 'reactstrap';
+import Page from 'react-page-loading'
+
 
 
 function ProductDisplay() {
@@ -61,7 +63,7 @@ function ProductDisplay() {
 
 
               <button type="button" className="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">
-                Check the reviews
+                Reviews
               </button>
               <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog"
                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -123,6 +125,8 @@ function ProductDisplay() {
   return (
 
       <div className='shop'>
+        <Page loader={"bar"} color={"#A9A9A9"} size={6}   >
+
 
         <PhotoSlide/>
 
@@ -265,6 +269,7 @@ function ProductDisplay() {
             </div>
           </div>
         </footer>
+        </Page>
       </div>
   );
 }

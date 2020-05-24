@@ -11,7 +11,7 @@ const Product = (props) => (
     <td>{props.product.brand}</td>
     <td>{props.product.price}</td>
     <td>{props.product.color}</td>
-    {/* <td>{props.product.gender}</td> */}
+
     <td>{props.product.size}</td>
 
     <td>

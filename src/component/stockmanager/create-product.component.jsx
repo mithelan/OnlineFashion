@@ -33,6 +33,7 @@ export default class CreateProducts extends Component {
       brand: "Both",
       categories: [],
       category: "",
+      brands: [],
     };
   }
 
@@ -42,6 +43,14 @@ export default class CreateProducts extends Component {
         this.setState({
           categories: response.data.map((category) => category.category),
           category: response.data[0].category,
+        });
+      }
+    });
+
+    axios.get("http://localhost:5000/brands/").then((response) => {
+      if (response.data.length > 0) {
+        this.setState({
+          brands: response.data.map((brand) => brand.brand),
         });
       }
     });
@@ -173,24 +182,17 @@ export default class CreateProducts extends Component {
                 <label className="col-sm-2 col-form-label">BRAND</label>
                 <div className="col-sm-10">
                   <select
-                    className="form-control border_only_field"
                     onChange={this.onChangeBrand}
+                    className="form-control border_only_field"
                   >
-                    <option value="Others">Select one</option>
-                    <option value="Nike">Nike</option>
-                    <option value="Inditex">Inditex </option>
-                    <option value="H and M">H and M </option>
-                    <option value="Louris Vuitton">Louris Vuitton</option>
-                    <option value="Adidas">Adidas</option>
-                    <option value="Uniqlo">Uniqlo</option>
-                    <option value="Hermes">Hermes</option>
-                    <option value="Gucci">Gucci</option>
-                    <option value="Michael Kors">Michael Kors</option>
-                    <option value="Ralph Lauren">Ralph Lauren</option>
-                    <option value=" Prada"> Prada</option>
-                    <option value="Levi Strauss and Co">
-                      Levi Strauss and Co
-                    </option>
+                    <option value="others">Select one</option>
+                    {this.state.brands.map(function (brand) {
+                      return (
+                        <option key={brand} value={brand}>
+                          {brand}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>

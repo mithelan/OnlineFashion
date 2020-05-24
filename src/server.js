@@ -32,7 +32,9 @@ const contactRouter = require("./routes/contact");
 
 //natti
 const productsRouter = require("../src/server/routes/products");
+const brandsRouter = require("../src/server/routes/brands");
 app.use("/products", productsRouter);
+app.use("/brands", brandsRouter);
 
 //dimi
 app.use("/contactus", contactRouter);

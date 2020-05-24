@@ -1,94 +1,113 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, {Component} from 'react';
+import axios from 'axios'
+import {Card} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
+const Update = props => (
+    <a href="#" onClick={() => {props.EditProfile(props.user.id) }}>Edit</a>
+)
 
-
-export default class EditProfile extends Component {
-
+export default class Profile extends Component {
     constructor(props) {
         super(props);
 
+        this.state={
+            name:'',
+            email:'',
+            password:'',
+            user:[]
+        };
 
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        // this.onChange = this.onChange.bind(this);
+    }
 
-
-        this.state = {
-
-            email:''
-
-
-        }
+    Profile() {
+        return this.state.user.map(currentstock => {
+            return <Update user={currentstock} key={currentstock._id}/>;
+        })
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/auth/user'+ this.props.match.params.id)
-            .then(res => {
-                this.setState({
-                    email: res.data.email
-                });
+        this.getUser();
+    }
+
+
+    getUser=()=>{
+        axios.get('http://localhost:5000/api/auth/user',
+
+            {
+
+                headers:{
+                    "x-auth-token":localStorage.getItem("token"),
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                }
+
+            }
+
+
+        )
+
+            .then((response)=>{
+                const data=response.data;
+                this.setState({email:data.email,name:data.name})
+                console.log('data recieve'+ this.state.email);
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch(()=>{
+                alert('error')
             })
+
     }
 
 
 
-    onChangeEmail(e) {
-        this.setState({
-            email: e.target.value
-        });
-    }
-
-
-
-    onSubmit(e) {
-        e.preventDefault();
-        const Update = {
-            email: this.state.email
-        };
-
-
-
-        // console.log(Stock);
-        window.location = '/';
-
-        axios.post('http://localhost:5000/api/auth/updateuser/' +this.props.match.params.id, Update)
-            .then(res => console.log(res.data));
-    }
 
     render() {
         return (
+            <div>
+                <h1>Profile </h1>
 
-            <div className={"container"} style={{width:'40.4rem',height:'41rem'}} >
-                <br/>
-                <div className={"row"}>
-                    <div className={"col-md-6 mt-5 mx-auto"} >
-                        <h1 className={"h3 mb-3 font-weight-normal"} align={"center"}><b><i>EDIT STAFF</i></b></h1>
-                        <form onSubmit={this.onSubmit}>
+                Email:   <input type="text" value={this.state.email} onChange={this.setEmail}></input>
+                <br></br>
+                Name:   <input type="text" value={this.state.name} onChange={this.setName}></input>
+
+                { this.Profile() }
 
 
-                            <div className="form-group">
-                                <label>Email: </label>
-                                <input  type="email"
-                                        required
-                                        className="form-control"
-                                        value={this.state.email}
-                                        onChange={this.onChangeEmail}
-                                />
+                <button type="button" className="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">
+                    Edit Here
+                </button>
+                <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog"
+                     aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+
+                                <h5 className="modal-title" id="exampleModalLongTitle">Reviews</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <div className="modal-body">
+
+                                <form >
+
+                                    Email:   <input type="text" value={this.state.email} onChange={this.setEmail}></input>
+                                    <br></br>
+                                    Name:   <input type="text" value={this.state.name} onChange={this.setName}></input>
 
 
-                            <div className="form-group">
-                                <input type="submit" value="Edit Staff" className="btn btn-primary" />
+
+                                </form>
+
+                                {Update}
                             </div>
-                            <br/>
-                        </form>
+                        </div>
                     </div>
                 </div>
+
+
+
             </div>
-        )
+        );
     }
 }
