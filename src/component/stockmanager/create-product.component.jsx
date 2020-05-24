@@ -152,16 +152,14 @@ export default class CreateProducts extends Component {
   render() {
     return (
       <div>
-        {/* <Navbar /> */}
         <br />
         <form onSubmit={this.onSubmit}>
           <div className="row">
             <div className="col-md-5">
-              {/* <h4>PRODUCT DETAILS</h4> */}
               <br />
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">CATEGORY</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">CATEGORY</label>
+                <div className="col-sm-9">
                   <select
                     onChange={this.onChangeCategory}
                     className="form-control border_only_field"
@@ -179,8 +177,8 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">BRAND</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">BRAND</label>
+                <div className="col-sm-9">
                   <select
                     onChange={this.onChangeBrand}
                     className="form-control border_only_field"
@@ -198,8 +196,8 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">PRICE</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">PRICE</label>
+                <div className="col-sm-9">
                   <input
                     type="text"
                     required
@@ -210,8 +208,8 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">SIZE</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">SIZE</label>
+                <div className="col-sm-9">
                   {/* <input
                     type="text"
                     required
@@ -233,8 +231,8 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">COLOR </label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">COLOR </label>
+                <div className="col-sm-9">
                   <input
                     type="text"
                     className="form-control border_only_field"
@@ -245,8 +243,8 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Quantity </label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">Quantity </label>
+                <div className="col-sm-9">
                   <input
                     type="number"
                     className="form-control border_only_field"
@@ -257,7 +255,7 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <div className="col-sm-10"></div>
+                <div className="col-sm-9"></div>
               </div>
             </div>
             <div className="col-md-7">
@@ -268,6 +266,7 @@ export default class CreateProducts extends Component {
                   className="form-control border_only_field"
                   rows="8"
                   onChange={this.onChangeDescription}
+                  placeholder="write description..."
                 ></textarea>
 
                 <div className="custom-file mb-4">

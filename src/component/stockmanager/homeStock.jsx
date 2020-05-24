@@ -11,11 +11,18 @@ const Product = (props) => (
     <td>{props.product.brand}</td>
     <td>{props.product.price}</td>
     <td>{props.product.color}</td>
-
     <td>{props.product.size}</td>
 
     <td>
-      <label className="badge badge-primary">{props.product.quantity}</label>
+      <label
+        className={
+          props.product.quantity == 0
+            ? "badge badge-danger"
+            : "badge badge-primary"
+        }
+      >
+        {props.product.quantity}
+      </label>
     </td>
     <td>{props.product.description}</td>
     <td>
@@ -63,7 +70,7 @@ export default class HomeStock extends Component {
       description: "",
       price: 0,
       color: "",
-      // gender: "male",
+
       size: "",
       file: "",
       filename: "Choose File",
@@ -71,6 +78,7 @@ export default class HomeStock extends Component {
       uploaded: {},
       currentId: "",
       brand: "",
+      categories: [],
     };
   }
 
@@ -83,6 +91,14 @@ export default class HomeStock extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+    axios.get("http://localhost:5000/products/category").then((response) => {
+      if (response.data.length > 0) {
+        this.setState({
+          categories: response.data.map((category) => category.category),
+        });
+      }
+    });
   }
 
   deleteProduct(id) {
@@ -119,7 +135,7 @@ export default class HomeStock extends Component {
           brand: response.data.brand,
           price: response.data.price,
           size: response.data.size,
-          // gender: response.data.gender,
+
           color: response.data.color,
           quantity: response.data.quantity,
           description: response.data.description,
@@ -182,6 +198,42 @@ export default class HomeStock extends Component {
     });
   }
 
+  searchCategory() {
+    var input = document.getElementById("searchCategory");
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById("myTable");
+    var tr = table.getElementsByTagName("tr");
+    for (var i = 0; i < tr.length; i++) {
+      var td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        var txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+  searchQuantity() {
+    var input = document.getElementById("searchQuantity");
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById("myTable");
+    var tr = table.getElementsByTagName("tr");
+    for (var i = 0; i < tr.length; i++) {
+      var td = tr[i].getElementsByTagName("td")[5];
+      if (td) {
+        var txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -233,10 +285,38 @@ export default class HomeStock extends Component {
   render() {
     return (
       <div>
+        <div className="">
+          <div className="row">
+            <div className="col-md-3">
+              <select
+                onChange={this.searchCategory}
+                className="form-control border_only_field"
+                id="searchCategory"
+              >
+                <option value="">Filter by Category</option>
+                {this.state.categories.map(function (category) {
+                  return (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="col-md-3">
+              <select
+                className="form-control"
+                onChange={this.searchQuantity}
+                id="searchQuantity"
+              >
+                <option value="">Filter By Availability</option>
+                <option value="0">Out of Stock</option>
+              </select>
+            </div>
+          </div>
+        </div>
         <br />
-
-        <br />
-        <table className="table">
+        <table className="table" id="myTable">
           <thead className="thead-light">
             <tr>
               <th className="theading">CATEGORY</th>
@@ -251,7 +331,6 @@ export default class HomeStock extends Component {
           </thead>
           <tbody>{this.productList()}</tbody>
         </table>
-
         {/* modal for editing prduct */}
         <div
           className="modal fade"

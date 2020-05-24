@@ -11,7 +11,8 @@ export default class StockMain extends Component {
   render() {
     return (
       <div>
-        <h1>Stock Management</h1>
+        <h1>STOCK MANAGEMENT</h1>
+        <br />
         <Navbar />
 
         <div className="row">
@@ -23,7 +24,7 @@ export default class StockMain extends Component {
               data-toggle="modal"
               data-target="#exampleModalCenter"
             >
-              + ADD NEW PRODUCT
+              + ADD PRODUCT
             </button>
           </div>
         </div>
