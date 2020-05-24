@@ -132,16 +132,16 @@ router.get("/getUsers", (req, res) => {
 });
 
 //DELETE THE USER
-router.route('/delete',auth).delete((req,res)=>{
+router.route('/delete').delete(auth,(req,res)=>{
 
-    User.findByIdAndDelete(req.param.id)
+    User.findByIdAndDelete(req.user.id)
         .then(()=>res.json('USER DELETED'))
         .catch(err=>res.status(400).json('Error:'+err));
 })
 
 
-router.route("/updateuser/:id").put((req, res) => {
-    User.findById(req.params.id)
+router.route("/updateuser").put(auth,(req, res) => {
+    User.findById(req.user.id)
         .then((users) => {
             users.email = req.body.email;
             users

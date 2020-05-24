@@ -1,6 +1,6 @@
 import React, {Component, Fragment, useEffect, useState} from 'react';
 import Axios from 'axios';
-import { addToCart} from '../actions/addAction';
+import {addToCart, addtocartnew} from '../actions/addAction';
 import {connect, useDispatch} from "react-redux";
 import {Card, Row, Col, Button, Navbar} from "react-bootstrap";
 import '../App.css'
@@ -33,7 +33,7 @@ function ProductDetail(props) {
 
 
     const [Items, setItems] = useState([])
-   // const [state, setState] = useState(initialState);
+    // const [state, setState] = useState(initialState);
 
     useEffect(() => {
         Axios.get(`http://localhost:5000/products/products_by_id?id=${productId}&type=single`)
@@ -53,11 +53,11 @@ function ProductDetail(props) {
         console.log("pri",productId)
     }
 
-   useEffect(() => {
+    useEffect(() => {
         Axios.get("http://localhost:5000/products/getProducts/"+productId).then((response) => {
 
-                //products same name as routes
-                setProducts(response.data.products);
+            //products same name as routes
+            setProducts(response.data.products);
 
 
         });
@@ -66,33 +66,33 @@ function ProductDetail(props) {
 
 
 
-   /* const addToCardNEW=(e)=>{
-        //dispatch(addcart(productId));
+    /* const addToCardNEW=(e)=>{
+         //dispatch(addcart(productId));
 
-        e.preventDefault();
+         e.preventDefault();
 
-        //  const comment = {comments};
+         //  const comment = {comments};
 
-        const token=localStorage.getItem('token')
-        Axios.post(
-            "http://localhost:5000/api/auth/addToCart/" + productId,
-            "",{
+         const token=localStorage.getItem('token')
+         Axios.post(
+             "http://localhost:5000/api/auth/addToCart/" + productId,
+             "",{
 
-                headers:{
-                    "x-auth-token":localStorage.getItem("token"),
-                    'Accept':'application/json',
-                    'Content-Type':'application/json'
-                }
+                 headers:{
+                     "x-auth-token":localStorage.getItem("token"),
+                     'Accept':'application/json',
+                     'Content-Type':'application/json'
+                 }
 
-            }
-        ).then(response=>{
-            console.log(response.data)
-        })
-        console.log('success');
+             }
+         ).then(response=>{
+             console.log(response.data)
+         })
+         console.log('success');
 
-    };
+     };
 
-*/
+ */
 
 
 
@@ -160,7 +160,7 @@ function ProductDetail(props) {
 
 
 
-                    <label className="col-sm-2 col-form-label"></label>
+                    <label className="col-sm-2 col-form-label">Comment</label>
                     <div className="col-sm-10">
 
                             <textarea
@@ -193,71 +193,69 @@ function ProductDetail(props) {
 
 
     //CHECK LOGIN FOR START RATING
-   function isLoginnedForRating() {
-       if (localStorage.length !== 0) {
-           return (
-               <div>
-                   {/*short hand for array with five untitled items in it.*/}
-                   {[...Array(5)].map((star, i) => {
-                       const ratValue = i + 1;
-                       return (
-                           <div>
-                               <div>
-                           <label>
-                               <input style={{display: "none"}}
-                                      type="radio"
-                                      name='ratings'
-                                      value={ratValue}
-                                      onClick={() => setRating(ratValue)}
-                                      onChange={(e) => SetRate(e.target.value)}
+    function isLoginnedForRating() {
+        if (localStorage.length !== 0) {
+            return (
+                <div>
+                    {/*short hand for array with five untitled items in it.*/}
+                    {[...Array(5)].map((star, i) => {
+                        const ratValue = i + 1;
+                        return (
+                            <div>
+                                <div>
+                                    <label>
+                                        <input style={{display: "none"}}
+                                               type="radio"
+                                               name='ratings'
+                                               value={ratValue}
+                                               onClick={() => setRating(ratValue)}
+                                               onChange={(e) => SetRate(e.target.value)}
 
-                               />
+                                        />
 
-                               <FaStar style={{cursor: "pointer"}}
-                                       color={ratValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
-                                       onMouseEnter={() => setHover(ratValue)}
-                                       onMouseLeave={() => setHover(null)}
+                                        <FaStar style={{cursor: "pointer"}}
+                                                color={ratValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+                                                onMouseEnter={() => setHover(ratValue)}
+                                                onMouseLeave={() => setHover(null)}
 
-                               />
+                                        />
 
-                           </label>
-                           </div>
-                           <button  type="submit" className="btn btn-warning" >
-                           Rating
-                           </button>
-                           </div>
+                                    </label>
+                                </div>
+                                <button  type="submit" className="btn btn-warning" >
+                                    Rating
+                                </button>
+                            </div>
 
 
-                       )
-                   })}
+                        )
+                    })}
 
-               </div>
+                </div>
 
-           )
-       }
-   }
+            )
+        }
+    }
 
-/*    const rendercard = Products.map((products, productId) => {
+    /*    const rendercard = Products.map((products, productId) => {
 
-        return<div>
-            {products.Review.map((item,productId)=>{
-                return(
-                    <div>
-                        {item.comments}
-                    </div>
-                )
-            })}
-        </div>
-    })*/
+            return<div>
+                {products.Review.map((item,productId)=>{
+                    return(
+                        <div>
+                            {item.comments}
+                        </div>
+                    )
+                })}
+            </div>
+        })*/
 
     return (
         <div>
 
             <div className="details">
                 <div className="details-image">
-                    <h4>Selected Product</h4>
-                    <img  className="product-view" height="500"
-                          width="180" src={`/images/productPhotos/${Product.filename}`}
+                    <img  className="product-view" src={`/images/productPhotos/${Product.filename}`}
                           data-zoom-image={`/images/productPhotos/${Product.filename}`}/>
 
 
@@ -274,9 +272,9 @@ function ProductDetail(props) {
                 <div className="details-info">
 
 
-                    <h2 className="box-title"> {Product.title}</h2>
+                    <h2 className="box-title"> {Product.category}</h2>
 
-                    <p className="box-title"> {Product.description}</p>
+                    <h3 className="box-title"> {Product.description}</h3>
                     <h3 className="box-price">
                         Rs .{Product.price}
 
@@ -289,7 +287,7 @@ function ProductDetail(props) {
 
 
 
-                        <ol>{Product.description}</ol>
+
 
                         <br></br>
                         <ol>
@@ -322,8 +320,6 @@ function ProductDetail(props) {
                             <button type="button" className="btn btn-light" onClick={`/products/AddToWish/${productId}`}>Add to WishList</button>
                         </ol>
 
-
-
                     </ul>
 
                 </div>
@@ -343,11 +339,10 @@ function ProductDetail(props) {
             </div>
 
             <form onSubmit={submit}>
-                <div className='Arrange1'>
+                <div className='Arrange'>
                     <div className="row">
                         <div className="col-md-5">
                             <br/>
-                            <h4>Add a comment Here</h4>
                             {namemethod()}
 
                             <div className="form-group row">

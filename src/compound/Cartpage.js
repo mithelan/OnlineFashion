@@ -75,7 +75,7 @@ function Cartpage(props) {
 
                                         </div>
 
-                                        <div >
+                                        <div className='selected' >
                                             Selected Number of products :
                                             <select className='dropdown' value={item.qty} onChange={(e) => dispatch(addtocartnew(item.product, e.target.value))}>
                                                 {[...Array(item.quantity).keys()].map(x =>

@@ -6,27 +6,27 @@ import CreateProducts from "./create-product.component";
 import EditProduct from "./edit-product.component";
 
 const Product = (props) => (
-  <tr>
-    <td>{props.product.category}</td>
-    <td>{props.product.brand}</td>
-    <td>{props.product.price}</td>
-    <td>{props.product.color}</td>
-    {/* <td>{props.product.gender}</td> */}
-    <td>{props.product.size}</td>
+    <tr>
+      <td>{props.product.category}</td>
+      <td>{props.product.brand}</td>
+      <td>{props.product.price}</td>
+      <td>{props.product.color}</td>
+      {/* <td>{props.product.gender}</td> */}
+      <td>{props.product.size}</td>
 
-    <td>
-      <label className="badge badge-primary">{props.product.quantity}</label>
-    </td>
-    <td>{props.product.description}</td>
-    <td>
-      <img
-        src={`/images/productPhotos/${props.product.filename}`}
-        height="180"
-        width="180"
-      />
-    </td>
-    <td>
-      {/* <button
+      <td>
+        <label className="badge badge-primary">{props.product.quantity}</label>
+      </td>
+      <td>{props.product.description}</td>
+      <td>
+        <img
+            src={`/images/productPhotos/${props.product.filename}`}
+            height="180"
+            width="180"
+        />
+      </td>
+      <td>
+        {/* <button
         className="btn btn-warning btn-function2 mt-2 btn-lg rounded-0"
         data-toggle="modal"
         data-target="#exampleModalCenter2"
@@ -36,20 +36,20 @@ const Product = (props) => (
       >
         EDIT
       </button> */}
-      <i className="fa fa-trash fa-5x"></i>
-      <br />
-      <br />
-      <a
-        href="#"
-        className="btn btn-danger btn-function2 btn-lg rounded-0"
-        onClick={() => {
-          props.deleteProduct(props.product._id);
-        }}
-      >
-        delete
-      </a>
-    </td>
-  </tr>
+        <i className="fa fa-trash fa-5x"></i>
+        <br />
+        <br />
+        <a
+            href="#"
+            className="btn btn-danger btn-function2 btn-lg rounded-0"
+            onClick={() => {
+              props.deleteProduct(props.product._id);
+            }}
+        >
+          delete
+        </a>
+      </td>
+    </tr>
 );
 
 export default class HomeStock extends Component {
@@ -77,13 +77,13 @@ export default class HomeStock extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/products/")
-      .then((response) => {
-        this.setState({ products: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .get("http://localhost:5000/products/")
+        .then((response) => {
+          this.setState({ products: response.data });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }
 
   deleteProduct(id) {
@@ -99,12 +99,12 @@ export default class HomeStock extends Component {
   productList() {
     return this.state.products.map((currentproduct) => {
       return (
-        <Product
-          product={currentproduct}
-          deleteProduct={this.deleteProduct}
-          getProduct={this.getProduct}
-          key={currentproduct._id}
-        />
+          <Product
+              product={currentproduct}
+              deleteProduct={this.deleteProduct}
+              getProduct={this.getProduct}
+              key={currentproduct._id}
+          />
       );
     });
   }
@@ -113,24 +113,24 @@ export default class HomeStock extends Component {
 
   getProduct(id) {
     axios
-      .get("http://localhost:5000/products/get/" + id)
-      .then((response) => {
-        this.setState({
-          category: response.data.category,
-          brand: response.data.brand,
-          price: response.data.price,
-          size: response.data.size,
-          // gender: response.data.gender,
-          color: response.data.color,
-          quantity: response.data.quantity,
-          description: response.data.description,
-          filename: response.data.filename,
-          currentId: id,
+        .get("http://localhost:5000/products/get/" + id)
+        .then((response) => {
+          this.setState({
+            category: response.data.category,
+            brand: response.data.brand,
+            price: response.data.price,
+            size: response.data.size,
+            // gender: response.data.gender,
+            color: response.data.color,
+            quantity: response.data.quantity,
+            description: response.data.description,
+            filename: response.data.filename,
+            currentId: id,
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
         });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   onChangeCategory(key, event) {
@@ -193,7 +193,7 @@ export default class HomeStock extends Component {
       category: this.state.category,
       description: this.state.description,
       price: this.state.price,
-      category: this.state.category,
+
       brand: this.state.brand,
       color: this.state.color,
     };
@@ -201,11 +201,11 @@ export default class HomeStock extends Component {
     console.log(product);
 
     axios
-      .post(
-        "http://localhost:5000/products/update/" + this.state.currentId,
-        product
-      )
-      .then((res) => console.log(res.data));
+        .post(
+            "http://localhost:5000/products/update/" + this.state.currentId,
+            product
+        )
+        .then((res) => console.log(res.data));
 
     window.location = "/stockmanager/addStocks";
 
@@ -214,13 +214,13 @@ export default class HomeStock extends Component {
 
     try {
       const res = axios.post(
-        "http://localhost:5000/products/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+          "http://localhost:5000/products/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
       );
 
       const { fileName, filePath } = res.data;
@@ -233,28 +233,28 @@ export default class HomeStock extends Component {
 
   render() {
     return (
-      <div>
-        <h3 className="theading mt-2">Stock Management</h3>
-        <br />
-        <br />
+        <div>
+          <h3 className="theading mt-2">Stock Management</h3>
+          <br />
+          <br />
 
-        <Navbar />
+          <Navbar />
 
-        <div className="row">
-          <div className="col-md-9"></div>
-          <div className="col-md-3">
-            <button
-              className="btn btn-dark rounded-0 btn-block btn-lg btn-function"
-              data-toggle="modal"
-              data-target="#exampleModalCenter"
-            >
-              + ADD NEW PRODUCT
-            </button>
+          <div className="row">
+            <div className="col-md-9"></div>
+            <div className="col-md-3">
+              <button
+                  className="btn btn-dark rounded-0 btn-block btn-lg btn-function"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+              >
+                + ADD NEW PRODUCT
+              </button>
+            </div>
           </div>
-        </div>
-        <br />
-        <table className="table">
-          <thead className="thead-light">
+          <br />
+          <table className="table">
+            <thead className="thead-light">
             <tr>
               <th className="theading">CATEGORY</th>
               <th className="theading">Brand</th>
@@ -265,113 +265,113 @@ export default class HomeStock extends Component {
               <th className="theading">Description</th>
               <th className="theading">Photo</th>
             </tr>
-          </thead>
-          <tbody>{this.productList()}</tbody>
-        </table>
+            </thead>
+            <tbody>{this.productList()}</tbody>
+          </table>
 
-        {/* modal for creating new prduct */}
-        <div
-          className="modal fade"
-          id="exampleModalCenter"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalCenterTitle"
-          aria-hidden="true"
-        >
+          {/* modal for creating new prduct */}
           <div
-            className="modal-dialog modal-dialog-centered modal-xl"
-            role="document"
+              className="modal fade"
+              id="exampleModalCenter"
+              tabIndex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
           >
-            <div className="modal-content">
-              <div className="modal-header">
-                <h2 style={{ letterSpacing: "5px" }} className="text-center">
-                  ADD PRODUCT
-                </h2>
+            <div
+                className="modal-dialog modal-dialog-centered modal-xl"
+                role="document"
+            >
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h2 style={{ letterSpacing: "5px" }} className="text-center">
+                    ADD PRODUCT
+                  </h2>
 
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                  <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div className="modal-body">
+                  <CreateProducts />
+                </div>
               </div>
+            </div>
+          </div>
 
-              <div className="modal-body">
-                <CreateProducts />
+          {/* modal for editing prduct */}
+          <div
+              className="modal fade"
+              id="exampleModalCenter2"
+              tabIndex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+          >
+            <div
+                className="modal-dialog modal-dialog-centered modal-xl"
+                role="document"
+            >
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h2 style={{ letterSpacing: "5px" }} className="text-center">
+                    EDIT PRODUCT
+                  </h2>
+
+                  <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                {/* modal for edit */}
+                <div className="modal-body">
+                  <EditProduct
+                      category={this.state.category}
+                      price={this.state.price}
+                      description={this.state.description}
+                      quantity={this.state.quantity}
+                      color={this.state.color}
+                      brand={this.state.brand}
+                      // gender={this.state.gender}
+                      // cate
+                      size={this.state.size}
+                      filename={this.state.filename}
+                      onChangeBrand={this.onChangeBrand.bind(this, "brand")}
+                      onChangePrice={this.onChangePrice.bind(this, "price")}
+                      onChangeDescription={this.onChangeDescription.bind(
+                          this,
+                          "description"
+                      )}
+                      // onChangeGender={this.onChangeGender.bind(this, "gender")}
+                      onChangeQuantity={this.onChangeQuantity.bind(
+                          this,
+                          "quantity"
+                      )}
+                      onChangeColor={this.onChangeColor.bind(this, "color")}
+                      onChangeSize={this.onChangeSize.bind(this, "size")}
+                      onChangePhoto={this.onChangePhoto.bind(this, "file")}
+                      onChangeCategory={this.onChangeCategory.bind(
+                          this,
+                          "category"
+                      )}
+                      onSubmit={this.onSubmit.bind(this)}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* modal for editing prduct */}
-        <div
-          className="modal fade"
-          id="exampleModalCenter2"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalCenterTitle"
-          aria-hidden="true"
-        >
-          <div
-            className="modal-dialog modal-dialog-centered modal-xl"
-            role="document"
-          >
-            <div className="modal-content">
-              <div className="modal-header">
-                <h2 style={{ letterSpacing: "5px" }} className="text-center">
-                  EDIT PRODUCT
-                </h2>
-
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-
-              {/* modal for edit */}
-              <div className="modal-body">
-                <EditProduct
-                  category={this.state.category}
-                  price={this.state.price}
-                  description={this.state.description}
-                  quantity={this.state.quantity}
-                  color={this.state.color}
-                  brand={this.state.brand}
-                  // gender={this.state.gender}
-                  // cate
-                  size={this.state.size}
-                  filename={this.state.filename}
-                  onChangeBrand={this.onChangeBrand.bind(this, "brand")}
-                  onChangePrice={this.onChangePrice.bind(this, "price")}
-                  onChangeDescription={this.onChangeDescription.bind(
-                    this,
-                    "description"
-                  )}
-                  // onChangeGender={this.onChangeGender.bind(this, "gender")}
-                  onChangeQuantity={this.onChangeQuantity.bind(
-                    this,
-                    "quantity"
-                  )}
-                  onChangeColor={this.onChangeColor.bind(this, "color")}
-                  onChangeSize={this.onChangeSize.bind(this, "size")}
-                  onChangePhoto={this.onChangePhoto.bind(this, "file")}
-                  onChangeCategory={this.onChangeCategory.bind(
-                    this,
-                    "category"
-                  )}
-                  onSubmit={this.onSubmit.bind(this)}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     );
   }
 }

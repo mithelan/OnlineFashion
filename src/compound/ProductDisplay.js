@@ -56,7 +56,7 @@ function ProductDisplay() {
                 width="180"
             />
             <Card.Body>
-              <Card.Title>{products.title}</Card.Title>
+              <Card.Title>{products.category}</Card.Title>
               <Card.Title>{`Rs.${products.price}`} </Card.Title>
 
 

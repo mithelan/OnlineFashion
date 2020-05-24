@@ -1,24 +1,30 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Card} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
-class Profile extends Component {
+const Update = props => (
+    <a href="#" onClick={() => {props.EditProfile(props.user.id) }}>Edit</a>
+)
+
+export default class Profile extends Component {
     constructor(props) {
         super(props);
-
-
-
-
 
         this.state={
             name:'',
             email:'',
             password:'',
-            newemail:''
+            user:[]
         };
 
     }
 
+    Profile() {
+        return this.state.user.map(currentstock => {
+            return <Update user={currentstock} key={currentstock._id}/>;
+        })
+    }
 
     componentDidMount() {
         this.getUser();
@@ -39,12 +45,11 @@ class Profile extends Component {
             }
 
 
-
         )
 
             .then((response)=>{
                 const data=response.data;
-                this.setState({email:data.email})
+                this.setState({email:data.email,name:data.name})
                 console.log('data recieve'+ this.state.email);
             })
             .catch(()=>{
@@ -54,19 +59,18 @@ class Profile extends Component {
     }
 
 
-    setEmail(event) {
-        this.setState({
-            newemail : event.target.value
-        });
-    }
+
+
     render() {
         return (
             <div>
                 <h1>Profile </h1>
 
                 Email:   <input type="text" value={this.state.email} onChange={this.setEmail}></input>
+                <br></br>
+                Name:   <input type="text" value={this.state.name} onChange={this.setName}></input>
 
-
+                { this.Profile() }
 
 
                 <button type="button" className="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">
@@ -85,16 +89,26 @@ class Profile extends Component {
                             </div>
                             <div className="modal-body">
 
+                                <form >
+
+                                    Email:   <input type="text" value={this.state.email} onChange={this.setEmail}></input>
+                                    <br></br>
+                                    Name:   <input type="text" value={this.state.name} onChange={this.setName}></input>
 
 
+
+                                </form>
+
+                                {Update}
                             </div>
                         </div>
                     </div>
                 </div>
+
+
 
             </div>
         );
     }
 }
 
-export default Profile;
