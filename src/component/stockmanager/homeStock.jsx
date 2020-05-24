@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import Navbar from "./stocknav.component";
 import axios from "axios";
 import CreateProducts from "./create-product.component";
@@ -11,7 +10,6 @@ const Product = (props) => (
     <td>{props.product.brand}</td>
     <td>{props.product.price}</td>
     <td>{props.product.color}</td>
-    {/* <td>{props.product.gender}</td> */}
     <td>{props.product.size}</td>
 
     <td>
@@ -26,28 +24,27 @@ const Product = (props) => (
       />
     </td>
     <td>
-      {/* <button
-        className="btn btn-warning btn-function2 mt-2 btn-lg rounded-0"
+      <br />
+      <br />
+      <br />
+      {/* edit icon  */}
+      <i
+        className="fa fa-pencil fa-3x"
         data-toggle="modal"
         data-target="#exampleModalCenter2"
         onClick={() => {
           props.getProduct(props.product._id);
         }}
-      >
-        EDIT
-      </button> */}
-      <i className="fa fa-trash fa-5x"></i>
-      <br />
-      <br />
-      <a
-        href="#"
-        className="btn btn-danger btn-function2 btn-lg rounded-0"
+      ></i>
+      {/* end of edit icon  */} {/* delete icon  */}
+      <i
+        className="fa fa-trash fa-3x"
+        style={{ color: "#d60928" }}
         onClick={() => {
           props.deleteProduct(props.product._id);
         }}
-      >
-        delete
-      </a>
+      ></i>
+      {/* end of delete icon  */}
     </td>
   </tr>
 );
@@ -234,15 +231,13 @@ export default class HomeStock extends Component {
   render() {
     return (
       <div>
-        <h3 className="theading mt-2">Stock Management</h3>
         <br />
-        <br />
-
         <Navbar />
 
         <div className="row">
           <div className="col-md-9"></div>
           <div className="col-md-3">
+            {/* add new product button  */}
             <button
               className="btn btn-dark rounded-0 btn-block btn-lg btn-function"
               data-toggle="modal"
@@ -250,6 +245,7 @@ export default class HomeStock extends Component {
             >
               + ADD NEW PRODUCT
             </button>
+            {/* end of add new product button  */}
           </div>
         </div>
         <br />
@@ -269,7 +265,7 @@ export default class HomeStock extends Component {
           <tbody>{this.productList()}</tbody>
         </table>
 
-        {/* modal for creating new prduct */}
+        {/* modal for creating new product */}
         <div
           className="modal fade"
           id="exampleModalCenter"
@@ -304,6 +300,7 @@ export default class HomeStock extends Component {
             </div>
           </div>
         </div>
+        {/* end of modal for creating product  */}
 
         {/* modal for editing prduct */}
         <div
@@ -371,6 +368,7 @@ export default class HomeStock extends Component {
             </div>
           </div>
         </div>
+        {/* end of modal for edit product  */}
       </div>
     );
   }

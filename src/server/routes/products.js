@@ -69,6 +69,13 @@ router.route("/get/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+//narthi get products by category
+router.route("/categoryProduct/:category").get((req, res) => {
+  Product.find({ category: req.params.category })
+    .then((products) => res.json(products))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 //to homepage-Mithi
 router.get("/getProducts", (req, res) => {
   Product.find().exec((err, products) => {

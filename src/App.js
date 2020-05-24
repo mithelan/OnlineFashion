@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Component } from "react";
-
+import "./script";
 import "./App.css";
 import Home from "./compound/Home";
 import Homep from "./compound/Homepage";
@@ -16,6 +16,7 @@ import CreateProducts from "./component/stockmanager/create-product.component";
 import EditProduct from "./component/stockmanager/edit-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeStock from "./component/stockmanager/homeStock";
+import StockMain from "./component/stockmanager/stock-main-component";
 
 import Axios from "axios";
 import AdminHo from "./admin/AdminHo";
@@ -87,7 +88,7 @@ class App extends Component {
               <Route exact path="/Comment" component={Component} />
               //Cart
               <Route path="/Cartpage/:id?" component={Cartpage} />
-              <Route path="/stockmanager" component={HomeStock} />
+              <Route path="/stockmanager" component={StockMain} />
               <Route path="/addStock" component={CreateProducts} />
               <Route path="/editStock/:id" component={EditProduct} />
               <Route path="/Contactus" component={Contactus} />
