@@ -28,6 +28,26 @@
   position: relative;
   margin-top: 1%;
 }
+.Arrange {
+  position: relative;
+  margin-left: 4%;
+  margin-top: -29%;
+}
+.take {
+  position: relative;
+  margin-top: -12%;
+  margin-right: -11%;
+}
+.ArrangeContact {
+  position: relative;
+  margin-left: 4%;
+  margin-top: -3%;
+}
+.emailar {
+  position: relative;
+  margin-top: 4%;
+  margin-right: 58%;
+}
 
 .App-header {
   background-color: #ffffff;

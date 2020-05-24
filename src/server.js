@@ -46,11 +46,35 @@ app.use("/checkout", checkoutRouter);
 //Anjik
 
 // Use Routes
+
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log("Server started " + port));
+
+mongoose.connect(
+  process.env.MONGO_DB_CONNECTION,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err) => {
+    if (err) throw err;
+    console.log("MONGO VAREN DAW");
+  }
+);
+
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
+
+//VITHU
+const stockManagerRouter = require("./admin/routes/stockmanager");
+const categoryRouter = require("./admin/routes/category");
+
+app.use("/stockmanager", stockManagerRouter);
+
+app.use("/category", categoryRouter);
 
 mongoose.connect(
   process.env.MONGO_DB_CONNECTION,

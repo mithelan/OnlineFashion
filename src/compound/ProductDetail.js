@@ -275,7 +275,7 @@ function ProductDetail(props) {
                 <div className="details-info">
 
 
-                    <h2 className="box-title"> {Product.title}</h2>
+                    <h2 className="box-title"> {Product.brand}</h2>
 
                     <p className="box-title"> {Product.description}</p>
                     <h3 className="box-price">

@@ -117,7 +117,7 @@ class Contactus extends Component {
                     </div>
 
                 <form onSubmit={this.onSubmit}>
-                    <div className='Arrange'>
+                    <div className='ArrangeContact'>
                     <div className="row">
                         <div className="col-md-5">
 
@@ -182,9 +182,12 @@ class Contactus extends Component {
 
                             <div className="form-group row-size">
                                 <div className="col-sm-16">
-                                    <button  type="submit" className="btn btn-dark float-md">
+                                    <button  type="submit" className="btn btn-dark float-md" data-toggle="modal" href="#ignismyModal">
                                          Send
                                     </button>
+
+
+
                                 </div>
                             </div>
                         </div>
