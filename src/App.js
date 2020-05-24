@@ -17,6 +17,8 @@ import CreateProducts from "./component/stockmanager/create-product.component";
 import EditProduct from "./component/stockmanager/edit-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeStock from "./component/stockmanager/homeStock";
+import StockMain from "./component/stockmanager/stock-main-component";
+import ManageBrand from "./component/stockmanager/manage-brand.component";
 
 import Axios from "axios";
 import AdminHo from "./admin/AdminHo";
@@ -38,16 +40,14 @@ import LoginAdmin from "./admin/adminlogin";
 //     setAuthToken(localStorage.token);
 // }
 class App extends Component {
-    state={
-       uname:""
-    }
-     dologout(){
-        localStorage.clear()
+  state = {
+    uname: "",
+  };
+  dologout() {
+    localStorage.clear();
 
-        window.location='/customerLogin'
-
-
-    }
+    window.location = "/customerLogin";
+  }
 
   parseJwt(token) {
     if (!token) {
@@ -91,10 +91,9 @@ class App extends Component {
               <Route exact path="/Register" component={RegisterModal} />
               <Route exact path="/Comment" component={Component} />
               <Route exact path="/Profile" component={Profile} />
-
-              //Cart
+              <Route path="/managebrand" component={ManageBrand} />
               <Route path="/Cartpage/:id?" component={Cartpage} />
-              <Route path="/stockmanager" component={HomeStock} />
+              <Route path="/stockmanager" component={StockMain} />
               <Route path="/addStock" component={CreateProducts} />
               <Route path="/editStock/:id" component={EditProduct} />
               <Route path="/Contactus" component={Contactus} />

@@ -33,6 +33,7 @@ export default class CreateProducts extends Component {
       brand: "Both",
       categories: [],
       category: "",
+      brands: [],
     };
   }
 
@@ -42,6 +43,14 @@ export default class CreateProducts extends Component {
         this.setState({
           categories: response.data.map((category) => category.category),
           category: response.data[0].category,
+        });
+      }
+    });
+
+    axios.get("http://localhost:5000/brands/").then((response) => {
+      if (response.data.length > 0) {
+        this.setState({
+          brands: response.data.map((brand) => brand.brand),
         });
       }
     });
@@ -143,16 +152,14 @@ export default class CreateProducts extends Component {
   render() {
     return (
       <div>
-        {/* <Navbar /> */}
         <br />
         <form onSubmit={this.onSubmit}>
           <div className="row">
             <div className="col-md-5">
-              {/* <h4>PRODUCT DETAILS</h4> */}
               <br />
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">CATEGORY</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">CATEGORY</label>
+                <div className="col-sm-9">
                   <select
                     onChange={this.onChangeCategory}
                     className="form-control border_only_field"
@@ -170,34 +177,27 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">BRAND</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">BRAND</label>
+                <div className="col-sm-9">
                   <select
-                    className="form-control border_only_field"
                     onChange={this.onChangeBrand}
+                    className="form-control border_only_field"
                   >
-                    <option value="Others">Select one</option>
-                    <option value="Nike">Nike</option>
-                    <option value="Inditex">Inditex </option>
-                    <option value="H and M">H and M </option>
-                    <option value="Louris Vuitton">Louris Vuitton</option>
-                    <option value="Adidas">Adidas</option>
-                    <option value="Uniqlo">Uniqlo</option>
-                    <option value="Hermes">Hermes</option>
-                    <option value="Gucci">Gucci</option>
-                    <option value="Michael Kors">Michael Kors</option>
-                    <option value="Ralph Lauren">Ralph Lauren</option>
-                    <option value=" Prada"> Prada</option>
-                    <option value="Levi Strauss and Co">
-                      Levi Strauss and Co
-                    </option>
+                    <option value="others">Select one</option>
+                    {this.state.brands.map(function (brand) {
+                      return (
+                        <option key={brand} value={brand}>
+                          {brand}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">PRICE</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">PRICE</label>
+                <div className="col-sm-9">
                   <input
                     type="text"
                     required
@@ -208,8 +208,8 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">SIZE</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">SIZE</label>
+                <div className="col-sm-9">
                   {/* <input
                     type="text"
                     required
@@ -231,8 +231,8 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">COLOR </label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">COLOR </label>
+                <div className="col-sm-9">
                   <input
                     type="text"
                     className="form-control border_only_field"
@@ -243,8 +243,8 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Quantity </label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">Quantity </label>
+                <div className="col-sm-9">
                   <input
                     type="number"
                     className="form-control border_only_field"
@@ -255,7 +255,7 @@ export default class CreateProducts extends Component {
               </div>
 
               <div className="form-group row">
-                <div className="col-sm-10"></div>
+                <div className="col-sm-9"></div>
               </div>
             </div>
             <div className="col-md-7">
@@ -266,6 +266,7 @@ export default class CreateProducts extends Component {
                   className="form-control border_only_field"
                   rows="8"
                   onChange={this.onChangeDescription}
+                  placeholder="write description..."
                 ></textarea>
 
                 <div className="custom-file mb-4">

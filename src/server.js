@@ -1,16 +1,15 @@
-const express=require('express');
-const mongoose=require('mongoose');
-const cors =require('cors');
-const bodyParser=require('body-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
-require('dotenv').config({ path: 'src/.env' });
+require("dotenv").config({ path: "src/.env" });
+const fileUpload = require("express-fileupload");
 
-
-
-const app=express();
+const app = express();
 app.use(cors());
 app.use(express.json());
-
+app.use(fileUpload());
 
 //BodyParser Middelware
 
@@ -55,11 +54,11 @@ app.use('/api/auth', require('./routes/api/auth'));
 //VITHU
 const stockManagerRouter = require("./admin/routes/stockmanager");
 const categoryRouter =require ("./admin/routes/category");
-const AdminRouter =require ("./routes/admin");
-app.use("/stockmanagers",stockManagerRouter);
+
+app.use("/stockmanager",stockManagerRouter);
 
 app.use("/category",categoryRouter);
-app.use("/adminaction",AdminRouter);
+
 
 
 

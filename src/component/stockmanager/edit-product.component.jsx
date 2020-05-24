@@ -8,6 +8,7 @@ export default class EditProduct extends Component {
     this.state = {
       categories: [],
       category: "",
+      brands: [],
     };
   }
   componentDidMount() {
@@ -16,6 +17,14 @@ export default class EditProduct extends Component {
         this.setState({
           categories: response.data.map((category) => category.category),
           category: response.data[0].category,
+        });
+      }
+    });
+
+    axios.get("http://localhost:5000/brands/").then((response) => {
+      if (response.data.length > 0) {
+        this.setState({
+          brands: response.data.map((brand) => brand.brand),
         });
       }
     });
@@ -30,8 +39,8 @@ export default class EditProduct extends Component {
             <div className="col-md-5">
               <br />
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">CATEGORY</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">CATEGORY</label>
+                <div className="col-sm-9">
                   <select
                     value={this.props.category}
                     required
@@ -51,35 +60,29 @@ export default class EditProduct extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">BRAND</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">BRAND</label>
+                <div className="col-sm-9">
                   <select
-                    className="form-control"
                     value={this.props.brand}
+                    required
                     onChange={this.props.onChangeBrand}
+                    className="form-control border_only_field"
                   >
-                    <option value="Others">Other</option>
-                    <option value="Nike">Nike</option>
-                    <option value="Inditex">Inditex </option>
-                    <option value="H and M">H and M </option>
-                    <option value="Louris Vuitton">Louris Vuitton</option>
-                    <option value="Adidas">Adidas</option>
-                    <option value="Uniqlo">Uniqlo</option>
-                    <option value="Hermes">Hermes</option>
-                    <option value="Gucci">Gucci</option>
-                    <option value="Michael Kors">Michael Kors</option>
-                    <option value="Ralph Lauren">Ralph Lauren</option>
-                    <option value=" Prada"> Prada</option>
-                    <option value="Levi Strauss and Co">
-                      Levi Strauss and Co
-                    </option>
+                    <option>Others</option>
+                    {this.state.brands.map(function (brand) {
+                      return (
+                        <option key={brand} value={brand}>
+                          {brand}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">PRICE</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">PRICE</label>
+                <div className="col-sm-9">
                   <input
                     type="text"
                     required
@@ -91,8 +94,8 @@ export default class EditProduct extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">SIZE</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">SIZE</label>
+                <div className="col-sm-9">
                   {/* <input
                     type="text"
                     required
@@ -117,8 +120,8 @@ export default class EditProduct extends Component {
               </div>
 
               {/* <div className="form-group row">
-                <label className="col-sm-2 col-form-label">GENDER</label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">GENDER</label>
+                <div className="col-sm-9">
                   <select
                     className="form-control"
                     value={this.props.gender}
@@ -136,8 +139,8 @@ export default class EditProduct extends Component {
               </div> */}
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">COLOR </label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">COLOR </label>
+                <div className="col-sm-9">
                   <input
                     type="text"
                     value={this.props.color}
@@ -149,8 +152,8 @@ export default class EditProduct extends Component {
               </div>
 
               <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Quantity </label>
-                <div className="col-sm-10">
+                <label className="col-sm-3 col-form-label">Quantity </label>
+                <div className="col-sm-9">
                   <input
                     type="number"
                     className="form-control"
@@ -162,7 +165,7 @@ export default class EditProduct extends Component {
               </div>
 
               <div className="form-group row">
-                <div className="col-sm-10"></div>
+                <div className="col-sm-9"></div>
               </div>
             </div>
             <div className="col-md-7">
@@ -184,7 +187,7 @@ export default class EditProduct extends Component {
                     onChange={this.props.onChangePhoto}
                   />
                   <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-3">
                       <label
                         className="customer-file-label"
                         htmlFor="customFile"
@@ -195,8 +198,8 @@ export default class EditProduct extends Component {
                     <div className="col-md-6">
                       <img
                         src={`/images/productPhotos/${this.props.filename}`}
-                        height="200"
-                        width="200"
+                        height="300"
+                        width="300"
                       />
                     </div>
                     <div className="col-4"></div>
