@@ -61,7 +61,7 @@ function ProductDisplay() {
 
 
               <button type="button" className="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">
-                Check the reviews
+                Reviews
               </button>
               <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog"
                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">

@@ -124,6 +124,15 @@ router.get('/user', auth, (req, res) => {
         .then(user => res.json(user));
 });
 
+
+router.route("/userid").get(auth,(req, res) => {
+    User.findById(req.user.id)
+        .exec((err, us) => {
+            if (err) return res.status(400).json({ success: false, err });
+            res.status(200).json({ success: true, us });
+        });
+});
+
 router.get("/getUsers", (req, res) => {
     User.find().exec((err, users) => {
         if (err) return res.status(400).json({ success: false, err });

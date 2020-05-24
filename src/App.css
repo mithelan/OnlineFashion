@@ -29,6 +29,17 @@
   margin-top: 1%;
 
 }
+.take{
+  position: relative;
+  margin-top: -12%;
+  margin-right: -11%;
+
+}
+.emailar{
+  position: relative;
+  margin-top: 4%;
+  margin-right: 58%;
+}
 
 .App-header {
   background-color: #ffffff;

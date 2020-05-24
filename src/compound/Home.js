@@ -43,7 +43,7 @@ class Home extends Component{
 
 
             <Badge count={1}>
-              <a href='/user/cart'>
+              <a href='/cartpage'>
                 <ion-icon name="cart-outline"></ion-icon>
               </a>
             </Badge>
@@ -157,7 +157,7 @@ class Home extends Component{
                     <a href="/">Home</a>
                   </li>
                   <li>
-                    <a href="/ProductDisplay.js">Shop</a>
+                    <a href="/">Shop</a>
                   </li>
                   <li>
                     <a href="#">Collection</a>
