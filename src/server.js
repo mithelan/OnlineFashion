@@ -52,7 +52,13 @@ app.use('/checkout',checkoutRouter);
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 
+//VITHU
+const stockManagerRouter = require("./admin/routes/stockmanager");
+const categoryRouter =require ("./admin/routes/category");
 
+app.use("/stockmanager",stockManagerRouter);
+
+app.use("/category",categoryRouter);
 
 
 

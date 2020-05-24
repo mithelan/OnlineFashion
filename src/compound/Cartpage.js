@@ -26,6 +26,10 @@ function Cartpage(props) {
         if(localStorage.length !== 0){
             props.history.push('/checkout')
 
+
+
+
+
         }else{
             props.history.push('/login?redirect=payment')
 
@@ -70,7 +74,7 @@ function Cartpage(props) {
                                         <div className="cart-name">
 
                                             <Link to={"/products/" + item.product}>
-                                                {item.title}
+                                                {item.category}
                                             </Link>
 
                                         </div>

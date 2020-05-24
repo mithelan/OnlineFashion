@@ -204,8 +204,8 @@ function ProductDisplay() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="py-2 d-block">
-                        Profile
+                      <a href="/admin" className="py-2 d-block">
+                       Admin
                       </a>
                     </li>
                     <li>

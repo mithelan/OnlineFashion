@@ -163,7 +163,7 @@ class Home extends Component{
                     <a href="#">Collection</a>
                     <ul className="dropdown">
                       <li>
-                        <a href="/MaleProductDisplay">Men's</a>
+                        <a href="/cartpage">Shopping Cart</a>
                       </li>
                       <li>
                         <a href="#">Women's</a>
@@ -182,7 +182,7 @@ class Home extends Component{
                     <ul className="dropdown">
 
                       <li>
-                        <a href="/stockmanager"> Staff Login</a>
+                        <a href="/stockmanagerlogin"> Staff Login</a>
                       </li>
 
                     </ul>
