@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 export const login = stockmanager => {
-    return axios.post('http://localhost:5000/stockmanager/login',{
+    return axios.post('http://localhost:5000/stockmanagers/login',{
         username:stockmanager.username,
         password:stockmanager.password,
     }).then(res =>{

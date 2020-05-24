@@ -26,8 +26,10 @@ connection.once("open", () => {
 });
 const stockManagerRouter = require("./routes/stockmanager");
 const categoryRouter =require ("./routes/category");
+const AdminRouter =require ("./routes/admin");
 
 app.use("/stockmanager",stockManagerRouter);
+app.use("/adminaction",AdminRouter);
 
 app.use("/category",categoryRouter);
 

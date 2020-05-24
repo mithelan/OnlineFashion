@@ -30,6 +30,8 @@ import Profile from "./compound/Profile";
 import setAuthToken from "./middleware/setAuthToken";
 
 import Cartpage from "./compound/Cartpage";
+import RegisterAdmin from "./admin/registerAdmin";
+import LoginAdmin from "./admin/adminlogin";
 
 //end of narthi
 // if(localStorage.token){
@@ -102,6 +104,8 @@ class App extends Component {
               <Route path="/admin" component={AdminHo} />
               <Route path="/registerstockmanager" component={RegisterSM} />
               <Route path="/stockmanagerlogin" component={LoginSM} />
+              <Route exact path="/adminregister" component={RegisterAdmin} />
+              <Route exact path="/adminlogin" component={LoginAdmin} />
             </Switch>
           </BrowserRouter>
         </div>

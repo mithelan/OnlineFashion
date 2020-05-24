@@ -23,6 +23,11 @@ export default class AdminNavBar extends Component {
                             </Link>
                         </li>
 
+                        <li className="navbar-item">
+                            <Link to="/adminregister" className="nav-link">
+                                Register New Admin
+                            </Link>
+                        </li>
 
 
 

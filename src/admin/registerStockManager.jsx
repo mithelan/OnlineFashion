@@ -32,7 +32,7 @@ export default class RegisterSM extends Component {
            contactno:this.state.contactno,
        };
         console.log(stockmanager)
-       axios.post("http://localhost:5000/stockmanager/adds",stockmanager)
+       axios.post("http://localhost:5000/stockmanagers/adds",stockmanager)
 
 
     }

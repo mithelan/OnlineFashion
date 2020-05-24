@@ -33,7 +33,7 @@ export default class AdminHo extends Component {
 
         };
         console.log(addCategory)
-        axios.post("http://localhost:5000/category/addcategory",addCategory)
+        axios.post("http://localhost:5001/category/addcategory",addCategory)
 
 
 

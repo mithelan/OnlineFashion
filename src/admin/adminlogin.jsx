@@ -3,10 +3,10 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import {Card, Col} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {login} from "./Actions";
+import {loginAd} from "./adminloginactions";
 
 
-export default class LoginSM extends Component {
+export default class LoginAdmin extends Component {
 
     constructor() {
         super()
@@ -26,14 +26,14 @@ export default class LoginSM extends Component {
     onSubmit(e) {
         e.preventDefault()
 
-        const stockmanager = {
+        const admin = {
             username: this.state.username,
             password: this.state.password
         }
 
-        login(stockmanager).then(res => {
+        loginAd(admin).then(res => {
             if (res) {
-                this.props.history.push('/')
+                this.props.history.push('/admin')
             }
         })
     }

@@ -182,7 +182,10 @@ class Home extends Component{
                     <ul className="dropdown">
 
                       <li>
-                        <a href="/stockmanagerlogin"> Staff Login</a>
+                        <a href="/stockmanagerlogin"> Stock Manager Login</a>
+                      </li>
+                      <li>
+                        <a href="/adminlogin"> Admin Login</a>
                       </li>
 
                     </ul>

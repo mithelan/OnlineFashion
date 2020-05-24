@@ -55,11 +55,11 @@ app.use('/api/auth', require('./routes/api/auth'));
 //VITHU
 const stockManagerRouter = require("./admin/routes/stockmanager");
 const categoryRouter =require ("./admin/routes/category");
-
-app.use("/stockmanager",stockManagerRouter);
+const AdminRouter =require ("./routes/admin");
+app.use("/stockmanagers",stockManagerRouter);
 
 app.use("/category",categoryRouter);
-
+app.use("/adminaction",AdminRouter);
 
 
 
