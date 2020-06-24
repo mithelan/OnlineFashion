@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import Cookie from "js-cookie";
 import rootReducer from "./frontend/user_login/reducers";
@@ -14,10 +15,9 @@ const middleWare = [thunk];
 const store = createStore(
   rootReducer,
   initialState,
-  compose(
-    applyMiddleware(...middleWare),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+    composeWithDevTools(applyMiddleware(...middleWare))
+
+
 );
 
 export default store;
