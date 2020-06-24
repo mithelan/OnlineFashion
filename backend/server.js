@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-require("dotenv").config({ path: "src/.env" });
+//require("dotenv").config({ path: "backend/.env" });
 const fileUpload = require("express-fileupload");
 
 const app = express();
@@ -15,18 +15,22 @@ app.use(fileUpload());
 
 app.use(bodyParser.json());
 
-/*mongoose.connect('mongodb+srv://dbuser:dbuser@cluster0-phmwx.mongodb.net/test?retryWrites=true&w=majority',
-    {useNewUrlParser:true},(err)=>{
+mongoose.connect('mongodb+srv://dbuser:dbuser@cluster0-phmwx.mongodb.net/test?retryWrites=true&w=majority',
+    {useNewUrlParser:true,
+
+
+        useUnifiedTopology: true,
+    },(err)=>{
 
         if(!err){
-            console.log('Mongo Connected dawwsw');
+            console.log('Mongo Connected dawwwsw');
         }else {
             console.log('Not Connected dawq');
         }
 
     }
 
-);*/
+);
 
 const contactRouter = require("./routes/contact");
 
@@ -60,7 +64,7 @@ app.use("/category", categoryRouter);
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log("Server started " + port));
 
-mongoose.connect(
+/*mongoose.connect(
   process.env.MONGO_DB_CONNECTION,
   {
     useNewUrlParser: true,
@@ -70,4 +74,4 @@ mongoose.connect(
     if (err) throw err;
     console.log("MONGO VAREN DAW");
   }
-);
+);*/
