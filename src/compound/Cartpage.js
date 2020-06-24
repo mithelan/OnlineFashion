@@ -115,7 +115,7 @@ function Cartpage(props) {
                     Rs.{cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
                 </h3>
                 <button onClick={checkOutFunction} className="btn btn-warning">
-                    Proceed to Checkout
+                    Proceed TO Checkout
                 </button>
 
             </div>
