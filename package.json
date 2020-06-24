@@ -2,9 +2,6 @@
   "name": "untitled",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "12.14.1"
-  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -85,17 +82,5 @@
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.3",
     "semantic-ui-react": "^0.88.2"
-  },
-  "description": "Online Fashion Store Web Application developed using MERN Stack.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mithelan/OnlineFashion.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mithelan/OnlineFashion/issues"
-  },
-  "homepage": "https://github.com/mithelan/OnlineFashion#readme"
+  }
 }
