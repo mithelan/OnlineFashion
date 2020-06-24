@@ -1,39 +1,39 @@
 import React, { useEffect, useState, Component } from "react";
 
 import "./App.css";
-import Home from "./compound/Home";
-import Homep from "./compound/Homepage";
+import Home from "./frontend/compound/Home";
+import Homep from "./frontend/compound/Homepage";
 import { Provider, useSelector } from "react-redux";
 import store from "./store";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 //mithi
-import ProductDetail from "./compound/ProductDetail";
-import Checkout from "./compound/Checkout";
-import Contactus from "./compound/Contactus";
-import ProductDisplay from "./compound/ProductDisplay";
-import NewCartPage from "./compound/NewCartPage";
+import ProductDetail from "./frontend/compound/ProductDetail";
+import Checkout from "./frontend/compound/Checkout";
+import Contactus from "./frontend/compound/Contactus";
+import ProductDisplay from "./frontend/compound/ProductDisplay";
+
 //narthi
-import CreateProducts from "./component/stockmanager/create-product.component";
-import EditProduct from "./component/stockmanager/edit-product.component";
+import CreateProducts from "./frontend/component/stockmanager/create-product.component";
+import EditProduct from "./frontend/component/stockmanager/edit-product.component";
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomeStock from "./component/stockmanager/homeStock";
-import StockMain from "./component/stockmanager/stock-main-component";
-import ManageBrand from "./component/stockmanager/manage-brand.component";
+
+import StockMain from "./frontend/component/stockmanager/stock-main-component";
+import ManageBrand from "./frontend/component/stockmanager/manage-brand.component";
 
 import Axios from "axios";
-import AdminHo from "./admin/AdminHo";
-import RegisterSM from "./admin/registerStockManager";
-import LoginSM from "./admin/stockmanagerlogin";
-import Login from "./user_login/components/auth/LoginModal";
+import AdminHo from "./frontend/admin/AdminHo";
+import RegisterSM from "./frontend/admin/registerStockManager";
+import LoginSM from "./frontend/admin/stockmanagerlogin";
+import Login from "./frontend/user_login/components/auth/LoginModal";
 
-import RegisterModal from "./user_login/components/auth/RegisterModal";
-import Comment from "./compound/Comment";
-import Profile from "./compound/Profile";
-import setAuthToken from "./middleware/setAuthToken";
+import RegisterModal from "./frontend/user_login/components/auth/RegisterModal";
 
-import Cartpage from "./compound/Cartpage";
-import RegisterAdmin from "./admin/registerAdmin";
-import LoginAdmin from "./admin/adminlogin";
+import Profile from "./frontend/compound/Profile";
+
+
+import Cartpage from "./frontend/compound/Cartpage";
+import RegisterAdmin from "./frontend/admin/registerAdmin";
+import LoginAdmin from "./frontend/admin/adminlogin";
 
 //end of narthi
 // if(localStorage.token){
