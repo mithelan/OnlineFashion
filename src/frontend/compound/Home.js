@@ -128,78 +128,25 @@ class Home extends Component{
           </div>
 
 
-
-
-
-
-          <div className="nav-item">
-            <div className="container">
-              <div className="nav-depart">
-                <div className="depart-btn">
-                  <i className="ti-menu"></i>
-                  <span>All departments</span>
-                  <ul className="depart-hover">
-                    <li className="active">
-                      <a href="#">Women’s Clothing</a>
-                    </li>
-                    <li>
-                      <a href="#">Men’ss Clothing</a>
-                    </li>
-                    <li>
-                      <a href="#">Accessories/Shoes</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <nav className="nav-menu mobile-menu">
-                <ul>
-                  <li className="active">
-                    <a href="/">Home</a>
-                  </li>
-                  <li>
-                    <a href="/">Shop</a>
-                  </li>
-                  <li>
-                    <a href="#">Collection</a>
-                    <ul className="dropdown">
-                      <li>
-                        <a href="/cartpage">Shopping Cart</a>
-                      </li>
-                      <li>
-                        <a href="#">Women's</a>
-                      </li>
-                      <li>
-                        <a href="#">Accessories/Shoes</a>
-                      </li>
-                    </ul>
-                  </li>
-
-                  <li>
-                    <a href='Contactus'>Contact</a>
-                  </li>
-                  <li>
-                    <a href="#">More</a>
-                    <ul className="dropdown">
-
-                      <li>
-                        <a href="/stockmanagerlogin"> Stock Manager Login</a>
-                      </li>
-                      <li>
-                        <a href="/adminlogin"> Admin Login</a>
-                      </li>
-
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-              <div id="mobile-menu-wrap"></div>
-            </div>
+          <div className="topnav" id="myTopnav">
+            <a href="#home" className="active">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+            <a href="javascript:void(0);" className="icon" onClick="myFunction()">
+              <i className="fa fa-bars"></i>
+            </a>
           </div>
 
+
+
+
         </header>
+
     );
   }
 }
+
 const mapStateToProps = state=> ({
 
   auth:state.auth

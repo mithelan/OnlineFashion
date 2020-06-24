@@ -32,6 +32,13 @@ mongoose.connect('mongodb+srv://dbuser:dbuser@cluster0-phmwx.mongodb.net/test?re
 
 );
 
+//dummy
+app.get('/',(req,res)=>{
+    res.json({
+        message:"heelow"
+    })
+})
+
 const contactRouter = require("./routes/contact");
 
 //natti
