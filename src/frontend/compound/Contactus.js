@@ -74,7 +74,7 @@ class Contactus extends Component {
         }
         console.log(contact);
 
-        axios.post('http://localhost:5000/contactus/add',contact)
+        axios.post('https://backend77.herokuapp.com/contactus/add',contact)
             .then(res=>
            alert('Thank you! We will contact you soon with your email address')
             )
