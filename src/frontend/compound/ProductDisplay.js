@@ -31,7 +31,7 @@ function ProductDisplay() {
 
 
   useEffect(() => {
-    Axios.get("http://localhost:5000/products/getProducts").then((response) => {
+    Axios.get("https://backend77.herokuapp.com/products/getProducts").then((response) => {
       if (response.data.success) {
         //products same name as route
         setProducts(response.data.products);

@@ -37,7 +37,7 @@ function ProductDetail(props) {
     // const [state, setState] = useState(initialState);
 
     useEffect(() => {
-        Axios.get(`http://localhost:5000/products/products_by_id?id=${productId}&type=single`)
+        Axios.get(`https://backend77.herokuapp.com/products/products_by_id?id=${productId}&type=single`)
             .then(response => {
 
                 setProduct(response.data[0])
@@ -55,7 +55,7 @@ function ProductDetail(props) {
     }
 
     useEffect(() => {
-        Axios.get("http://localhost:5000/products/getProducts/"+productId).then((response) => {
+        Axios.get("https://backend77.herokuapp.com/products/getProducts/"+productId).then((response) => {
 
             //products same name as routes
             setProducts(response.data.products);
