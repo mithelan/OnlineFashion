@@ -25,7 +25,7 @@ class Contactus extends Component {
     }
 
     componentDidMount() {
-    axios.get('http://localhost:5000/contactus/add')
+    axios.get('https://backend77.herokuapp.com/contactus/add')
         .then(response =>{
             if(response.data.length>0){
                 this.setState({
