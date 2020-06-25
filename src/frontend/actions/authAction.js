@@ -17,7 +17,7 @@ export const loadUser = () => (dispatch, getState) => {
     dispatch({ type: USER_LOADING });
 
     axios
-        .get('http://localhost:5000/api/auth/user', tokenConfig(getState))
+        .get('https://backend77.herokuapp.com/api/auth/user', tokenConfig(getState))
         .then(res =>
             dispatch({
                 type: USER_LOADED,
@@ -53,7 +53,7 @@ export const register = ({ name, email, password }) => dispatch => {
 
     const body = JSON.stringify({ name, email, password })
 
-    axios.post('http://localhost:5000/api/users ', body, config)
+    axios.post('https://backend77.herokuapp.com/api/users ', body, config)
         .then(res => dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
@@ -85,7 +85,7 @@ export const login = ({email, password }) => dispatch => {
 
     const body = JSON.stringify({ email, password })
 
-    axios.post('http://localhost:5000/api/auth  ', body, config)
+    axios.post('https://backend77.herokuapp.com/api/auth  ', body, config)
         .then(res => dispatch({
 
             type: LOGIN_SUCCESS,

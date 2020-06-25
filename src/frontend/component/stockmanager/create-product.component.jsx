@@ -38,7 +38,7 @@ export default class CreateProducts extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:5000/products/category").then((response) => {
+    axios.get("https://backend77.herokuapp.com/products/category").then((response) => {
       if (response.data.length > 0) {
         this.setState({
           categories: response.data.map((category) => category.category),
@@ -47,7 +47,7 @@ export default class CreateProducts extends Component {
       }
     });
 
-    axios.get("http://localhost:5000/brands/").then((response) => {
+    axios.get("https://backend77.herokuapp.com/brands/").then((response) => {
       if (response.data.length > 0) {
         this.setState({
           brands: response.data.map((brand) => brand.brand),
@@ -122,7 +122,7 @@ export default class CreateProducts extends Component {
     console.log(product);
 
     axios
-      .post("http://localhost:5000/products/add", product)
+      .post("https://backend77.herokuapp.com/products/add", product)
       .then((res) => console.log(res.data));
 
     window.location = "/stockmanager/addStocks";
@@ -132,7 +132,7 @@ export default class CreateProducts extends Component {
 
     try {
       const res = axios.post(
-        "http://localhost:5000/products/upload",
+        "https://backend77.herokuapp.com/products/upload",
         formData,
         {
           headers: {

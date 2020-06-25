@@ -55,7 +55,7 @@ export default class ManageBrand extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/brands/")
+      .get("https://backend77.herokuapp.com/brands/")
       .then((response) => {
         this.setState({ brands: response.data });
       })
@@ -68,7 +68,7 @@ export default class ManageBrand extends Component {
   }
 
   deleteBrand(id) {
-    axios.delete("http://localhost:5000/brands/" + id).then((response) => {
+    axios.delete("https://backend77.herokuapp.com/brands/" + id).then((response) => {
       console.log(response.data);
     });
 
@@ -79,7 +79,7 @@ export default class ManageBrand extends Component {
 
   getBrand(id) {
     axios
-      .get("http://localhost:5000/brands/get/" + id)
+      .get("https://backend77.herokuapp.com/brands/get/" + id)
       .then((response) => {
         this.setState({
           brand: response.data.brand,
@@ -138,7 +138,7 @@ export default class ManageBrand extends Component {
     console.log(companyBrand);
 
     axios
-      .post("http://localhost:5000/brands/add", companyBrand)
+      .post("https://backend77.herokuapp.com/brands/add", companyBrand)
       .then((res) => console.log(res.data));
 
     window.location = "/managebrand";
@@ -157,7 +157,7 @@ export default class ManageBrand extends Component {
 
     axios
       .post(
-        "http://localhost:5000/brands/update/" + this.state.currentId,
+        "https://backend77.herokuapp.com/brands/update/" + this.state.currentId,
         brand
       )
       .then((res) => console.log(res.data));

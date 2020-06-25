@@ -12,7 +12,7 @@ export default class EditProduct extends Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:5000/products/category").then((response) => {
+    axios.get("https://backend77.herokuapp.com/products/category").then((response) => {
       if (response.data.length > 0) {
         this.setState({
           categories: response.data.map((category) => category.category),
@@ -21,7 +21,7 @@ export default class EditProduct extends Component {
       }
     });
 
-    axios.get("http://localhost:5000/brands/").then((response) => {
+    axios.get("https://backend77.herokuapp.com/brands/").then((response) => {
       if (response.data.length > 0) {
         this.setState({
           brands: response.data.map((brand) => brand.brand),

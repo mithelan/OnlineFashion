@@ -84,7 +84,7 @@ export default class HomeStock extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/products/")
+      .get("https://backend77.herokuapp.com/products/")
       .then((response) => {
         this.setState({ products: response.data });
       })
@@ -92,7 +92,7 @@ export default class HomeStock extends Component {
         console.log(error);
       });
 
-    axios.get("http://localhost:5000/products/category").then((response) => {
+    axios.get("https://backend77.herokuapp.com/products/category").then((response) => {
       if (response.data.length > 0) {
         this.setState({
           categories: response.data.map((category) => category.category),
@@ -102,7 +102,7 @@ export default class HomeStock extends Component {
   }
 
   deleteProduct(id) {
-    axios.delete("http://localhost:5000/products/" + id).then((response) => {
+    axios.delete("https://backend77.herokuapp.com/products/" + id).then((response) => {
       console.log(response.data);
     });
 
@@ -128,7 +128,7 @@ export default class HomeStock extends Component {
 
   getProduct(id) {
     axios
-      .get("http://localhost:5000/products/get/" + id)
+      .get("https://backend77.herokuapp.com/products/get/" + id)
       .then((response) => {
         this.setState({
           category: response.data.category,
@@ -253,7 +253,7 @@ export default class HomeStock extends Component {
 
     axios
       .post(
-        "http://localhost:5000/products/update/" + this.state.currentId,
+        "https://backend77.herokuapp.com/products/update/" + this.state.currentId,
         product
       )
       .then((res) => console.log(res.data));
@@ -265,7 +265,7 @@ export default class HomeStock extends Component {
 
     try {
       const res = axios.post(
-        "http://localhost:5000/products/upload",
+        "https://backend77.herokuapp.com/products/upload",
         formData,
         {
           headers: {

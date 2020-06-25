@@ -8,7 +8,7 @@ import Cookie from 'js-cookie'
 
 const addtocartnew=(productId,qty)=> async (dispatch,getState)=>{
     try{
-        const {data}= await axios.get(`http://localhost:5000/products/get/`+productId)
+        const {data}= await axios.get(`https://backend77.herokuapp.com/products/get/`+productId)
         console.log('Adding to Cart');
         dispatch({
             type: ADD_TO_NEW_CART, payload: {
@@ -45,7 +45,7 @@ const removeFromCart=(productId)=> async (dispatch,getState)=>{
 
 const addcart=(_id)=> {
 
-   const request=axios.post(`http://localhost:5000/api/auth/addToCart/`+_id
+   const request=axios.post(`https://backend77.herokuapp.com/api/auth/addToCart/`+_id
 
        ,"",{
 
@@ -68,7 +68,7 @@ const addcart=(_id)=> {
 
 const getCart=(cartItems,userCart)=>{
 
-    const request=axios.get(`http://localhost:5000/product/products_by_id?id=${cartItems}&type=array`
+    const request=axios.get(`https://backend77.herokuapp.com/product/products_by_id?id=${cartItems}&type=array`
 
         ,"",{
 
