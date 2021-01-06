@@ -11,7 +11,7 @@
     "@uppy/instagram": "^1.4.5",
     "@uppy/tus": "^1.5.12",
     "async": "latest",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
